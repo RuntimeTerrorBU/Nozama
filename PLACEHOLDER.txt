@@ -1,2 +1,1 @@
-THIS IS A PLACEHOLDER ZIP
-when the real zip is ready I will replace this.
+Placeholder text file for iteration2 to ensure that the button works
