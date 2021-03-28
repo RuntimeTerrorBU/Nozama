@@ -8,7 +8,6 @@ public class Customer {
 	private String shippingAddress;
 	private List<String> wishList;
 	
-	
 	public String getUsername() {
 		return username;
 	}
@@ -44,6 +43,7 @@ public class Customer {
 		result = prime * result + ((wishList == null) ? 0 : wishList.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -82,11 +82,5 @@ public class Customer {
 		this.password = password;
 		this.shippingAddress = shippingAddress;
 		this.wishList = wishList;
-	}
-	
-	@Override
-	public String toString() {
-		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
-				+ ", wishList=" + wishList + "]";
-	}
+  }
 }
