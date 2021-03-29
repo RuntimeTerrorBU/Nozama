@@ -1,22 +1,23 @@
 package nozamaFiles;
 
-public class ItemCatalog {
-	private List<Item> items;
+import java.util.List;
 
-	public ItemCatalog(List<Item> items) {
-		super();
-		this.items = items;
+public class ItemCatalog {
+	private static List<ItemSpecification> items;
+	
+	public ItemCatalog(List<ItemSpecification> items) {
+		ItemCatalog.items = items;
+	}
+	
+	public static Integer getNumberOfItems() {
+		return items.size();
 	}
 
-	public List<Item> getItems() {
+	public static List<ItemSpecification> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-	
-	public Integer getNumberOfItems() {
-		return items.size();
+	public static void setItems(List<ItemSpecification> items) {
+		ItemCatalog.items = items;
 	}
 }
