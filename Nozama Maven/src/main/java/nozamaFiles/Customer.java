@@ -82,15 +82,10 @@ public class Customer {
 		this.password = password;
 		this.shippingAddress = shippingAddress;
 		this.wishList = wishList;
-<<<<<<< HEAD
-	}	
-	
+	}
 	@Override
 	public String toString() {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
 				+ ", wishList=" + wishList + "]";
 	}
-=======
-  }
->>>>>>> origin/ashleybranch
 }
