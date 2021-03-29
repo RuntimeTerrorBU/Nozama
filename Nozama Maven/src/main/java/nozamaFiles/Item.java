@@ -1,5 +1,7 @@
 package nozamaFiles;
 
+import nozamaFiles.Item;
+
 public class Item {
 	private String name;
 	private Double cost;
