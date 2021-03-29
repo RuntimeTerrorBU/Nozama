@@ -1,5 +1,6 @@
 package nozamaFiles;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ItemCatalog {
@@ -18,6 +19,13 @@ public class ItemCatalog {
 	}
 
 	public static void setItems(List<ItemSpecification> items) {
+		Collections.sort(items, ItemSpecification.compareByID);
 		ItemCatalog.items = items;
+	}
+	
+	public static ItemSpecification getItemSpecification(String itemID) {
+		int ndx = Collections.binarySearch(ItemCatalog.items, new ItemSpecification(null, null, itemID, null), ItemSpecification.compareByID);
+		
+		return ItemCatalog.items.get(ndx);
 	}
 }
