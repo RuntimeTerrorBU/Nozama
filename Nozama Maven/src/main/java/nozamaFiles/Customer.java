@@ -82,6 +82,7 @@ public class Customer {
 		this.password = password;
 		this.shippingAddress = shippingAddress;
 		this.wishList = wishList;
+<<<<<<< HEAD
 	}	
 	
 	@Override
@@ -89,4 +90,7 @@ public class Customer {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
 				+ ", wishList=" + wishList + "]";
 	}
+=======
+  }
+>>>>>>> origin/ashleybranch
 }
