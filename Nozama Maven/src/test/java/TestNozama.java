@@ -24,4 +24,5 @@ public class TestNozama {
 	public void test1() {
 		assert true;
 	}
+	
 }
