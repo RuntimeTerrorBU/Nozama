@@ -18,11 +18,10 @@ import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 
-public class TestJUnit {
-	
+public class TestNozama {
 	
 	@Test
 	public void test1() {
-		assertTrue(true);
+		assert true;
 	}
 }
