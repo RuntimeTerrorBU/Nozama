@@ -1,11 +1,20 @@
 package nozamaFiles;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
 	List<Pair<Item, Integer>> cart;
 	Double subtotal = 0.0;
 	
+	public ShoppingCart() {
+		this.cart = new ArrayList<Pair<Item, Integer>>();
+	}
+	public ShoppingCart(List<Pair<Item, Integer>> cart, Double subtotal) {
+		super();
+		this.cart = cart;
+		this.subtotal = subtotal;
+	}
 	public List<Pair<Item, Integer>> getCart() {
 		return cart;
 	}
