@@ -24,7 +24,7 @@ public class ItemCatalog {
 	}
 	
 	public static ItemSpecification getItemSpecification(String itemID) {
-		int ndx = Collections.binarySearch(ItemCatalog.items, new ItemSpecification(null, null, itemID, null), ItemSpecification.compareByID);
+		int ndx = Collections.binarySearch(ItemCatalog.items, new ItemSpecification(null, null, null, itemID, null), ItemSpecification.compareByID);
 		
 		return ItemCatalog.items.get(ndx);
 	}

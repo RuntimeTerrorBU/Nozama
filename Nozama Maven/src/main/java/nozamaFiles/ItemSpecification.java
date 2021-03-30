@@ -3,17 +3,27 @@ package nozamaFiles;
 import java.util.Comparator;
 
 public class ItemSpecification {
+	private String name;
 	private String description;
 	private Double price;
 	private String itemID;
 	private Integer quantity;
-	
-	public ItemSpecification(String description, Double price, String itemID, Integer quantity) {
+
+	public ItemSpecification(String name, String description, Double price, String itemID, Integer quantity) {
 		super();
+		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.itemID = itemID;
 		this.quantity = quantity;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -54,6 +64,7 @@ public class ItemSpecification {
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((itemID == null) ? 0 : itemID.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
@@ -77,6 +88,11 @@ public class ItemSpecification {
 			if (other.itemID != null)
 				return false;
 		} else if (!itemID.equals(other.itemID))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		if (price == null) {
 			if (other.price != null)
