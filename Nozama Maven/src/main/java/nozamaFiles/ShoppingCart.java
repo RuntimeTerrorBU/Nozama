@@ -35,7 +35,10 @@ public class ShoppingCart {
 	
 	public void addItemToCart(Item item, Integer quantity) {
 		boolean alreadyInCart = false;
-		Double itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
+		Double itemPrice = 0.0;
+		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
+			itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
+		}
 		for(Pair<Item, Integer> p : cart) {
 			if(p.first.equals(item)) {
 				p.second += quantity;
