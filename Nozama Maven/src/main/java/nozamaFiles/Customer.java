@@ -1,12 +1,16 @@
 package nozamaFiles;
 
 import java.util.List;
+import java.util.Map;
 
 public class Customer {
 	private String username;
 	private String password;
 	private String shippingAddress;
+	private static int incrementalID = 0;
+	private int customerID;
 	private List<String> wishList;
+	private Map<String, String> customerInformation;
 	
 	public String getUsername() {
 		return username;
@@ -26,11 +30,30 @@ public class Customer {
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
+	public int getCustomerID() {
+		return customerID;
+	}
 	public List<String> getWishList() {
 		return wishList;
 	}
 	public void setWishList(List<String> wishList) {
 		this.wishList = wishList;
+	}
+	public Map<String, String> getCustomerInformation() {
+		return this.customerInformation;
+	}
+	public void setCustomerInformation(Map<String, String> customerInformation) {
+		this.customerInformation = customerInformation;
+	}
+	
+	public boolean login(String username, String password) {
+		boolean toReturn = false;
+		
+		if(password == this.getCustomerInformation().get(username)) {
+			toReturn = true;
+		}
+		
+		return toReturn;
 	}
 	
 	@Override
@@ -76,13 +99,17 @@ public class Customer {
 		return true;
 	}
 	
-	public Customer(String username, String password, String shippingAddress, List<String> wishList) {
+	public Customer(String username, String password, String shippingAddress, int customerID, List<String> wishList) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.shippingAddress = shippingAddress;
+		this.customerID = uniqueID;
+		this.uniqueID++;
 		this.wishList = wishList;
+		this.customerInformation.put(username, password);
 	}
+	
 	@Override
 	public String toString() {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
