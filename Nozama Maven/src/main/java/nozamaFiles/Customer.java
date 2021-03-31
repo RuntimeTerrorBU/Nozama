@@ -60,6 +60,8 @@ public class Customer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + customerID;
+		result = prime * result + ((customerInformation == null) ? 0 : customerInformation.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((shippingAddress == null) ? 0 : shippingAddress.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -76,6 +78,13 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
+		if (customerID != other.customerID)
+			return false;
+		if (customerInformation == null) {
+			if (other.customerInformation != null)
+				return false;
+		} else if (!customerInformation.equals(other.customerInformation))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -113,6 +122,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
-				+ ", wishList=" + wishList + "]";
+				+ ", customerID=" + customerID + ", wishList=" + wishList + ", customerInformation="
+				+ customerInformation + "]";
 	}
 }
