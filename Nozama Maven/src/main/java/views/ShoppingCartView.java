@@ -1,58 +1,104 @@
 package views;
 
+import models.*;
 import nozamaFiles.*;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import models.*;
-import nozamaFiles.*;
-
-public class ShoppingCartView extends JPanel {
+public class ShoppingCartView extends JPanel implements ActionListener {
 	private ShoppingCartModel scm = new ShoppingCartModel();
 
 	public ShoppingCartView() {
 		// FOR TESTING ONLY
-		
-		
+
 		try {
 			File catalogFile = new File("resources/testCatalog.csv");
 			ItemCatalog.loadData(catalogFile);
 			File cartFile = new File("resources/testCart.csv");
 			scm.loadData(cartFile);
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		final JTable table = new JTable(scm);
+		table.removeColumn(table.getColumnModel().getColumn(4));
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane);
-		
-		JPanel subtotalForm = new JPanel();
 
 		BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
-		JLabel subtotalLbl = new JLabel("Subtotal: $" + sub.toPlainString());
-		subtotalForm.add(subtotalLbl);
-		add(subtotalForm, BorderLayout.SOUTH);
-		
+		JLabel subtotalLbl = new JLabel();
+		subtotalLbl.setText("Subtotal: $" + sub.toPlainString());
+
+		Action edit = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel form2 = new JPanel(new GridLayout(0, 1));
+				JTable table = (JTable) e.getSource();
+				int modelRow = Integer.valueOf(e.getActionCommand());
+
+				JTextField numField = new JTextField(table.getModel().getValueAt(modelRow, 2).toString());
+				numField.setSize(new Dimension(75, 30));
+				JLabel numLabel = new JLabel("Enter Quantity: ");
+				form2.add(numLabel);
+				numLabel.setLabelFor(numField);
+				form2.add(numField);
+
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Save");
+				int result = JOptionPane.showConfirmDialog(null, form2, "Edit Quantity", JOptionPane.OK_CANCEL_OPTION);
+
+				if (result == JOptionPane.OK_OPTION) {
+					int res = Integer.parseInt(numField.getText());
+					if (res == 0) {
+						((ShoppingCartModel) table.getModel()).removeRow(modelRow);
+
+					} else if (res < ItemCatalog.getItemSpecification(scm.getValueAt(modelRow, 4).toString())
+							.getQuantity()) {
+						scm.setValueAt(res, modelRow, 2);
+					}
+
+					BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
+					subtotalLbl.setText("Subtotal: $" + sub.toPlainString());
+				}
+			}
+		};
+		ButtonColumn editButton = new ButtonColumn(table, edit, 3);
+
+		add(subtotalLbl, BorderLayout.SOUTH);
+
+		JButton checkoutButton = new JButton("Checkout");
+		checkoutButton.addActionListener(this);
+		add(checkoutButton);
+		revalidate();
 	}
-	
+
+	public void actionPerformed(ActionEvent e) {
+		JButton source = (JButton) (e.getSource());
+
+		if (source.getText().equals("Checkout")) {
+			System.out.println("Please add a checkout page :)");
+		}
+
+	}
 
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("Your Cart");
@@ -75,5 +121,5 @@ public class ShoppingCartView extends JPanel {
 			}
 		});
 	}
-	
+
 }

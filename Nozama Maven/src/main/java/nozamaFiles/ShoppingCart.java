@@ -47,7 +47,7 @@ public class ShoppingCart {
 		}
 		
 		subtotal += itemPrice * quantity;
-	}
+	}	
 	
 	public void loadCart(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
