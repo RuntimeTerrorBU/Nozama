@@ -24,19 +24,19 @@ import javax.xml.bind.JAXBException;
 
 public class TestCatalog {
 	private ItemCatalog catalog = null;
-	
+
 	@BeforeEach
 	void init() {
 		catalog = new ItemCatalog(null);
 	}
-	
+
 	@Test
 	void testNullLoad() {
 		assertThrows(NullPointerException.class, () -> {
 			ItemCatalog.loadData(null);
 		});
 	}
-	
+
 	@Test
 	void testValidLoad() {
 		File file = new File("resources/testCatalog.csv");

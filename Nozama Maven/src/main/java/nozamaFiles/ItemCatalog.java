@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ItemCatalog {
-	private static List<ItemSpecification> items;
+	private static List<ItemSpecification> items = new ArrayList<ItemSpecification>();
 	
 	public ItemCatalog(List<ItemSpecification> items) {
 		ItemCatalog.items = items;
@@ -31,7 +31,10 @@ public class ItemCatalog {
 	public static ItemSpecification getItemSpecification(String itemID) {
 		int ndx = Collections.binarySearch(ItemCatalog.items, new ItemSpecification(null, null, null, itemID, null), ItemSpecification.compareByID);
 		
-		return ItemCatalog.items.get(ndx);
+		if (ndx != -1) {
+			return ItemCatalog.items.get(ndx);
+		}
+		return null;
 	}
 	public static void loadData(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
