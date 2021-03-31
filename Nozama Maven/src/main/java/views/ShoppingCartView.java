@@ -2,14 +2,19 @@ package views;
 
 import nozamaFiles.*;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,31 +23,36 @@ import models.*;
 import nozamaFiles.*;
 
 public class ShoppingCartView extends JPanel {
+	private ShoppingCartModel scm = new ShoppingCartModel();
 
 	public ShoppingCartView() {
 		// FOR TESTING ONLY
-		File myFile = new File("resources/testCatalog.csv");
+		
+		
 		try {
-			ItemCatalog.loadData(myFile);
+			File catalogFile = new File("resources/testCatalog.csv");
+			ItemCatalog.loadData(catalogFile);
+			File cartFile = new File("resources/testCart.csv");
+			scm.loadData(cartFile);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ShoppingCart cart = new ShoppingCart();
-
-		cart.addItemToCart(new Item("1"), 1);
-		cart.addItemToCart(new Item("2"), 2);
-		cart.addItemToCart(new Item("3"), 3);
-		cart.addItemToCart(new Item("4"), 4);
-		cart.addItemToCart(new Item("5"), 5);
-
-		ShoppingCartModel scm = new ShoppingCartModel(cart);
 
 		final JTable table = new JTable(scm);
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane);
+		
+		JPanel subtotalForm = new JPanel();
 
+		BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
+		JLabel subtotalLbl = new JLabel("Subtotal: $" + sub.toPlainString());
+		subtotalForm.add(subtotalLbl);
+		add(subtotalForm, BorderLayout.SOUTH);
+		
 	}
+	
 
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("Your Cart");
@@ -65,4 +75,5 @@ public class ShoppingCartView extends JPanel {
 			}
 		});
 	}
+	
 }

@@ -1,5 +1,7 @@
 package models;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +14,12 @@ import nozamaFiles.Pair;
 import nozamaFiles.ShoppingCart;
 
 public class ShoppingCartModel extends AbstractTableModel {
-	private ShoppingCart cart;
+	private ShoppingCart cart = new ShoppingCart();
 	private String[] columnNames = { "Name", "Cost", "Quantity" };
 	private List<Object[]> data;
 
-	public ShoppingCartModel(ShoppingCart cart) {
-		this.setCart(cart);
-		cartToData();
+	public ShoppingCartModel() {
+		data = new ArrayList<Object[]>();
 	}
 
 	@Override
@@ -52,10 +53,18 @@ public class ShoppingCartModel extends AbstractTableModel {
 	public void setCart(ShoppingCart cart) {
 		this.cart = cart;
 		cartToData();
-		
 		fireTableDataChanged();
 	}
-
+	
+	public Double getSubtotal() {
+		double subtotal = 0.0;
+		for(Object[] cols:data) {
+			subtotal += (double)cols[1] * (int)cols[2];
+		}
+		
+		return subtotal;
+	}
+	
 	public void cartToData() {
 		List<Pair<Item, Integer>> contents = cart.getCart();
 		List<Object[]> cartData = new ArrayList<Object[]>();
@@ -74,6 +83,12 @@ public class ShoppingCartModel extends AbstractTableModel {
 			cartData.add(itemData);
 		}
 		this.data = cartData;
+		fireTableDataChanged();
+	}
+	
+	public void loadData(File file) throws IOException {
+		cart.loadCart(file);
+		cartToData();
 		fireTableDataChanged();
 	}
 	
