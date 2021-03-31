@@ -47,6 +47,7 @@ public class ShoppingCartModel extends AbstractTableModel {
 	}
 
 	public ShoppingCart getCart() {
+		dataToCart();
 		return cart;
 	}
 

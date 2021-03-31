@@ -24,17 +24,16 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.TableRowSorter;
 
 public class ShoppingCartView extends JPanel implements ActionListener {
-	private ShoppingCartModel scm = new ShoppingCartModel();
+	private static ShoppingCartModel scm = new ShoppingCartModel();
 
-	public ShoppingCartView() {
+	public ShoppingCartView(ShoppingCart sc) {
 		// FOR TESTING ONLY
-
 		try {
 			File catalogFile = new File("resources/testCatalog.csv");
 			ItemCatalog.loadData(catalogFile);
-			File cartFile = new File("resources/testCart.csv");
-			scm.loadData(cartFile);
-
+			//File cartFile = new File("resources/testCart.csv");
+			//scm.loadData(cartFile);
+			scm.setCart(sc);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,11 +109,11 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 
 	}
 
-	private static void createAndShowGUI() {
+	public static void createAndShowGUI(ShoppingCart sc) {
 		JFrame frame = new JFrame("Your Cart");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		ShoppingCartView newContentPane = new ShoppingCartView();
+		ShoppingCartView newContentPane = new ShoppingCartView(sc);
 
 		newContentPane.setOpaque(true);
 
@@ -122,8 +121,17 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 
 		frame.pack();
 		frame.setVisible(true);
+		
 	}
-
+	
+	public static void setCart(ShoppingCart sc) {
+		scm.setCart(sc);
+	}
+	public static ShoppingCart getCart() {
+		return scm.getCart();
+	}
+	
+	/*
 	public static void main(String[] args) throws FileNotFoundException {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -131,5 +139,6 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			}
 		});
 	}
+	*/
 
 }
