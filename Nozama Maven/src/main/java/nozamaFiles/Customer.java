@@ -104,8 +104,8 @@ public class Customer {
 		this.username = username;
 		this.password = password;
 		this.shippingAddress = shippingAddress;
-		this.customerID = uniqueID;
-		this.uniqueID++;
+		this.customerID = incrementalID;
+		this.incrementalID++;
 		this.wishList = wishList;
 		this.customerInformation.put(username, password);
 	}
