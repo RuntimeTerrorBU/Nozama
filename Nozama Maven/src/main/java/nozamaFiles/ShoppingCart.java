@@ -1,5 +1,10 @@
 package nozamaFiles;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +49,20 @@ public class ShoppingCart {
 		subtotal += itemPrice * quantity;
 	}
 	
+	public void loadCart(File file) throws IOException {
+		BufferedReader in = new BufferedReader(new FileReader(file));
+		String line;
+		String id;
+		Integer quantity;
+		
+		while((line = in.readLine()) != null) {
+			String[] data = line.split(",");
+			id = data[0];
+			quantity = Integer.parseInt(data[1]);
+			
+			cart.add(new Pair<Item, Integer>(new Item(id), quantity));
+		}
+	}
 	
 	
 	
