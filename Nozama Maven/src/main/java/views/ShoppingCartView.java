@@ -71,10 +71,20 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 					if (res == 0) {
 						((ShoppingCartModel) table.getModel()).removeRow(modelRow);
 
-					} else if (res < ItemCatalog.getItemSpecification(scm.getValueAt(modelRow, 4).toString())
+					} 
+					else if(res < 0) {
+						JOptionPane.showMessageDialog(form2, "Error: You cannot enter a negative quantity!");
+						
+					}
+					else if (res <= ItemCatalog.getItemSpecification(scm.getValueAt(modelRow, 4).toString())
 							.getQuantity()) {
 						scm.setValueAt(res, modelRow, 2);
 					}
+					else {
+						JOptionPane.showMessageDialog(form2, "Error: Quantity entered exceeded maximum availiable!");
+						
+					}
+					
 
 					BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
 					subtotalLbl.setText("Subtotal: $" + sub.toPlainString());
