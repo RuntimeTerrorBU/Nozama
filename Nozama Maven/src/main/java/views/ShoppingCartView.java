@@ -26,6 +26,7 @@ import javax.swing.table.TableRowSorter;
 public class ShoppingCartView extends JPanel implements ActionListener {
 	private static ShoppingCartModel scm = new ShoppingCartModel();
 
+
 	public ShoppingCartView(ShoppingCart sc) {
 		// FOR TESTING ONLY
 		try {
@@ -44,8 +45,9 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane);
 
-		BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
 		JLabel subtotalLbl = new JLabel();
+		
+		BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
 		subtotalLbl.setText("Subtotal: $" + sub.toPlainString());
 
 		Action edit = new AbstractAction() {
@@ -103,8 +105,49 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) (e.getSource());
 
+		//If the action fired is the checkout confirmation
 		if (source.getText().equals("Checkout")) {
-			System.out.println("Please add a checkout page :)");
+			//Base of Checkout Confirmation
+			
+			//Frame and label creation
+			JFrame frameCheckout = new JFrame("Checkout Confirmation");
+			JLabel subtotalLbl = new JLabel();
+			
+			//Frame altered to be configured as a checkout screen
+			frameCheckout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frameCheckout.setPreferredSize(new Dimension(240, 150));
+			frameCheckout.pack();
+			frameCheckout.setLocationRelativeTo(null);
+			frameCheckout.setVisible(true);
+			
+			//Fire changes
+			revalidate();
+
+
+			
+			//Find the sub total based on the Shopping Cart Model		
+			BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
+			subtotalLbl.setText('\t' + "Subtotal: $" + sub.toPlainString());
+			//JPanel checkoutForm = new JPanel(new GridLayout(0, 1));
+			//add(checkoutForm);
+			//setVisible(checkoutForm);	
+			
+			
+			//Add the sub total count to the checkout prompt
+			subtotalLbl.setHorizontalAlignment(JLabel.CENTER);
+			frameCheckout.add(subtotalLbl, BorderLayout.NORTH);
+			
+			
+			//ADD THE REST OF THE THINGS IN CHECKOUT FORM
+			//	- NOT SURE WHAT ELSE NEEDS TO BE HERE YET
+			
+			
+			//Fire changes
+			revalidate();
+			
+			//Validation check in command line
+			System.out.println("CHECKOUT CLICKED");
+			
 		}
 
 	}
