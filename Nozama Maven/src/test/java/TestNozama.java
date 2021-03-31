@@ -19,10 +19,10 @@ import java.util.regex.Pattern;
 import javax.xml.bind.JAXBException;
 
 public class TestNozama {
-	
+
 	@Test
 	public void test1() {
 		assert true;
 	}
-	
+
 }
