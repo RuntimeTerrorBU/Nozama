@@ -135,6 +135,8 @@ public class NozamaView {
 		
 		table = new JTable(nm);
 		scrollPane.setColumnHeaderView(table);
+		scrollPane.setPreferredSize(new Dimension(450, 110));
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JButton cartButton = new JButton("Show Cart");
 		cartButton.addMouseListener(new MouseAdapter() {
