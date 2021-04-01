@@ -52,6 +52,27 @@ public class ShoppingCart {
 		subtotal += itemPrice * quantity;
 	}	
 	
+	public void removeItemFromCart(Item item, Integer quantity) {
+		Double itemPrice = 0.0;
+		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
+			itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
+		}
+		for(int i = 0; i < cart.size(); i++) {
+			Pair<Item, Integer> p = cart.get(i);
+			//if item is in cart
+			if(p.first.getItemID().equals(item.getItemID())) {
+				if(p.second.equals(quantity)) {
+					cart.remove(i);
+					subtotal -= itemPrice * quantity;
+				}
+				else if(p.second > quantity) {
+					p.second -= quantity;
+					subtotal -= itemPrice * quantity;
+				}
+			}
+		}
+	}
+	
 	public void loadCart(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String line;
