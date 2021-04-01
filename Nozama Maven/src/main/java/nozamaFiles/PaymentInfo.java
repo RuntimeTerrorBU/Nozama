@@ -2,10 +2,13 @@ package nozamaFiles;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class PaymentInfo {
 	
-	public static final int VALID_CVC_NUMBER = 19;
-	public static final int VALID_CARD_NUMBER = 3;
+	public static final int VALID_CARD_NUMBER = 19;
+	public static final int VALID_CARD_NUMBER2 = 16;
+	public static final int VALID_CVC_NUMBER = 3;
 	
 	//Card Variables
 	private String cardNumber;
@@ -25,7 +28,29 @@ public class PaymentInfo {
 			this.cardNumber = cn;
 			this.cvc = c;
 			this.billingAddress = ba;
-		}		
+		}	
+		else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
+			
+			String formatString = "";
+			
+			formatString = cn.substring(0, 4) + "-" + cn.substring(4, 8) + "-" + cn.substring(8, 12) + "-" + cn.substring(12, 16);
+			
+			this.cardNumber = formatString;
+			this.cvc = c;
+			this.billingAddress = ba;
+		}	
+	}
+	
+	Boolean validateCardInfo(String cn, String c) {
+		
+		Boolean toReturn = false;
+		
+		//Return true if input card information is valid
+		if(c.length() == VALID_CVC_NUMBER && (c.length() == VALID_CVC_NUMBER || cn.length() == VALID_CARD_NUMBER2)) {
+			toReturn = true;
+		}
+		
+		return toReturn;
 	}
 	
 	public String getCardNumber() {
