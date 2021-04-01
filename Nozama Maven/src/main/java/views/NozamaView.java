@@ -158,8 +158,8 @@ public class NozamaView {
 				JTable table = (JTable) e.getSource();
 				int modelRow = Integer.valueOf(e.getActionCommand());
 				
-				//FIXME
-				System.out.println("ADD ITEM TO CART");
+				//Validation check in command line
+				System.out.println("ADD ITEM CLICKED");
 			}
 		};
 		ButtonColumn addToCartButton = new ButtonColumn(table, addToCart, 2);
