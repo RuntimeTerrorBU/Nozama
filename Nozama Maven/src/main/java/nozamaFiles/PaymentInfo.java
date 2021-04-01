@@ -15,14 +15,14 @@ public class PaymentInfo {
 	private String cvc;
 	private String billingAddress;
 	
-	PaymentInfo() {
+	public PaymentInfo() {
 		this.cardNumber = "9999-9999-9999-9999";
 		this.cvc = "999";
 		this.billingAddress = "";
 		
 	}
 	
-	PaymentInfo(String cn, String c, String ba) {
+	public PaymentInfo(String cn, String c, String ba) {
 		
 		if(validateCardInfo(cn, c)) {
 			if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
@@ -43,12 +43,14 @@ public class PaymentInfo {
 		}
 	}
 	
-	Boolean validateCardInfo(String cn, String c) {
+	public Boolean validateCardInfo(String cn, String c) {
 		
-		Boolean toReturn = true;
+		Boolean toReturn = false;
 		
 		//Return true if input card information is valid (Dashed format)
 		if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
+			
+			toReturn = true;
 			
 			for(int i = 0; i < VALID_CARD_NUMBER; i++) {
 				
@@ -72,6 +74,8 @@ public class PaymentInfo {
 		}
 		//Return true if input card information is valid (Pure number format)
 		else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
+			
+			toReturn = true;
 			
 			for(int i = 0; i < VALID_CARD_NUMBER2; i++) {
 				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
