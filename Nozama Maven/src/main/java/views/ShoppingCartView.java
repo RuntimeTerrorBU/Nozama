@@ -136,6 +136,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			
 			//Frame and label creation
 			JFrame frameCheckout = new JFrame("Checkout Confirmation");
+			JPanel checkoutForm = new JPanel(new GridLayout(0, 1));
 			JLabel subtotalLbl = new JLabel();
 			
 			//Frame altered to be configured as a checkout screen
@@ -163,9 +164,26 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			frameCheckout.add(subtotalLbl, BorderLayout.NORTH);
 			
 			
-			//ADD THE REST OF THE THINGS IN CHECKOUT FORM
-			//	- NOT SURE WHAT ELSE NEEDS TO BE HERE YET
+			//Create Labels and Text fields for entering card info and cvc numbers
+			JLabel cardLabel = new JLabel("Enter Card Number: ");
+			JTextField cardField = new JTextField();
+			cardField.setSize(new Dimension(75, 30));
+			JLabel cvcLabel = new JLabel("Enter CVC Number: ");
+			JTextField cvcField = new JTextField();
+			cvcField.setSize(new Dimension(75, 30));
 			
+			//Edit layout for card input prompt
+			checkoutForm.add(cardLabel, BorderLayout.WEST);
+			cardLabel.setLabelFor(cardField);
+			checkoutForm.add(cardField);
+			
+			//Edit layout for cvc input prompt
+			checkoutForm.add(cvcLabel, BorderLayout.WEST);
+			cvcLabel.setLabelFor(cvcField);
+			checkoutForm.add(cvcField);
+			
+			//Add the entire form to the frame
+			frameCheckout.add(checkoutForm);
 			
 			//Fire changes
 			revalidate();
