@@ -1,6 +1,7 @@
 README for Nozama
 -----------------------
-URL: https://github.com/RuntimeTerrorBU/Nozama
+Project Website: https://runtimeterrorbu.github.io/Nozama/
+Git URL: https://github.com/RuntimeTerrorBU/Nozama
 -----------------------
 Project Vision:
 
