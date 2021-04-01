@@ -2,10 +2,13 @@ package nozamaFiles;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class PaymentInfo {
 	
-	public static final int VALID_CVC_NUMBER = 19;
-	public static final int VALID_CARD_NUMBER = 3;
+	public static final int VALID_CARD_NUMBER = 19;
+	public static final int VALID_CARD_NUMBER2 = 16;
+	public static final int VALID_CVC_NUMBER = 3;
 	
 	//Card Variables
 	private String cardNumber;
@@ -21,11 +24,69 @@ public class PaymentInfo {
 	
 	PaymentInfo(String cn, String c, String ba) {
 		
+		if(validateCardInfo(cn, c)) {
+			if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
+				this.cardNumber = cn;
+				this.cvc = c;
+				this.billingAddress = ba;
+			}	
+			else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
+				
+				String formatString = "";
+				
+				formatString = cn.substring(0, 4) + "-" + cn.substring(4, 8) + "-" + cn.substring(8, 12) + "-" + cn.substring(12, 16);
+				
+				this.cardNumber = formatString;
+				this.cvc = c;
+				this.billingAddress = ba;
+			}	
+		}
+	}
+	
+	Boolean validateCardInfo(String cn, String c) {
+		
+		Boolean toReturn = true;
+		
+		//Return true if input card information is valid (Dashed format)
 		if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
-			this.cardNumber = cn;
-			this.cvc = c;
-			this.billingAddress = ba;
-		}		
+			
+			for(int i = 0; i < VALID_CARD_NUMBER; i++) {
+				
+				if(i == 4 || i == 9 || i == 14) {
+					if(!(cn.charAt(i) == '-')) {
+						toReturn = false;
+					}
+					i++;
+				}
+				
+				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+			
+			for(int i = 0; i < VALID_CVC_NUMBER; i++) {
+				if(!(c.charAt(i) >= '0' && c.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+		}
+		//Return true if input card information is valid (Pure number format)
+		else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
+			
+			for(int i = 0; i < VALID_CARD_NUMBER2; i++) {
+				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+			
+			for(int i = 0; i < VALID_CVC_NUMBER; i++) {
+				if(!(c.charAt(i) >= '0' && c.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+		}
+		
+		return toReturn;
 	}
 	
 	public String getCardNumber() {
@@ -36,6 +97,14 @@ public class PaymentInfo {
 		if(cn.length() == VALID_CARD_NUMBER) {
 			this.cardNumber = cn;
 		}
+		else if(cn.length() == VALID_CARD_NUMBER2) {
+			
+			String formatString = "";
+			
+			formatString = cn.substring(0, 4) + "-" + cn.substring(4, 8) + "-" + cn.substring(8, 12) + "-" + cn.substring(12, 16);
+			
+			this.cardNumber = formatString;
+		}	
 	}
 
 	public String getCvc() {
