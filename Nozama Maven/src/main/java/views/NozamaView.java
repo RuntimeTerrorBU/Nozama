@@ -28,7 +28,7 @@ import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 
-import models.*;
+import controllers.*;
 import nozamaFiles.ItemCatalog;
 import views.*;
 
@@ -41,8 +41,8 @@ public class NozamaView {
 	private JFrame frame;
 	private JTextField searchField;
 	private JTable table;
-	private TableRowSorter<NozamaModel> sorter;
-	private NozamaModel nm = new NozamaModel();
+	private TableRowSorter<NozamaController> sorter;
+	private NozamaController nm = new NozamaController();
 
 	/**
 	 * Launch the application.
@@ -143,7 +143,7 @@ public class NozamaView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ShoppingCartView.createAndShowGUI(nm.getCart());
-				NozamaModel.setCart(ShoppingCartView.getCart());
+				NozamaController.setCart(ShoppingCartView.getCart());
 			}
 		});
 		GridBagConstraints gbc_cartButton = new GridBagConstraints();

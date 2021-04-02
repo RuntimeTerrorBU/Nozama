@@ -1,4 +1,4 @@
-package models;
+package controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,12 +9,12 @@ import javax.swing.table.AbstractTableModel;
 
 import nozamaFiles.*;
 
-public class NozamaModel extends AbstractTableModel {
+public class NozamaController extends AbstractTableModel {
 	private String[] columnNames = {"Name", "Cost", ""};
 	private List<Object[]> data;
 	private static ShoppingCart cart;
 	
-	public NozamaModel() {
+	public NozamaController() {
 		data = new ArrayList<Object[]>();
 		cart = new ShoppingCart();
 		loadData();
@@ -73,7 +73,7 @@ public class NozamaModel extends AbstractTableModel {
 	}
 
 	public static void setCart(ShoppingCart cart) {
-		NozamaModel.cart = cart;
+		NozamaController.cart = cart;
 	}
 	
 	public boolean isCellEditable(int row, int col) {

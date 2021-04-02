@@ -1,4 +1,4 @@
-package models;
+package controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +13,12 @@ import nozamaFiles.ItemSpecification;
 import nozamaFiles.Pair;
 import nozamaFiles.ShoppingCart;
 
-public class ShoppingCartModel extends AbstractTableModel {
+public class ShoppingCartController extends AbstractTableModel {
 	private ShoppingCart cart = new ShoppingCart();
 	private String[] columnNames = { "Name", "Cost", "Quantity", "" , ""};
 	private List<Object[]> data;
 
-	public ShoppingCartModel() {
+	public ShoppingCartController() {
 		data = new ArrayList<Object[]>();
 	}
 

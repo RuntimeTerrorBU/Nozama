@@ -1,6 +1,5 @@
 package views;
 
-import models.*;
 import nozamaFiles.*;
 
 import java.awt.BorderLayout;
@@ -23,10 +22,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableRowSorter;
 
+import controllers.*;
+
 public class ShoppingCartView extends JPanel implements ActionListener {
 	
 	//Instance of the ShoppingCart Model to be used
-	private static ShoppingCartModel scm = new ShoppingCartModel();
+	private static ShoppingCartController scm = new ShoppingCartController();
 
 	public ShoppingCartView(ShoppingCart sc) {
 		// FOR TESTING ONLY
@@ -84,7 +85,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 					//If quantity changed to 0, remove item
 					int res = Integer.parseInt(numField.getText());
 					if (res == 0) {
-						((ShoppingCartModel) table.getModel()).removeRow(modelRow);
+						((ShoppingCartController) table.getModel()).removeRow(modelRow);
 
 					} 
 					//ERROR if negative quantity

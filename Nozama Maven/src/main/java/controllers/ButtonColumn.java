@@ -1,4 +1,4 @@
-package models;
+package controllers;
 
 import java.awt.*;
 import java.awt.event.*;
