@@ -40,5 +40,12 @@ public class TestPaymentInfo {
 	public void testVerificiation2() {
 		assertFalse(testVal.validateCardInfo("9999a999999999999", "101"));	
 	}
+	
+	@Test
+	public void testNullVerify() {
+		assertThrows(NullPointerException.class, () -> {
+			testVal.validateCardInfo(null, null);
+		});
+	}
 
 }
