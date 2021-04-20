@@ -4,23 +4,15 @@ import nozamaFiles.*;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.TableRowSorter;
 
 import controllers.*;
 
@@ -29,14 +21,14 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 	//Instance of the ShoppingCart Model to be used
 	private static ShoppingCartController scm = new ShoppingCartController();
 
-	public ShoppingCartView(ShoppingCart sc) {
-		// FOR TESTING ONLY
+	public ShoppingCartView(Customer c) {
+		// FIXME This try/catch is specifically for testing only
 		try {
 			File catalogFile = new File("resources/testCatalog.csv");
 			ItemCatalog.loadData(catalogFile);
-			//File cartFile = new File("resources/testCart.csv");
-			//scm.loadData(cartFile);
-			scm.setCart(sc);
+			//scm.setCart(sc);
+			scm.setCustomer(c);
+			scm.setCustomerFile(new File("resources/testCart.csv"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +44,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		JLabel subtotalLbl = new JLabel();
 		
 		//Fetch the sub total of the current cart, used to display
-		BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
+		BigDecimal sub = new BigDecimal(c.getCustomerCart().calculateSub()).setScale(2, RoundingMode.HALF_UP);
 		subtotalLbl.setText("Subtotal: $" + sub.toPlainString());
 
 		//Action to perform edit on quantity of item
@@ -93,10 +85,20 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 						JOptionPane.showMessageDialog(form2, "ERROR: You cannot enter a negative quantity!");
 						
 					}
-					//Change quantity if valid quantity
+					//Change quantity if valid quantity & write to the customer file
 					else if (res <= ItemCatalog.getItemSpecification(scm.getValueAt(modelRow, 4).toString())
 							.getQuantity()) {
 						scm.setValueAt(res, modelRow, 2);
+						
+						try {
+							BufferedWriter out = new BufferedWriter(new FileWriter(scm.getCustomerFile()));
+							out.write(scm.getCart().toString());
+							out.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 					}
 					//Otherwise quantity is too large for order, ERROR
 					else {
@@ -196,13 +198,13 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 
 	}
 
-	public static void createAndShowGUI(ShoppingCart sc) {
-		
+	public static void createAndShowGUI(Customer c) {
 		//Implementation of the Shopping cart interface after checkout
 		JFrame frame = new JFrame("Your Cart");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 
-		ShoppingCartView newContentPane = new ShoppingCartView(sc);
+		ShoppingCartView newContentPane = new ShoppingCartView(c);
 
 		newContentPane.setOpaque(true);
 
@@ -211,21 +213,4 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		frame.setVisible(true);
 		
 	}
-	
-	public static void setCart(ShoppingCart sc) {
-		scm.setCart(sc);
-	}
-	
-	public static ShoppingCart getCart() {
-		return scm.getCart();
-	}
-	
-	/*public static void main(String[] args) throws FileNotFoundException {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}*/
-
 }

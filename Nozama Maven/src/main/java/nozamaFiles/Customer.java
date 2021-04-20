@@ -1,5 +1,8 @@
 package nozamaFiles;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +13,11 @@ public class Customer {
 	private static int incrementalID = 0;
 	private int customerID;
 	private List<String> wishList;
-	private Map<String, String> customerInformation;
+	private Map<String, String> customerInformation = new HashMap<String, String> ();
+	
+	//added by Austin
+	private ShoppingCart customerCart;
+	private File cartFile;
 	
 	public String getUsername() {
 		return username;
@@ -45,7 +52,18 @@ public class Customer {
 	public void setCustomerInformation(Map<String, String> customerInformation) {
 		this.customerInformation = customerInformation;
 	}
-	
+	public ShoppingCart getCustomerCart() {
+		return customerCart;
+	}
+	public void setCustomerCart(ShoppingCart customerCart) {
+		this.customerCart = customerCart;
+	}
+	public File getCartFile() {
+		return cartFile;
+	}
+	public void setCartFile(File cartFile) {
+		this.cartFile = cartFile;
+	}
 	public boolean login(String username, String password) {
 		boolean toReturn = false;
 		
@@ -60,6 +78,7 @@ public class Customer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((customerCart == null) ? 0 : customerCart.hashCode());
 		result = prime * result + customerID;
 		result = prime * result + ((customerInformation == null) ? 0 : customerInformation.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -78,6 +97,11 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
+		if (customerCart == null) {
+			if (other.customerCart != null)
+				return false;
+		} else if (!customerCart.equals(other.customerCart))
+			return false;
 		if (customerID != other.customerID)
 			return false;
 		if (customerInformation == null) {
@@ -117,6 +141,17 @@ public class Customer {
 		this.incrementalID++;
 		this.wishList = wishList;
 		this.customerInformation.put(username, password);
+		
+		//FIXME added for testing purposes, will need to update to work with different customers
+		this.customerCart = new ShoppingCart();
+		try {
+			File f = new File("resources/testCart.csv");
+			this.customerCart.loadCart(f);
+			this.cartFile = f;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

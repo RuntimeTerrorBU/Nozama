@@ -20,6 +20,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -72,11 +79,22 @@ public class NozamaView {
 	 */
 	private void initialize() {
 		//TODO loadCart is for testing only
-		nm.loadCart();
-		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					BufferedWriter out = new BufferedWriter(new FileWriter(nm.getCustomer().getCartFile()));
+					out.write(nm.getCustomer().getCustomerCart().toString());
+					out.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -142,10 +160,10 @@ public class NozamaView {
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ShoppingCartView.createAndShowGUI(nm.getCart());
-				NozamaController.setCart(ShoppingCartView.getCart());
+				displayCart();
 			}
 		});
+		
 		GridBagConstraints gbc_cartButton = new GridBagConstraints();
 		gbc_cartButton.insets = new Insets(0, 0, 5, 0);
 		gbc_cartButton.gridx = 13;
@@ -162,10 +180,14 @@ public class NozamaView {
 				
 				//Validation check in command line
 				System.out.println("ADD ITEM CLICKED");
+				
 			}
 		};
 		ButtonColumn addToCartButton = new ButtonColumn(table, addToCart, 2);
 
 	}
 
+	public void displayCart() {
+		ShoppingCartView.createAndShowGUI(nm.getCustomer());
+	}
 }

@@ -86,8 +86,22 @@ public class ShoppingCart {
 			
 			cart.add(new Pair<Item, Integer>(new Item(id), quantity));
 		}
+		in.close();
+		
+		subtotal = calculateSub();
 	}
 	
+	public double calculateSub() {
+		double itemPrice;
+		double res = 0.0;
+		for(Pair<Item, Integer> p:cart) {
+			if (ItemCatalog.getItemSpecification(p.first.getItemID()) != null) {
+				itemPrice = ItemCatalog.getItemSpecification(p.first.getItemID()).getPrice();
+				res += itemPrice * p.second;
+			}
+		}
+		return res;
+	}
 	
 	
 	

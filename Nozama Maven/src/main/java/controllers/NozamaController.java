@@ -12,11 +12,13 @@ import nozamaFiles.*;
 public class NozamaController extends AbstractTableModel {
 	private String[] columnNames = {"Name", "Cost", ""};
 	private List<Object[]> data;
-	private static ShoppingCart cart;
+	//private ShoppingCart cart;
+	private Customer c;
 	
 	public NozamaController() {
 		data = new ArrayList<Object[]>();
-		cart = new ShoppingCart();
+		//for test purposes, refactor later to deal with different customers
+		c = new Customer("testCustomer", null, null, 0, null);
 		loadData();
 	}
 
@@ -40,6 +42,7 @@ public class NozamaController extends AbstractTableModel {
 	
 	
 	public void loadData() {
+		//FIXME change the file to be the customer's specific cart file
 		File file = new File("resources/testCatalog.csv");
 		try {
 			ItemCatalog.loadData(file);
@@ -59,25 +62,34 @@ public class NozamaController extends AbstractTableModel {
 		
 	}
 	
-	public void loadCart() {
-		File file = new File("resources/testCart.csv");
+	public void loadCart(File f) {
 		try {
-			cart.loadCart(file);
+			//cart.loadCart(file);
+			//cart = new ShoppingCart();
+			//cart.loadCart(f);
+			c.getCustomerCart().loadCart(f);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public ShoppingCart getCart() {
-		return cart;
+		//return cart;
+		return c.getCustomerCart();
 	}
 
-	public static void setCart(ShoppingCart cart) {
-		NozamaController.cart = cart;
+	/*
+	public void setCart(ShoppingCart cart) {
+		this.cart = cart;
 	}
+	*/
 	
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
+	}
+	
+	public Customer getCustomer() {
+		return c;
 	}
 	
 	

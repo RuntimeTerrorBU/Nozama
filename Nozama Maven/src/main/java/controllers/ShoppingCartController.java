@@ -1,12 +1,12 @@
 package controllers;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import nozamaFiles.Customer;
 import nozamaFiles.Item;
 import nozamaFiles.ItemCatalog;
 import nozamaFiles.ItemSpecification;
@@ -14,9 +14,10 @@ import nozamaFiles.Pair;
 import nozamaFiles.ShoppingCart;
 
 public class ShoppingCartController extends AbstractTableModel {
-	private ShoppingCart cart = new ShoppingCart();
 	private String[] columnNames = { "Name", "Cost", "Quantity", "" , ""};
 	private List<Object[]> data;
+	private File customerFile;
+	private Customer c;
 
 	public ShoppingCartController() {
 		data = new ArrayList<Object[]>();
@@ -48,11 +49,10 @@ public class ShoppingCartController extends AbstractTableModel {
 
 	public ShoppingCart getCart() {
 		dataToCart();
-		return cart;
+		return c.getCustomerCart();
 	}
-
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
+	public void setCustomer(Customer c) {
+		this.c = c;
 		cartToData();
 		fireTableDataChanged();
 	}
@@ -66,16 +66,17 @@ public class ShoppingCartController extends AbstractTableModel {
 	}
 	
 	public Double getSubtotal() {
-		double subtotal = 0.0;
-		for(Object[] cols:data) {
-			subtotal += (double)cols[1] * (int)cols[2];
-		}
-		
-		return subtotal;
+		return c.getCustomerCart().getSubtotal();
 	}
-	
+	public File getCustomerFile() {
+		return customerFile;
+	}
+	public void setCustomerFile(File f) {
+		customerFile = f;
+	}
+
 	public void cartToData() {
-		List<Pair<Item, Integer>> contents = cart.getCart();
+		List<Pair<Item, Integer>> contents = c.getCustomerCart().getCart();
 		List<Object[]> cartData = new ArrayList<Object[]>();
 		ItemSpecification is = null;
 
@@ -104,13 +105,7 @@ public class ShoppingCartController extends AbstractTableModel {
 			newCart.addItemToCart(i, (Integer) o[2]);
 		}
 		
-		cart = newCart;
-		fireTableDataChanged();
-	}
-	
-	public void loadData(File file) throws IOException {
-		cart.loadCart(file);
-		cartToData();
+		c.setCustomerCart(newCart);
 		fireTableDataChanged();
 	}
 	
