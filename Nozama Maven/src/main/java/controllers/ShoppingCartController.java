@@ -81,8 +81,6 @@ public class ShoppingCartController extends AbstractTableModel {
 		ItemSpecification is = null;
 
 		//TODO fix later for adding image column, edit, and remove
-		
-		
 		for (Pair<Item, Integer> p : contents) {
 			is = ItemCatalog.getItemSpecification(p.first.getItemID());
 			Object[] itemData = new Object[5];

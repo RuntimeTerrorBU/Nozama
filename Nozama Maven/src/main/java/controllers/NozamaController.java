@@ -10,14 +10,13 @@ import javax.swing.table.AbstractTableModel;
 import nozamaFiles.*;
 
 public class NozamaController extends AbstractTableModel {
-	private String[] columnNames = {"Name", "Cost", ""};
+	private String[] columnNames = {"Name", "Cost", "", ""};
 	private List<Object[]> data;
-	//private ShoppingCart cart;
 	private Customer c;
 	
 	public NozamaController() {
 		data = new ArrayList<Object[]>();
-		//for test purposes, refactor later to deal with different customers
+		//TODO for test purposes, refactor later to deal with different customers
 		c = new Customer("testCustomer", null, null, 0, null);
 		loadData();
 	}
@@ -56,6 +55,7 @@ public class NozamaController extends AbstractTableModel {
 			colData[0] = i.getName();
 			colData[1] = i.getPrice();
 			colData[2] = "Add To Cart";
+			colData[3] = i.getItemID();
 			data.add(colData);
 		}
 		fireTableDataChanged();
@@ -64,9 +64,6 @@ public class NozamaController extends AbstractTableModel {
 	
 	public void loadCart(File f) {
 		try {
-			//cart.loadCart(file);
-			//cart = new ShoppingCart();
-			//cart.loadCart(f);
 			c.getCustomerCart().loadCart(f);
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -74,15 +71,8 @@ public class NozamaController extends AbstractTableModel {
 	}
 
 	public ShoppingCart getCart() {
-		//return cart;
 		return c.getCustomerCart();
 	}
-
-	/*
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
-	}
-	*/
 	
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;

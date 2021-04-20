@@ -2,6 +2,7 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,6 +37,7 @@ import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 
 import controllers.*;
+import nozamaFiles.Item;
 import nozamaFiles.ItemCatalog;
 import views.*;
 
@@ -78,7 +80,7 @@ public class NozamaView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//TODO loadCart is for testing only
+		// TODO loadCart is for testing only
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,12 +98,12 @@ public class NozamaView {
 			}
 		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		frame.getContentPane().setLayout(gridBagLayout);
-		
+
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
@@ -109,22 +111,23 @@ public class NozamaView {
 		gbc_panel.gridy = 0;
 		frame.getContentPane().add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{16, 27, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[] { 16, 27, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-		
+
 		JButton searchButton = new JButton("Search");
 		searchButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String text = searchField.getText();
-				//FIXME Find out how to filter
+				// FIXME Find out how to filter
 				System.out.println("FIXME");
 			}
 		});
-		
+
 		searchField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 11;
@@ -140,7 +143,7 @@ public class NozamaView {
 		gbc_searchButton.gridx = 13;
 		gbc_searchButton.gridy = 0;
 		panel.add(searchButton, gbc_searchButton);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 7;
@@ -150,12 +153,13 @@ public class NozamaView {
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 1;
 		panel.add(scrollPane, gbc_scrollPane);
-		
+
 		table = new JTable(nm);
+		table.removeColumn(table.getColumnModel().getColumn(3));
 		scrollPane.setColumnHeaderView(table);
 		scrollPane.setPreferredSize(new Dimension(450, 110));
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
+
 		JButton cartButton = new JButton("Show Cart");
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -163,23 +167,43 @@ public class NozamaView {
 				displayCart();
 			}
 		});
-		
+
 		GridBagConstraints gbc_cartButton = new GridBagConstraints();
 		gbc_cartButton.insets = new Insets(0, 0, 5, 0);
 		gbc_cartButton.gridx = 13;
 		gbc_cartButton.gridy = 7;
 		panel.add(cartButton, gbc_cartButton);
-		
-		
-		
+
 		Action addToCart = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				JPanel form2 = new JPanel(new GridLayout(0, 1));
+				JPanel form2 = new JPanel(new GridLayout(0,1));
 				JTable table = (JTable) e.getSource();
 				int modelRow = Integer.valueOf(e.getActionCommand());
 				
-				//Validation check in command line
-				System.out.println("ADD ITEM CLICKED");
+				JLabel quantityLbl = new JLabel("Quantity: ");
+				JTextField qTextField = new JTextField();
+				qTextField.setText("1");
+				form2.add(quantityLbl);
+				form2.add(qTextField);
+				
+				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Cart", JOptionPane.OK_CANCEL_OPTION);
+				if(res == JOptionPane.OK_OPTION) {
+					Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
+					Integer quantity = Integer.parseInt(qTextField.getText());
+					Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
+					
+					//validate quantity
+					if(quantity <= 0) { 
+						JOptionPane.showMessageDialog(form2, "ERROR: Quantity can't be less than or equal to 0!");
+					}
+					else if(quantity <= available) {
+						nm.getCustomer().getCustomerCart().addItemToCart(toAdd, quantity);
+					}
+					else {
+						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
+					}
+				}
+				
 				
 			}
 		};
