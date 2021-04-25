@@ -81,7 +81,8 @@ public class NozamaView {
 	 */
 	private void initialize() {
 		// TODO loadCart is for testing only
-		frame = new JFrame();
+		sorter = new TableRowSorter<NozamaController>(nm);
+		frame = new JFrame("Home Page");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -97,6 +98,7 @@ public class NozamaView {
 				}
 			}
 		});
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0 };
@@ -124,7 +126,35 @@ public class NozamaView {
 			public void mouseClicked(MouseEvent e) {
 				String text = searchField.getText();
 				// FIXME Find out how to filter
-				System.out.println("FIXME");
+				RowFilter<NozamaController, Object> rf = null;
+			    //If current expression doesn't parse, don't update.
+			    try {
+			        rf = RowFilter.regexFilter(text, 0);
+			    } catch (java.util.regex.PatternSyntaxException f) {
+			        return;
+			    }
+			    sorter.setRowFilter(rf);
+			}
+		});
+		
+		JButton btnNewButton = new JButton("Clear Search");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton.gridx = 13;
+		gbc_btnNewButton.gridy = 1;
+		panel.add(btnNewButton, gbc_btnNewButton);
+		
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RowFilter<NozamaController, Object> rf = null;
+				searchField.setText("");
+				try {
+					rf = RowFilter.regexFilter("(?s).*" , 0);
+				} catch (java.util.regex.PatternSyntaxException f) {
+					return;
+				}
+				sorter.setRowFilter(rf);
 			}
 		});
 
@@ -155,6 +185,7 @@ public class NozamaView {
 		panel.add(scrollPane, gbc_scrollPane);
 
 		table = new JTable(nm);
+		table.setRowSorter(sorter);
 		table.removeColumn(table.getColumnModel().getColumn(3));
 		scrollPane.setColumnHeaderView(table);
 		scrollPane.setPreferredSize(new Dimension(450, 110));
@@ -167,6 +198,7 @@ public class NozamaView {
 				displayCart();
 			}
 		});
+		
 
 		GridBagConstraints gbc_cartButton = new GridBagConstraints();
 		gbc_cartButton.insets = new Insets(0, 0, 5, 0);
