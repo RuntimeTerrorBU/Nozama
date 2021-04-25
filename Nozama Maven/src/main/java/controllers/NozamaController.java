@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 import nozamaFiles.*;
 
 public class NozamaController extends AbstractTableModel {
-	private String[] columnNames = {"Name", "Cost", ""};
+	private String[] columnNames = {"Name", "Cost", "", ""};
 	private List<Object[]> data;
 	private static ShoppingCart cart;
 	
@@ -53,6 +53,7 @@ public class NozamaController extends AbstractTableModel {
 			colData[0] = i.getName();
 			colData[1] = i.getPrice();
 			colData[2] = "Add To Cart";
+			colData[3] = "Add To Wishlist";
 			data.add(colData);
 		}
 		fireTableDataChanged();

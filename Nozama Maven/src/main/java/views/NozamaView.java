@@ -165,7 +165,15 @@ public class NozamaView {
 			}
 		};
 		ButtonColumn addToCartButton = new ButtonColumn(table, addToCart, 2);
-
+		
+		Action addToWishlist = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				System.out.println("ADD ITEM TO WISHLIST CLICKED");
+			}
+		};
+		ButtonColumn addToWishlistButton = new ButtonColumn(table, addToWishlist, 3);
 	}
 
 }
