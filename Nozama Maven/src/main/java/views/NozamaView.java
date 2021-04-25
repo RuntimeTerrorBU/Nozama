@@ -152,7 +152,20 @@ public class NozamaView {
 		gbc_cartButton.gridy = 7;
 		panel.add(cartButton, gbc_cartButton);
 		
-		
+		// add wishlist button
+		JButton wishlistButton = new JButton("Show Wishlist");
+		wishlistButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//TODO
+				System.out.println("SHOW WISHLIST CLICKED");
+			}
+		});
+		GridBagConstraints gbc_wishlistButton = new GridBagConstraints();
+		gbc_wishlistButton.insets = new Insets(0, 0, 5, 0);
+		gbc_wishlistButton.gridx = 13;
+		gbc_wishlistButton.gridy = 8;
+		panel.add(wishlistButton, gbc_wishlistButton);
 		
 		Action addToCart = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
