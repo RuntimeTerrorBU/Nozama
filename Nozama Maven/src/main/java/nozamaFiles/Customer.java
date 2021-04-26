@@ -16,6 +16,20 @@ public class Customer {
 	private Map<String, String> customerInformation = new HashMap<String, String> ();
 	private Boolean isCompany;
 	
+	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist,
+			Map<String, String> customerInformation, Boolean isCompany, ShoppingCart customerCart, File cartFile) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.shippingAddress = shippingAddress;
+		this.customerID = customerID;
+		this.wishlist = wishlist;
+		this.customerInformation = customerInformation;
+		this.isCompany = isCompany;
+		this.customerCart = customerCart;
+		this.cartFile = cartFile;
+	}
+
 	//added by Austin
 	private ShoppingCart customerCart;
 	private File cartFile;

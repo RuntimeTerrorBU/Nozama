@@ -17,7 +17,7 @@ public class NozamaController extends AbstractTableModel {
 	public NozamaController() {
 		data = new ArrayList<Object[]>();
 		//TODO for test purposes, refactor later to deal with different customers
-		c = new Customer("testCustomer", null, null, 0, null);
+		c = new Customer("testCustomer", null, null, 0, null, null, true, null, null);
 		loadData();
 	}
 

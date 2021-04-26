@@ -289,6 +289,25 @@ public class NozamaView {
 			}
 		};
 		ButtonColumn addToWishlistButton = new ButtonColumn(table, addToWishlist, 3);
+		
+		// add add product button
+		// if customer is company
+		if (nm.getCustomer().getIsCompany()) {
+			// add wishlist button
+			JButton addProductButton = new JButton("Add Product");
+			addProductButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("ADD PRODUCT CLICKED");
+				}
+			});
+			
+			GridBagConstraints gbc_addProductButton = new GridBagConstraints();
+			gbc_addProductButton.insets = new Insets(0, 0, 5, 0);
+			gbc_addProductButton.gridx = 13;
+			gbc_addProductButton.gridy = 9;
+			panel.add(addProductButton, gbc_addProductButton);
+		}
 	}
 
 	public void displayCart() {
