@@ -155,7 +155,6 @@ public class HomeView {
 					}
 				}
 				
-				
 				//Validation check in command line
 				System.out.println("Login CLICKED");
 			}
@@ -178,8 +177,6 @@ public class HomeView {
 				loginFrame.setPreferredSize(new Dimension(240, 150));
 				loginFrame.pack();
 				loginFrame.setLocationRelativeTo(null);
-				
-				
 				
 				//Create Labels and Text fields for entering card info and cvc numbers
 				JLabel userLabel = new JLabel("Enter Username: ");

@@ -159,11 +159,9 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			//add(checkoutForm);
 			//setVisible(checkoutForm);	
 			
-			
 			//Add the sub total count to the checkout prompt
 			subtotalLbl.setHorizontalAlignment(JLabel.CENTER);
 			frameCheckout.add(subtotalLbl, BorderLayout.NORTH);
-			
 			
 			//Create Labels and Text fields for entering card info and cvc numbers
 			JLabel cardLabel = new JLabel("Enter Card Number: ");
@@ -191,16 +189,13 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			
 			//Validation check in command line
 			System.out.println("CHECKOUT CLICKED");
-			
 		}
-
 	}
 
 	public static void createAndShowGUI(Customer c) {
 		//Implementation of the Shopping cart interface after checkout
 		JFrame frame = new JFrame("Your Cart");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
 
 		ShoppingCartView newContentPane = new ShoppingCartView(c);
 
@@ -209,6 +204,5 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		frame.setContentPane(newContentPane);
 		frame.pack();
 		frame.setVisible(true);
-		
 	}
 }
