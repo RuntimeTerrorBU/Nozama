@@ -151,8 +151,6 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			
 			//Fire changes
 			revalidate();
-
-
 			
 			//Find the sub total based on the Shopping Cart Model		
 			BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
