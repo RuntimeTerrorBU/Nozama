@@ -53,10 +53,8 @@ public class NozamaView {
 	private TableRowSorter<NozamaController> sorter;
 	private NozamaController nm = new NozamaController();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	
+	public static void createAndShowGUI() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -69,9 +67,7 @@ public class NozamaView {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
 	public NozamaView() {
 		initialize();
 	}
