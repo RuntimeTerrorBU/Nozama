@@ -250,86 +250,7 @@ public class NozamaView {
 			gbc_restockButton.gridx = 2;
 			gbc_restockButton.gridy = 8;
 			panel.add(restockButton, gbc_restockButton);
-		}
-
-		Action addToCart = new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				JPanel form2 = new JPanel(new GridLayout(0,1));
-				JTable table = (JTable) e.getSource();
-				int modelRow = Integer.valueOf(e.getActionCommand());
-
-				Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
-				Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
-				
-				JLabel quantityLbl = new JLabel("Quantity Desired:");
-				JTextField qTextField = new JTextField();
-				JLabel availabiltyLbl = new JLabel("Only " + available + " available");
-				qTextField.setText("1");
-				form2.add(quantityLbl);
-				form2.add(qTextField);
-				form2.add(availabiltyLbl);
-				
-				UIManager.put("OptionPane.cancelButtonText", "Cancel");
-				UIManager.put("OptionPane.okButtonText", "Add Item");
-				
-				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Cart", JOptionPane.OK_CANCEL_OPTION);
-				if(res == JOptionPane.OK_OPTION) {
-					Integer quantity = Integer.parseInt(qTextField.getText());
-					
-					//validate quantity
-					if(quantity <= 0) { 
-						JOptionPane.showMessageDialog(form2, "ERROR: Quantity can't be less than or equal to 0!");
-					}
-					else if(quantity <= available) {
-						nm.getCustomer().getCustomerCart().addItemToCart(toAdd, quantity);
-					}
-					else {
-						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
-					}
-				}		
-			}
-		};
-		
-		ButtonColumn addToCartButton = new ButtonColumn(table, addToCart, 2);
-		
-		Action addToWishlist = new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				JPanel form2 = new JPanel(new GridLayout(0,1));
-				JTable table = (JTable) e.getSource();
-				int modelRow = Integer.valueOf(e.getActionCommand());
-				
-				JLabel quantityLbl = new JLabel("Quantity: ");
-				JTextField qTextField = new JTextField();
-				qTextField.setText("1");
-				form2.add(quantityLbl);
-				form2.add(qTextField);
-				
-				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Wishlist", JOptionPane.OK_CANCEL_OPTION);
-				if(res == JOptionPane.OK_OPTION) {
-					Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
-					Integer quantity = Integer.parseInt(qTextField.getText());
-					Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
-					
-					//validate quantity
-					if(quantity <= 0) { 
-						JOptionPane.showMessageDialog(form2, "ERROR: Quantity can't be less than or equal to 0!");
-					}
-					else if(quantity <= available) {
-						nm.getCustomer().getWishlist().addItemToCart(toAdd, quantity);
-					}
-					else {
-						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
-					}
-				}
-				
-				System.out.println("ADD ITEM TO WISHLIST CLICKED");
-			}
-		};
-		ButtonColumn addToWishlistButton = new ButtonColumn(table, addToWishlist, 3);
-		
-		// add add product button
-		// if customer is company
-		if (nm.getCustomer().getIsCompany()) {
+			
 			// add wishlist button
 			JButton addProductButton = new JButton("Add Product");
 			addProductButton.addMouseListener(new MouseAdapter() {
@@ -408,8 +329,86 @@ public class NozamaView {
 			gbc_addProductButton.gridx = 13;
 			gbc_addProductButton.gridy = 9;
 			panel.add(addProductButton, gbc_addProductButton);
+		
 		}
+
+		Action addToCart = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel form2 = new JPanel(new GridLayout(0,1));
+				JTable table = (JTable) e.getSource();
+				int modelRow = Integer.valueOf(e.getActionCommand());
+
+				Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
+				Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
+				
+				JLabel quantityLbl = new JLabel("Quantity Desired:");
+				JTextField qTextField = new JTextField();
+				JLabel availabiltyLbl = new JLabel("Only " + available + " available");
+				qTextField.setText("1");
+				form2.add(quantityLbl);
+				form2.add(qTextField);
+				form2.add(availabiltyLbl);
+				
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Add Item");
+				
+				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Cart", JOptionPane.OK_CANCEL_OPTION);
+				if(res == JOptionPane.OK_OPTION) {
+					Integer quantity = Integer.parseInt(qTextField.getText());
+					
+					//validate quantity
+					if(quantity <= 0) { 
+						JOptionPane.showMessageDialog(form2, "ERROR: Quantity can't be less than or equal to 0!");
+					}
+					else if(quantity <= available) {
+						nm.getCustomer().getCustomerCart().addItemToCart(toAdd, quantity);
+					}
+					else {
+						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
+					}
+				}		
+			}
+		};
+		
+		ButtonColumn addToCartButton = new ButtonColumn(table, addToCart, 2);
+		
+		Action addToWishlist = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel form2 = new JPanel(new GridLayout(0,1));
+				JTable table = (JTable) e.getSource();
+				int modelRow = Integer.valueOf(e.getActionCommand());
+				
+				JLabel quantityLbl = new JLabel("Quantity: ");
+				JTextField qTextField = new JTextField();
+				qTextField.setText("1");
+				form2.add(quantityLbl);
+				form2.add(qTextField);
+				
+				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Wishlist", JOptionPane.OK_CANCEL_OPTION);
+				if(res == JOptionPane.OK_OPTION) {
+					Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
+					Integer quantity = Integer.parseInt(qTextField.getText());
+					Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
+					
+					//validate quantity
+					if(quantity <= 0) { 
+						JOptionPane.showMessageDialog(form2, "ERROR: Quantity can't be less than or equal to 0!");
+					}
+					else if(quantity <= available) {
+						nm.getCustomer().getWishlist().addItemToCart(toAdd, quantity);
+					}
+					else {
+						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
+					}
+				}
+				
+				System.out.println("ADD ITEM TO WISHLIST CLICKED");
+			}
+		};
+		ButtonColumn addToWishlistButton = new ButtonColumn(table, addToWishlist, 3);
+		
 	}
+	
 
 	public void displayCart() {
 		ShoppingCartView.createAndShowGUI(nm.getCustomer());
