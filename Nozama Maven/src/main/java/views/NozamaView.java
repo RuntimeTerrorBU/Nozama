@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -39,6 +40,7 @@ import javax.swing.table.TableRowSorter;
 import controllers.*;
 import nozamaFiles.Item;
 import nozamaFiles.ItemCatalog;
+import nozamaFiles.ItemSpecification;
 import views.*;
 
 import java.awt.Insets;
@@ -305,16 +307,21 @@ public class NozamaView {
 					int result = JOptionPane.showConfirmDialog(null, panel, "Edit", JOptionPane.OK_CANCEL_OPTION);
 					
 					if (result == JOptionPane.OK_OPTION) {
-						System.out.println("WORKS");
-					}
-					
-					/*
-					// add a done button
-					JButton doneButton = new JButton("Done");
-					doneButton.addMouseListener(new MouseAdapter() {
+						String name = nameField.getText();
+						String description = descriptionField.getText();
+						Double price = Double.parseDouble(priceField.getText());
+						String itemID = itemIDField.getText();
+						Integer quantity = Integer.parseInt(quantityField.getText());
 						
-					});
-					*/
+						ItemSpecification tempItemSpec = new ItemSpecification(name, description, price, itemID, quantity);
+						
+						// add the item spec
+						List<ItemSpecification> tempItemList = ItemCatalog.getItems();
+						tempItemList.add(tempItemSpec);
+						ItemCatalog.setItems(tempItemList);
+						
+						nm.update();
+					}
 					
 					// show the frame
 					frame.pack();

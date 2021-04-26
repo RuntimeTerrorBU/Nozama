@@ -17,7 +17,7 @@ public class NozamaController extends AbstractTableModel {
 	public NozamaController() {
 		data = new ArrayList<Object[]>();
 		//TODO for test purposes, refactor later to deal with different customers
-		c = new Customer("testCustomer", null, null, 0, null, null, true, null, null);
+		c = new Customer("testCustomer", null, null, 0, new ShoppingCart(), null, true, new ShoppingCart(), new File("textCart.csv"));
 		loadData();
 	}
 
@@ -49,6 +49,19 @@ public class NozamaController extends AbstractTableModel {
 			e.printStackTrace();
 		}
 		
+		for(ItemSpecification i : ItemCatalog.getItems()) {
+			Object[] colData = new Object[columnNames.length];
+			colData[0] = i.getName();
+			colData[1] = i.getPrice();
+			colData[2] = "Add To Cart";
+			colData[3] = i.getItemID();
+			colData[4] = "Add To Wishlist";
+			data.add(colData);
+		}
+		fireTableDataChanged();
+	}
+	
+	public void update() {
 		for(ItemSpecification i : ItemCatalog.getItems()) {
 			Object[] colData = new Object[columnNames.length];
 			colData[0] = i.getName();
