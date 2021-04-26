@@ -14,11 +14,19 @@ public class Customer {
 	private int customerID;
 	private ShoppingCart wishlist;
 	private Map<String, String> customerInformation = new HashMap<String, String> ();
+	private Boolean isCompany;
 	
 	//added by Austin
 	private ShoppingCart customerCart;
 	private File cartFile;
 	
+	
+	public Boolean getIsCompany() {
+		return isCompany;
+	}
+	public void setIsCompany(Boolean b) {
+		this.isCompany = b;
+	}
 	public String getUsername() {
 		return username;
 	}
