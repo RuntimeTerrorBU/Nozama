@@ -1,17 +1,32 @@
 package views;
 import java.awt.EventQueue;
+import java.io.*;  
+import java.util.Scanner;  
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class HomeView {
 
@@ -59,9 +74,90 @@ public class HomeView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//TODO ADD LOGIN SCREEN BEFORE THIS
-				System.out.println("ADD LOGIN SCREEN FOR CUSTOMER");
-				NozamaView.createAndShowGUI();
-				frame.setVisible(false);
+				
+				JFrame loginFrame = new JFrame("Customer Login");
+				JPanel loginForm = new JPanel(new GridLayout(0, 1));
+				//loginFrame.setVisible(true);
+				//loginForm.setVisible(true);
+				
+				//Frame altered to be configured as a checkout screen
+				loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				loginFrame.setPreferredSize(new Dimension(240, 150));
+				loginFrame.pack();
+				loginFrame.setLocationRelativeTo(null);
+				
+				
+				
+				//Create Labels and Text fields for entering card info and cvc numbers
+				JLabel userLabel = new JLabel("Enter Username: ");
+				JTextField userField = new JTextField();
+				userField.setSize(new Dimension(75, 30));
+				JLabel passLabel = new JLabel("Enter Password: ");
+				JTextField passField = new JTextField();
+				passField.setSize(new Dimension(75, 30));
+				
+				//Edit layout for card input prompt
+				loginForm.add(userLabel, BorderLayout.WEST);
+				userLabel.setLabelFor(userField);
+				loginForm.add(userField);
+				
+				//Edit layout for cvc input prompt
+				loginForm.add(passLabel, BorderLayout.WEST);
+				passLabel.setLabelFor(passField);
+				loginForm.add(passField);
+				
+				//Add the entire form to the frame
+				loginFrame.add(loginForm);
+				
+				//Fire changes
+				loginFrame.revalidate();
+				loginForm.revalidate();
+				
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Login");
+				
+				if(res == JOptionPane.OK_OPTION) {
+					String username = userField.getText();
+					String password = passField.getText();
+					Boolean loginComplete = false;
+					
+					try {
+						File file = new File("usersData.txt");   
+						FileInputStream fis = new FileInputStream(file);
+						Scanner scanner = new Scanner(file);
+
+						int r = 0;
+						String inputLine;
+						
+						while(scanner.hasNextLine() && !loginComplete) {
+							
+							inputLine = scanner.nextLine();
+							
+							String[] checkPerson;
+							checkPerson = inputLine.split(",");
+							
+							if(checkPerson[0].equals(username) && checkPerson[1].equals(password)) {
+								loginComplete = true;
+							}
+						}
+					}
+					catch(Exception ex){  
+						ex.printStackTrace();
+					}
+					
+					if(loginComplete) {
+						NozamaView.createAndShowGUI();
+						frame.setVisible(false);
+					}
+					else {
+						System.out.println("DISPLAY ERROR FOR INVALID LOGIN");
+					}
+				}
+				
+				
+				//Validation check in command line
+				System.out.println("Login CLICKED");
 			}
 		});
 		frame.getContentPane().add(customerButton);
@@ -72,10 +168,89 @@ public class HomeView {
 		companyButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TODO ADD LOGIN SCREEN BEFORE THIS
-				System.out.println("ADD LOGIN SCREEN FOR COMPANY");
-				NozamaView.createAndShowGUI();
-				frame.setVisible(false);
+				JFrame loginFrame = new JFrame("Customer Login");
+				JPanel loginForm = new JPanel(new GridLayout(0, 1));
+				//loginFrame.setVisible(true);
+				//loginForm.setVisible(true);
+				
+				//Frame altered to be configured as a checkout screen
+				loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				loginFrame.setPreferredSize(new Dimension(240, 150));
+				loginFrame.pack();
+				loginFrame.setLocationRelativeTo(null);
+				
+				
+				
+				//Create Labels and Text fields for entering card info and cvc numbers
+				JLabel userLabel = new JLabel("Enter Username: ");
+				JTextField userField = new JTextField();
+				userField.setSize(new Dimension(75, 30));
+				JLabel passLabel = new JLabel("Enter Password: ");
+				JTextField passField = new JTextField();
+				passField.setSize(new Dimension(75, 30));
+				
+				//Edit layout for card input prompt
+				loginForm.add(userLabel, BorderLayout.WEST);
+				userLabel.setLabelFor(userField);
+				loginForm.add(userField);
+				
+				//Edit layout for cvc input prompt
+				loginForm.add(passLabel, BorderLayout.WEST);
+				passLabel.setLabelFor(passField);
+				loginForm.add(passField);
+				
+				//Add the entire form to the frame
+				loginFrame.add(loginForm);
+				
+				//Fire changes
+				loginFrame.revalidate();
+				loginForm.revalidate();
+				
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Login");
+				
+				if(res == JOptionPane.OK_OPTION) {
+					String username = userField.getText();
+					String password = passField.getText();
+					Boolean loginComplete = false;
+					
+					try {
+						File file = new File("usersData.txt");   
+						FileInputStream fis = new FileInputStream(file);
+						Scanner scanner = new Scanner(file);
+
+						int r = 0;
+						String inputLine;
+						
+						while(scanner.hasNextLine() && !loginComplete) {
+							
+							inputLine = scanner.nextLine();
+							
+							String[] checkPerson;
+							checkPerson = inputLine.split(",");
+							
+							if(checkPerson[0].equals(username) && checkPerson[1].equals(password) && checkPerson[2].equals("true")) {
+								loginComplete = true;
+							}
+						}
+					}
+					catch(Exception ex){  
+						ex.printStackTrace();
+					}
+					
+					if(loginComplete) {
+						NozamaView.createAndShowGUI();
+						frame.setVisible(false);
+					}
+					else {
+						System.out.println("DISPLAY ERROR FOR INVALID LOGIN");
+					}
+				}
+				
+				
+				//Validation check in command line
+				System.out.println("Login CLICKED");
 			}
 		});
 		
