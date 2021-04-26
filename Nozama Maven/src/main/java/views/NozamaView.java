@@ -52,8 +52,12 @@ public class NozamaView {
 	private JTable table;
 	private TableRowSorter<NozamaController> sorter;
 	private NozamaController nm = new NozamaController();
+	private static Boolean managementState;
 
-	public static void createAndShowGUI() {
+	public static void createAndShowGUI(Boolean b) {
+		
+		managementState = b;
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -214,6 +218,39 @@ public class NozamaView {
 		gbc_wishlistButton.gridx = 13;
 		gbc_wishlistButton.gridy = 8;
 		panel.add(wishlistButton, gbc_wishlistButton);
+		
+		JButton deleteProductDBButton = new JButton("Delete Product from Database");
+		cartButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//deleteProductFromDatabase();
+				System.out.println("DELETE PRODUCT FIRED");
+			}
+		});
+
+		if(managementState) {
+			GridBagConstraints gbc_deleteProductDBButton = new GridBagConstraints();
+			gbc_deleteProductDBButton.insets = new Insets(0, 0, 5, 0);
+			gbc_deleteProductDBButton.gridx = 1;
+			gbc_deleteProductDBButton.gridy = 8;
+			panel.add(deleteProductDBButton, gbc_deleteProductDBButton);
+			
+			
+			JButton restockButton = new JButton("Restock Item");
+			cartButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					//deleteProductFromDatabase();
+					System.out.println("RESTOCK FIRED");
+				}
+			});
+
+			GridBagConstraints gbc_restockButton = new GridBagConstraints();
+			gbc_restockButton.insets = new Insets(0, 0, 5, 0);
+			gbc_restockButton.gridx = 2;
+			gbc_restockButton.gridy = 8;
+			panel.add(restockButton, gbc_restockButton);
+		}
 
 		Action addToCart = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {

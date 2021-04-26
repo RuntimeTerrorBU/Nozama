@@ -150,7 +150,7 @@ public class HomeView {
 					}
 					
 					if(loginComplete) {
-						NozamaView.createAndShowGUI();
+						NozamaView.createAndShowGUI(false);
 						frame.setVisible(false);
 					}
 					else {
@@ -240,7 +240,7 @@ public class HomeView {
 					}
 					
 					if(loginComplete) {
-						NozamaView.createAndShowGUI();
+						NozamaView.createAndShowGUI(true);
 						frame.setVisible(false);
 					}
 					else {
@@ -331,7 +331,7 @@ public class HomeView {
 				
 				
 				System.out.println("ADD NEW USER");
-				NozamaView.createAndShowGUI();
+				NozamaView.createAndShowGUI(false);
 				frame.setVisible(false);
 			}
 		});
