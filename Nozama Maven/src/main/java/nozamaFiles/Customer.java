@@ -12,7 +12,7 @@ public class Customer {
 	private String shippingAddress;
 	private static int incrementalID = 0;
 	private int customerID;
-	private List<String> wishList;
+	private ShoppingCart wishlist;
 	private Map<String, String> customerInformation = new HashMap<String, String> ();
 	
 	//added by Austin
@@ -40,11 +40,11 @@ public class Customer {
 	public int getCustomerID() {
 		return customerID;
 	}
-	public List<String> getWishList() {
-		return wishList;
+	public ShoppingCart getWishlist() {
+		return wishlist;
 	}
-	public void setWishList(List<String> wishList) {
-		this.wishList = wishList;
+	public void setWishlist(ShoppingCart wishlist) {
+		this.wishlist = wishlist;
 	}
 	public Map<String, String> getCustomerInformation() {
 		return this.customerInformation;
@@ -84,7 +84,7 @@ public class Customer {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((shippingAddress == null) ? 0 : shippingAddress.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		result = prime * result + ((wishList == null) ? 0 : wishList.hashCode());
+		result = prime * result + ((wishlist == null) ? 0 : wishlist.hashCode());
 		return result;
 	}
 	
@@ -124,25 +124,26 @@ public class Customer {
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
-		if (wishList == null) {
-			if (other.wishList != null)
+		if (wishlist == null) {
+			if (other.wishlist != null)
 				return false;
-		} else if (!wishList.equals(other.wishList))
+		} else if (!wishlist.equals(other.wishlist))
 			return false;
 		return true;
 	}
 	
-	public Customer(String username, String password, String shippingAddress, int customerID, List<String> wishList) {
+	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.shippingAddress = shippingAddress;
 		this.customerID = incrementalID;
 		this.incrementalID++;
-		this.wishList = wishList;
+		this.wishlist = wishlist;
 		this.customerInformation.put(username, password);
 		
 		//FIXME added for testing purposes, will need to update to work with different customers
+		this.wishlist = new ShoppingCart();
 		this.customerCart = new ShoppingCart();
 		try {
 			File f = new File("resources/testCart.csv");
@@ -157,7 +158,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
-				+ ", customerID=" + customerID + ", wishList=" + wishList + ", customerInformation="
+				+ ", customerID=" + customerID + ", wishList=" + wishlist + ", customerInformation="
 				+ customerInformation + "]";
 	}
 }

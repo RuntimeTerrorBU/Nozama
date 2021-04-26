@@ -211,7 +211,7 @@ public class NozamaView {
 		wishlistButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TODO
+				displayWishlist();
 				System.out.println("SHOW WISHLIST CLICKED");
 			}
 		});
@@ -258,7 +258,33 @@ public class NozamaView {
 		
 		Action addToWishlist = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				JPanel form2 = new JPanel(new GridLayout(0,1));
+				JTable table = (JTable) e.getSource();
+				int modelRow = Integer.valueOf(e.getActionCommand());
+				
+				JLabel quantityLbl = new JLabel("Quantity: ");
+				JTextField qTextField = new JTextField();
+				qTextField.setText("1");
+				form2.add(quantityLbl);
+				form2.add(qTextField);
+				
+				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Wishlist", JOptionPane.OK_CANCEL_OPTION);
+				if(res == JOptionPane.OK_OPTION) {
+					Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
+					Integer quantity = Integer.parseInt(qTextField.getText());
+					Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
+					
+					//validate quantity
+					if(quantity <= 0) { 
+						JOptionPane.showMessageDialog(form2, "ERROR: Quantity can't be less than or equal to 0!");
+					}
+					else if(quantity <= available) {
+						nm.getCustomer().getWishlist().addItemToCart(toAdd, quantity);
+					}
+					else {
+						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
+					}
+				}
 				
 				System.out.println("ADD ITEM TO WISHLIST CLICKED");
 			}
@@ -268,5 +294,9 @@ public class NozamaView {
 
 	public void displayCart() {
 		ShoppingCartView.createAndShowGUI(nm.getCustomer());
+	}
+	
+	public void displayWishlist() {
+		WishlistView.createAndShowGUI(nm.getCustomer());
 	}
 }

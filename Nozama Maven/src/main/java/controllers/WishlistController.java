@@ -13,13 +13,13 @@ import nozamaFiles.ItemSpecification;
 import nozamaFiles.Pair;
 import nozamaFiles.ShoppingCart;
 
-public class ShoppingCartController extends AbstractTableModel {
-	private String[] columnNames = { "Name", "Cost", "Quantity", "" , ""};
+public class WishlistController extends AbstractTableModel {
+	private String[] columnNames = { "Name", "Cost", "Quantity", "", ""};
 	private List<Object[]> data;
 	private File customerFile;
 	private Customer c;
 
-	public ShoppingCartController() {
+	public WishlistController() {
 		data = new ArrayList<Object[]>();
 	}
 
@@ -49,7 +49,7 @@ public class ShoppingCartController extends AbstractTableModel {
 
 	public ShoppingCart getCart() {
 		dataToCart();
-		return c.getWishlist();
+		return c.getCustomerCart();
 	}
 	public void setCustomer(Customer c) {
 		this.c = c;
@@ -88,7 +88,6 @@ public class ShoppingCartController extends AbstractTableModel {
 			itemData[1] = is.getPrice();
 			itemData[2] = p.second;
 			itemData[3] = "Edit";
-			itemData[4] = p.first.getItemID();
 			
 			cartData.add(itemData);
 		}
@@ -113,5 +112,4 @@ public class ShoppingCartController extends AbstractTableModel {
 		dataToCart();
 		fireTableDataChanged();
 	}
-	
 }
