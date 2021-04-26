@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
@@ -289,7 +293,27 @@ public class HomeView {
 				
 				
 				JCheckBox customerCB = new JCheckBox("Customer");
+				customerCB.setSelected(true);
+				
 				JCheckBox companyCB = new JCheckBox("Company");
+				customerCB.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						if(e.getStateChange() == 1) {
+							companyCB.setSelected(false);
+						}
+					}
+					
+				});
+				companyCB.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						if(e.getStateChange() == 1) {
+							customerCB.setSelected(false);
+						}
+					}
+					
+				});
 				loginForm.add(customerCB);
 				loginForm.add(companyCB);
 				
@@ -301,8 +325,8 @@ public class HomeView {
 				loginForm.revalidate();
 				
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
-				UIManager.put("OptionPane.okButtonText", "Login");
-				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
+				UIManager.put("OptionPane.okButtonText", "Create Login");
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Create New Login", JOptionPane.OK_CANCEL_OPTION);
 				
 				
 				
