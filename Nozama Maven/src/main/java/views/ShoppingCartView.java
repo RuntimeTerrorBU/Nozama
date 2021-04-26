@@ -138,16 +138,15 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			//Base of Checkout Confirmation
 			
 			//Frame and label creation
-			JFrame frameCheckout = new JFrame("Checkout Confirmation");
 			JPanel checkoutForm = new JPanel(new GridLayout(0, 1));
 			JLabel subtotalLbl = new JLabel();
 			
 			//Frame altered to be configured as a checkout screen
-			frameCheckout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			/*frameCheckout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frameCheckout.setPreferredSize(new Dimension(240, 150));
 			frameCheckout.pack();
 			frameCheckout.setLocationRelativeTo(null);
-			frameCheckout.setVisible(true);
+			frameCheckout.setVisible(true);*/
 			
 			//Fire changes
 			revalidate();
@@ -155,21 +154,30 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			//Find the sub total based on the Shopping Cart Model		
 			BigDecimal sub = new BigDecimal(scm.getSubtotal()).setScale(2, RoundingMode.HALF_UP);
 			subtotalLbl.setText('\t' + "Subtotal: $" + sub.toPlainString());
+			subtotalLbl.setVisible(true);
 			//JPanel checkoutForm = new JPanel(new GridLayout(0, 1));
 			//add(checkoutForm);
 			//setVisible(checkoutForm);	
 			
-			//Add the sub total count to the checkout prompt
-			subtotalLbl.setHorizontalAlignment(JLabel.CENTER);
-			frameCheckout.add(subtotalLbl, BorderLayout.NORTH);
-			
 			//Create Labels and Text fields for entering card info and cvc numbers
+			JLabel addyLabel = new JLabel("Enter Address: ");
+			JTextField addyField = new JTextField();
+			addyField.setSize(new Dimension(75, 30));
 			JLabel cardLabel = new JLabel("Enter Card Number: ");
 			JTextField cardField = new JTextField();
 			cardField.setSize(new Dimension(75, 30));
 			JLabel cvcLabel = new JLabel("Enter CVC Number: ");
 			JTextField cvcField = new JTextField();
 			cvcField.setSize(new Dimension(75, 30));
+			
+			//Add the sub total count to the checkout prompt
+			subtotalLbl.setHorizontalAlignment(JLabel.CENTER);
+			checkoutForm.add(subtotalLbl, BorderLayout.NORTH);
+			
+			//Edit layout for address prompt
+			checkoutForm.add(addyLabel, BorderLayout.WEST);
+			addyLabel.setLabelFor(addyField);
+			checkoutForm.add(addyField);
 			
 			//Edit layout for card input prompt
 			checkoutForm.add(cardLabel, BorderLayout.WEST);
@@ -182,13 +190,76 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			checkoutForm.add(cvcField);
 			
 			//Add the entire form to the frame
-			frameCheckout.add(checkoutForm);
+			//frameCheckout.add(checkoutForm);
 			
 			//Fire changes
 			revalidate();
 			
-			//Validation check in command line
-			System.out.println("CHECKOUT CLICKED");
+			UIManager.put("OptionPane.cancelButtonText", "Cancel");
+			UIManager.put("OptionPane.okButtonText", "Checkout");
+			int res = JOptionPane.showConfirmDialog(null, checkoutForm, "Checkout", JOptionPane.OK_CANCEL_OPTION);
+			
+			if(res == JOptionPane.OK_OPTION) {
+				JPanel frameCheckout = new JPanel();
+				
+				//Frame altered to be configured as a checkout screen
+				//frameCheckout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frameCheckout.setPreferredSize(new Dimension(240, 150));
+				//frameCheckout.pack();
+				//frameCheckout.setLocationRelativeTo(null);
+				frameCheckout.setVisible(true);
+				
+				JLabel thankyou = new JLabel("Thank you for your purchase!");
+				JLabel delimeter = new JLabel("===========================");
+				JLabel header = new JLabel("Shopping Purchase Details: ");
+				JLabel totalPay = new JLabel("Total Purchase Cost: " + sub.toPlainString());
+				JLabel sentAddress = new JLabel("Address: " + addyField.getText());
+				JLabel cardUsed = new JLabel("Card: " + cardField.getText());
+				
+				frameCheckout.add(thankyou, BorderLayout.WEST);
+				frameCheckout.add(delimeter, BorderLayout.WEST);
+				frameCheckout.add(header, BorderLayout.WEST);
+				frameCheckout.add(totalPay, BorderLayout.WEST);
+				frameCheckout.add(sentAddress, BorderLayout.WEST);
+				frameCheckout.add(cardUsed, BorderLayout.WEST);
+				
+				frameCheckout.revalidate();
+				
+				UIManager.put("OptionPane.okButtonText", "Receipt");
+				UIManager.put("OptionPane.cancelButtonText", "No Receipt");
+				
+				int resRec = JOptionPane.showConfirmDialog(null, frameCheckout, "Purchase Confirmation!", JOptionPane.OK_CANCEL_OPTION);
+				
+				
+				if(resRec == JOptionPane.OK_OPTION) {
+					
+					JPanel exportPrompt = new JPanel();
+					int selectedOpt;
+
+					// File J-Objects
+					JButton fileButton = new JButton("Choose File");
+					final JFileChooser fileChosen = new JFileChooser();
+					int optChosen = fileChosen.showSaveDialog(null);
+
+					// Chunk to write to file and export
+					if (optChosen == JFileChooser.APPROVE_OPTION) {
+						try {
+							File expFile = fileChosen.getSelectedFile();
+							FileWriter toWrite = new FileWriter(expFile);
+
+							// Call Model function to return table that is formatted for export
+							toWrite.write("Thank you for your purchase!\n===========================\nPurchase Details:\n" +
+											"Total: " + sub.toPlainString() + 
+											"\nAddress: " + addyField.getText() +
+											"\nCard: " + cardField.getText());
+							toWrite.close();
+						} catch (IOException x) {
+							x.printStackTrace();
+						}
+					}
+					
+				}
+			}
 		}
 	}
 
