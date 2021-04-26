@@ -298,7 +298,7 @@ public class NozamaView {
 			addProductButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JFrame frame = new JFrame("Add Product");
+					final JFrame frame = new JFrame("Add Product");
 					JPanel panel = new JPanel(new GridLayout(0, 1));
 					
 					// create the labels
@@ -340,6 +340,23 @@ public class NozamaView {
 					panel.add(quantityField);
 					
 					frame.add(panel);
+					
+					UIManager.put("OptionPane.cancelButtonText", "Canel");
+					UIManager.put("OptionPane.okButtonText", "Save");
+					
+					int result = JOptionPane.showConfirmDialog(null, panel, "Edit", JOptionPane.OK_CANCEL_OPTION);
+					
+					if (result == JOptionPane.OK_OPTION) {
+						System.out.println("WORKS");
+					}
+					
+					/*
+					// add a done button
+					JButton doneButton = new JButton("Done");
+					doneButton.addMouseListener(new MouseAdapter() {
+						
+					});
+					*/
 					
 					// show the frame
 					frame.pack();
