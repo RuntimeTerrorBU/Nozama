@@ -22,6 +22,7 @@ import java.math.RoundingMode;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 
 import java.awt.GridBagConstraints;
@@ -256,6 +257,55 @@ public class HomeView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//TODO ADD LOGIN SCREEN BEFORE THIS
+				JFrame loginFrame = new JFrame("Create Login");
+				JPanel loginForm = new JPanel(new GridLayout(0, 1));
+				boolean isCompany = false;
+				//loginFrame.setVisible(true);
+				//loginForm.setVisible(true);
+				
+				//Frame altered to be configured as a checkout screen
+				loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				loginFrame.setPreferredSize(new Dimension(240, 150));
+				loginFrame.pack();
+				loginFrame.setLocationRelativeTo(null);
+				
+				//Create Labels and Text fields for entering card info and cvc numbers
+				JLabel userLabel = new JLabel("Enter Username: ");
+				JTextField userField = new JTextField();
+				userField.setSize(new Dimension(75, 30));
+				JLabel passLabel = new JLabel("Enter Password: ");
+				JTextField passField = new JTextField();
+				passField.setSize(new Dimension(75, 30));
+				
+				//Edit layout for card input prompt
+				loginForm.add(userLabel, BorderLayout.WEST);
+				userLabel.setLabelFor(userField);
+				loginForm.add(userField);
+				
+				//Edit layout for cvc input prompt
+				loginForm.add(passLabel, BorderLayout.WEST);
+				passLabel.setLabelFor(passField);
+				loginForm.add(passField);
+				
+				
+				JCheckBox customerCB = new JCheckBox("Customer");
+				JCheckBox companyCB = new JCheckBox("Company");
+				loginForm.add(customerCB);
+				loginForm.add(companyCB);
+				
+				//Add the entire form to the frame
+				loginFrame.add(loginForm);
+				
+				//Fire changes
+				loginFrame.revalidate();
+				loginForm.revalidate();
+				
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Login");
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
+				
+				
+				
 				System.out.println("ADD NEW USER");
 				NozamaView.createAndShowGUI();
 				frame.setVisible(false);
