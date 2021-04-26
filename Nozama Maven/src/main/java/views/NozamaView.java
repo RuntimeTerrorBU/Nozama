@@ -79,7 +79,7 @@ public class NozamaView {
 		// TODO loadCart is for testing only
 		sorter = new TableRowSorter<NozamaController>(nm);
 		frame = new JFrame("Home Page");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
