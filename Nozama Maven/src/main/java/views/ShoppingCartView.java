@@ -56,7 +56,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 				JTable table = (JTable) e.getSource();
 				int modelRow = Integer.valueOf(e.getActionCommand());
 
-				//Text label to show user prompt and input field
+				//Text label to show  user prompt and input field
 				JTextField numField = new JTextField(table.getModel().getValueAt(modelRow, 2).toString());
 				numField.setSize(new Dimension(75, 30));
 				JLabel numLabel = new JLabel("Enter Quantity: ");

@@ -220,21 +220,25 @@ public class NozamaView {
 				JPanel form2 = new JPanel(new GridLayout(0,1));
 				JTable table = (JTable) e.getSource();
 				int modelRow = Integer.valueOf(e.getActionCommand());
+
+				Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
+				Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
 				
-				JLabel quantityLbl = new JLabel("Quantity: ");
+				
+				JLabel quantityLbl = new JLabel("Quantity Desired:");
 				JTextField qTextField = new JTextField();
+				JLabel availabiltyLbl = new JLabel("Only " + available + " available");
 				qTextField.setText("1");
 				form2.add(quantityLbl);
 				form2.add(qTextField);
+				form2.add(availabiltyLbl);
 				
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Add Item");
 				
 				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Cart", JOptionPane.OK_CANCEL_OPTION);
 				if(res == JOptionPane.OK_OPTION) {
-					Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
 					Integer quantity = Integer.parseInt(qTextField.getText());
-					Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
 					
 					//validate quantity
 					if(quantity <= 0) { 
