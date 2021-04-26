@@ -76,7 +76,7 @@ public class WishlistController extends AbstractTableModel {
 	}
 
 	public void cartToData() {
-		List<Pair<Item, Integer>> contents = c.getCustomerCart().getCart();
+		List<Pair<Item, Integer>> contents = c.getWishlist().getCart();
 		List<Object[]> cartData = new ArrayList<Object[]>();
 		ItemSpecification is = null;
 
@@ -102,7 +102,7 @@ public class WishlistController extends AbstractTableModel {
 			newCart.addItemToCart(i, (Integer) o[2]);
 		}
 		
-		c.setCustomerCart(newCart);
+		c.setWishlist(newCart);
 		fireTableDataChanged();
 	}
 	
