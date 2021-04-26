@@ -263,7 +263,7 @@ public class HomeView {
 				//TODO ADD LOGIN SCREEN BEFORE THIS
 				JFrame loginFrame = new JFrame("Create Login");
 				JPanel loginForm = new JPanel(new GridLayout(0, 1));
-				boolean isCompany = false;
+				Boolean isCompany = null;
 				//loginFrame.setVisible(true);
 				//loginForm.setVisible(true);
 				
@@ -280,6 +280,9 @@ public class HomeView {
 				JLabel passLabel = new JLabel("Enter Password: ");
 				JTextField passField = new JTextField();
 				passField.setSize(new Dimension(75, 30));
+				JLabel validateLabel = new JLabel("Re-Enter Password: ");
+				JTextField validateField = new JTextField();
+				validateField.setSize(new Dimension(75, 30));
 				
 				//Edit layout for card input prompt
 				loginForm.add(userLabel, BorderLayout.WEST);
@@ -291,6 +294,9 @@ public class HomeView {
 				passLabel.setLabelFor(passField);
 				loginForm.add(passField);
 				
+				loginForm.add(validateLabel, BorderLayout.WEST);
+				validateLabel.setLabelFor(validateField);
+				loginForm.add(validateField);
 				
 				JCheckBox customerCB = new JCheckBox("Customer");
 				customerCB.setSelected(true);
@@ -302,6 +308,9 @@ public class HomeView {
 						if(e.getStateChange() == 1) {
 							companyCB.setSelected(false);
 						}
+						else if(e.getStateChange() == 2) {
+							companyCB.setSelected(true);
+						}
 					}
 					
 				});
@@ -310,6 +319,9 @@ public class HomeView {
 					public void itemStateChanged(ItemEvent e) {
 						if(e.getStateChange() == 1) {
 							customerCB.setSelected(false);
+						}
+						else if(e.getStateChange() == 2) {
+							customerCB.setSelected(true);
 						}
 					}
 					
@@ -327,6 +339,56 @@ public class HomeView {
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Create Login");
 				int res = JOptionPane.showConfirmDialog(null, loginForm, "Create New Login", JOptionPane.OK_CANCEL_OPTION);
+				if(res == JOptionPane.OK_OPTION) {
+					if(customerCB.isSelected()) {
+						isCompany = false;
+					}
+					else {
+						isCompany = true;
+					}
+					
+					if(passField.getText().equals(validateField.getText())) {
+						String str = userField.getText() + "," + passField.getText() + ",";
+						if(isCompany) {
+							str += "true";
+						}
+						else {
+							str += "false";
+						}
+						str += '\n';
+						try {
+							File file = new File("usersData.txt");   
+							BufferedReader inputData = new BufferedReader(new FileReader(file));
+							FileOutputStream outputData = new FileOutputStream(file, true);
+							String line;
+							String userName = userField.getText();
+							boolean isValid = true;
+							
+							while(((line = inputData.readLine()) != null) && isValid) {
+								String[] split = line.split(",");
+								if(split[0].equals(userName)) {
+									isValid = false;
+								}
+							}
+							inputData.close();
+							
+							if(isValid) {
+								outputData.write(str.getBytes());
+								
+								String cartName = "resources/carts/" + userName + "Cart.csv";
+								File myCart = new File(cartName);
+								myCart.createNewFile();
+								
+								
+							}
+							outputData.close();
+						}
+						catch(Exception ex){  
+							ex.printStackTrace();
+						}
+					}
+					
+				}
 				
 				
 				
