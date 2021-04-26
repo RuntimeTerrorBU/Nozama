@@ -10,5 +10,4 @@ public class mainNozama {
 	public static void main(String[] agrs) {
 		return;
 	}
-
 }

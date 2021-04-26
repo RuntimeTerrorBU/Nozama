@@ -123,6 +123,5 @@ public class WishlistView extends JPanel {
 		frame.setContentPane(newContentPane);
 		frame.pack();
 		frame.setVisible(true);
-		
 	}
 }

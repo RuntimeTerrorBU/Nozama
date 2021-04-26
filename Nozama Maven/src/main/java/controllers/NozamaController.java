@@ -39,7 +39,6 @@ public class NozamaController extends AbstractTableModel {
 		return data.get(rowIndex)[columnIndex];
 	}
 	
-	
 	public void loadData() {
 		//FIXME change the file to be the customer's specific cart file
 		File file = new File("resources/testCatalog.csv");
@@ -60,7 +59,6 @@ public class NozamaController extends AbstractTableModel {
 			data.add(colData);
 		}
 		fireTableDataChanged();
-		
 	}
 	
 	public void loadCart(File f) {
@@ -82,6 +80,4 @@ public class NozamaController extends AbstractTableModel {
 	public Customer getCustomer() {
 		return c;
 	}
-	
-	
 }

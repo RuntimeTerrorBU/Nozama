@@ -20,58 +20,74 @@ public class Customer {
 	private ShoppingCart customerCart;
 	private File cartFile;
 	
-	
 	public Boolean getIsCompany() {
 		return isCompany;
 	}
+	
 	public void setIsCompany(Boolean b) {
 		this.isCompany = b;
 	}
+	
 	public String getUsername() {
 		return username;
 	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public String getShippingAddress() {
 		return shippingAddress;
 	}
+	
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
+	
 	public int getCustomerID() {
 		return customerID;
 	}
+	
 	public ShoppingCart getWishlist() {
 		return wishlist;
 	}
+	
 	public void setWishlist(ShoppingCart wishlist) {
 		this.wishlist = wishlist;
 	}
+	
 	public Map<String, String> getCustomerInformation() {
 		return this.customerInformation;
 	}
+	
 	public void setCustomerInformation(Map<String, String> customerInformation) {
 		this.customerInformation = customerInformation;
 	}
+	
 	public ShoppingCart getCustomerCart() {
 		return customerCart;
 	}
+	
 	public void setCustomerCart(ShoppingCart customerCart) {
 		this.customerCart = customerCart;
 	}
+	
 	public File getCartFile() {
 		return cartFile;
 	}
+	
 	public void setCartFile(File cartFile) {
 		this.cartFile = cartFile;
 	}
+	
 	public boolean login(String username, String password) {
 		boolean toReturn = false;
 		

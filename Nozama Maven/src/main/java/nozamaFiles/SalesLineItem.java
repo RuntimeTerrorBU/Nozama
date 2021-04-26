@@ -20,6 +20,7 @@ public class SalesLineItem {
 		result = prime * result + quantity;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

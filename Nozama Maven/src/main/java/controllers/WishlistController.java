@@ -56,9 +56,11 @@ public class WishlistController extends AbstractTableModel {
 		cartToData();
 		fireTableDataChanged();
 	}
+	
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
 	}
+	
 	public void setValueAt(Object value, int row, int col) {
 		data.get(row)[col] = value;
 		dataToCart();
@@ -68,9 +70,11 @@ public class WishlistController extends AbstractTableModel {
 	public Double getSubtotal() {
 		return c.getCustomerCart().getSubtotal();
 	}
+	
 	public File getCustomerFile() {
 		return customerFile;
 	}
+	
 	public void setCustomerFile(File f) {
 		customerFile = f;
 	}

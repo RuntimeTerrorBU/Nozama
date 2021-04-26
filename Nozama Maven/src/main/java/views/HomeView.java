@@ -86,8 +86,6 @@ public class HomeView {
 				loginFrame.pack();
 				loginFrame.setLocationRelativeTo(null);
 				
-				
-				
 				//Create Labels and Text fields for entering card info and cvc numbers
 				JLabel userLabel = new JLabel("Enter Username: ");
 				JTextField userField = new JTextField();
@@ -244,8 +242,7 @@ public class HomeView {
 						System.out.println("DISPLAY ERROR FOR INVALID LOGIN");
 					}
 				}
-				
-				
+			
 				//Validation check in command line
 				System.out.println("Login CLICKED");
 			}
@@ -274,8 +271,6 @@ public class HomeView {
 		JLabel lblNewLabel_2 = new JLabel("Form");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(195, 90, 61, 16);
-		frame.getContentPane().add(lblNewLabel_2);
-		
-		
+		frame.getContentPane().add(lblNewLabel_2);	
 	}
 }

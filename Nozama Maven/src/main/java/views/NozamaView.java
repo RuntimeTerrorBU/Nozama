@@ -192,7 +192,6 @@ public class NozamaView {
 				displayCart();
 			}
 		});
-		
 
 		GridBagConstraints gbc_cartButton = new GridBagConstraints();
 		gbc_cartButton.insets = new Insets(0, 0, 5, 0);
@@ -209,6 +208,7 @@ public class NozamaView {
 				System.out.println("SHOW WISHLIST CLICKED");
 			}
 		});
+		
 		GridBagConstraints gbc_wishlistButton = new GridBagConstraints();
 		gbc_wishlistButton.insets = new Insets(0, 0, 5, 0);
 		gbc_wishlistButton.gridx = 13;
@@ -223,7 +223,6 @@ public class NozamaView {
 
 				Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
 				Integer available = ItemCatalog.getItemSpecification(toAdd.getItemID()).getQuantity();
-				
 				
 				JLabel quantityLbl = new JLabel("Quantity Desired:");
 				JTextField qTextField = new JTextField();
@@ -253,6 +252,7 @@ public class NozamaView {
 				}		
 			}
 		};
+		
 		ButtonColumn addToCartButton = new ButtonColumn(table, addToCart, 2);
 		
 		Action addToWishlist = new AbstractAction() {

@@ -36,6 +36,7 @@ public class ItemCatalog {
 		}
 		return null;
 	}
+	
 	public static void loadData(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String line;

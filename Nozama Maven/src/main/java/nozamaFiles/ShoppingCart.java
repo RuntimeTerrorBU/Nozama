@@ -15,20 +15,25 @@ public class ShoppingCart {
 	public ShoppingCart() {
 		this.cart = new ArrayList<Pair<Item, Integer>>();
 	}
+	
 	public ShoppingCart(List<Pair<Item, Integer>> cart, Double subtotal) {
 		super();
 		this.cart = cart;
 		this.subtotal = subtotal;
 	}
+	
 	public List<Pair<Item, Integer>> getCart() {
 		return cart;
 	}
+	
 	public void setCart(List<Pair<Item, Integer>> cart) {
 		this.cart = cart;
 	}
+	
 	public Double getSubtotal() {
 		return subtotal;
 	}
+	
 	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
@@ -103,8 +108,6 @@ public class ShoppingCart {
 		return res;
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		String str = "";
@@ -115,6 +118,7 @@ public class ShoppingCart {
 		
 		return str;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,6 +127,7 @@ public class ShoppingCart {
 		result = prime * result + ((subtotal == null) ? 0 : subtotal.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -144,8 +149,4 @@ public class ShoppingCart {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 }

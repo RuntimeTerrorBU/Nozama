@@ -23,7 +23,6 @@ public class PaymentInfo {
 	}
 	
 	public PaymentInfo(String cn, String c, String ba) {
-		
 		if(validateCardInfo(cn, c)) {
 			if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
 				this.cardNumber = cn;
@@ -44,7 +43,6 @@ public class PaymentInfo {
 	}
 	
 	public Boolean validateCardInfo(String cn, String c) {
-		
 		Boolean toReturn = false;
 		
 		//Return true if input card information is valid (Dashed format)
@@ -170,7 +168,5 @@ public class PaymentInfo {
 	public String toString() {
 		return "PaymentInfo - CardNumber: " + cardNumber + ", CVC = " + cvc + ", Billing Address: " + billingAddress;
 	}
-	
-	
 }
 

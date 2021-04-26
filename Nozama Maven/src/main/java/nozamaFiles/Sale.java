@@ -7,12 +7,15 @@ public class Sale {
 	public String getDate() {
 		return date;
 	}
+	
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
 	public String getTime() {
 		return time;
 	}
+	
 	public void setTime(String time) {
 		this.time = time;
 	}
@@ -25,6 +28,7 @@ public class Sale {
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
