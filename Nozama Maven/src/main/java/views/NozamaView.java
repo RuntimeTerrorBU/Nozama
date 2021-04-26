@@ -298,6 +298,53 @@ public class NozamaView {
 			addProductButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					JFrame frame = new JFrame("Add Product");
+					JPanel panel = new JPanel(new GridLayout(0, 1));
+					
+					// create the labels
+					JLabel nameLabel = new JLabel("Name: ");
+					JLabel descriptionLabel = new JLabel("Description: ");
+					JLabel priceLabel = new JLabel("Price: ");
+					JLabel itemIDLabel = new JLabel("Item ID: ");
+					JLabel quantityLabel = new JLabel("Quantity: ");
+					
+					// make the text fields
+					JTextField nameField = new JTextField();
+					JTextField descriptionField = new JTextField();
+					JTextField priceField = new JTextField();
+					JTextField itemIDField = new JTextField();
+					JTextField quantityField = new JTextField();
+					
+					// set text field size
+					nameField.setSize(new Dimension(75, 30));
+					descriptionField.setSize(new Dimension(75, 30));
+					priceField.setSize(new Dimension(75, 30));
+					itemIDField.setSize(new Dimension(75, 30));
+					quantityField.setSize(new Dimension(75, 30));
+					
+					// set the labels and add them
+					panel.add(nameLabel);
+					nameLabel.setLabelFor(nameField);
+					panel.add(nameField);
+					panel.add(descriptionLabel);
+					descriptionLabel.setLabelFor(descriptionField);
+					panel.add(descriptionField);
+					panel.add(priceLabel);
+					priceLabel.setLabelFor(priceField);
+					panel.add(priceField);
+					panel.add(itemIDLabel);
+					itemIDLabel.setLabelFor(itemIDField);
+					panel.add(itemIDField);
+					panel.add(quantityLabel);
+					quantityLabel.setLabelFor(quantityField);
+					panel.add(quantityField);
+					
+					frame.add(panel);
+					
+					// show the frame
+					frame.pack();
+					frame.setVisible(true);
+					
 					System.out.println("ADD PRODUCT CLICKED");
 				}
 			});
