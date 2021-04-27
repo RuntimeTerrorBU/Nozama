@@ -301,7 +301,7 @@ public class NozamaView {
 					
 					frame.add(panel);
 					
-					UIManager.put("OptionPane.cancelButtonText", "Canel");
+					UIManager.put("OptionPane.cancelButtonText", "Cancel");
 					UIManager.put("OptionPane.okButtonText", "Save");
 					
 					int result = JOptionPane.showConfirmDialog(null, panel, "Edit", JOptionPane.OK_CANCEL_OPTION);
