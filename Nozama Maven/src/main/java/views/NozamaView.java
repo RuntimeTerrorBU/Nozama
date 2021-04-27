@@ -222,17 +222,43 @@ public class NozamaView {
 		gbc_wishlistButton.gridx = 13;
 		gbc_wishlistButton.gridy = 8;
 		panel.add(wishlistButton, gbc_wishlistButton);
-		
-		JButton deleteProductDBButton = new JButton("Delete Product DB");
-		cartButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//deleteProductFromDatabase();
-				System.out.println("DELETE PRODUCT FIRED");
-			}
-		});
 
 		if(managementState) {
+			
+			JButton deleteProductDBButton = new JButton("Delete Product DB");
+			deleteProductDBButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					table.getSelectedRow();
+					
+					List<ItemSpecification> tempItemList = ItemCatalog.getItems();
+
+					tempItemList.remove(table.getSelectedRow());
+					ItemCatalog.setItems(tempItemList);
+					
+					for(ItemSpecification x : tempItemList) {
+						System.out.println(x.getName());
+					}
+					
+					UIManager.put("OptionPane.cancelButtonText", "Cancel");
+					UIManager.put("OptionPane.okButtonText", "Save");
+					
+					//nm.fireTableDataChanged();
+					nm.data.remove(table.getSelectedRow());
+					nm.fireTableDataChanged();
+					
+					
+					
+					// show the frame
+					//frame.pack();
+					frame.setVisible(true);
+					
+					
+					System.out.println("DELETE PRODUCT CLICKED");
+
+				}
+			});
+			
 			GridBagConstraints gbc_deleteProductDBButton = new GridBagConstraints();
 			gbc_deleteProductDBButton.insets = new Insets(0, 0, 5, 0);
 			gbc_deleteProductDBButton.gridx = 2;

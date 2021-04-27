@@ -11,7 +11,7 @@ import nozamaFiles.*;
 
 public class NozamaController extends AbstractTableModel {
 	private String[] columnNames = {"Name", "Cost", "", "", ""};
-	private List<Object[]> data;
+	public List<Object[]> data;
 	private Customer c;
 	
 	public NozamaController(Customer c) {
@@ -41,6 +41,7 @@ public class NozamaController extends AbstractTableModel {
 	}
 	
 	public void loadData() {
+		
 		//FIXME change the file to be the customer's specific cart file
 		File file = new File("resources/testCatalog.csv");
 		try {
