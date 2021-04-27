@@ -28,7 +28,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 			ItemCatalog.loadData(catalogFile);
 			//scm.setCart(sc);
 			scm.setCustomer(c);
-			scm.setCustomerFile(new File("resources/testCart.csv"));
+			scm.setCustomerFile(new File("resources/carts/" + c.getUsername() + "Cart.csv"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

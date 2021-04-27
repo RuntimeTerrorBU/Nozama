@@ -33,6 +33,9 @@ import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import nozamaFiles.Customer;
+import nozamaFiles.ShoppingCart;
+
 public class HomeView {
 
 	private JFrame frame;
@@ -150,7 +153,9 @@ public class HomeView {
 					}
 					
 					if(loginComplete) {
-						NozamaView.createAndShowGUI(false);
+						File f = new File("resources/carts/" + username + "Cart.csv");
+						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, false, new ShoppingCart(), f);
+						NozamaView.createAndShowGUI(false, c);
 						frame.setVisible(false);
 					}
 					else {
@@ -206,7 +211,7 @@ public class HomeView {
 				loginFrame.revalidate();
 				loginForm.revalidate();
 				
-				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Company Login", JOptionPane.OK_CANCEL_OPTION);
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Login");
 				
@@ -240,7 +245,10 @@ public class HomeView {
 					}
 					
 					if(loginComplete) {
-						NozamaView.createAndShowGUI(true);
+						File f = new File("resources/carts/" + username + "Cart.csv");
+						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, true, new ShoppingCart(), f);
+						
+						NozamaView.createAndShowGUI(true, c);
 						frame.setVisible(false);
 					}
 					else {
@@ -389,12 +397,6 @@ public class HomeView {
 					}
 					
 				}
-				
-				
-				
-				System.out.println("ADD NEW USER");
-				NozamaView.createAndShowGUI(false);
-				frame.setVisible(false);
 			}
 		});
 		frame.getContentPane().add(newUserButton);

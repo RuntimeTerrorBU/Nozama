@@ -14,10 +14,11 @@ public class NozamaController extends AbstractTableModel {
 	private List<Object[]> data;
 	private Customer c;
 	
-	public NozamaController() {
+	public NozamaController(Customer c) {
 		data = new ArrayList<Object[]>();
 		//TODO for test purposes, refactor later to deal with different customers
-		c = new Customer("testCustomer", null, null, 0, new ShoppingCart(), null, true, new ShoppingCart(), new File("textCart.csv"));
+		//c = new Customer("testCustomer", null, null, 0, new ShoppingCart(), null, true, new ShoppingCart(), new File("textCart.csv"));
+		this.c = c;
 		loadData();
 	}
 

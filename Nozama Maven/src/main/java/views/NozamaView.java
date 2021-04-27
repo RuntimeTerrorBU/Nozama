@@ -38,6 +38,7 @@ import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 
 import controllers.*;
+import nozamaFiles.Customer;
 import nozamaFiles.Item;
 import nozamaFiles.ItemCatalog;
 import nozamaFiles.ItemSpecification;
@@ -53,17 +54,18 @@ public class NozamaView {
 	private JTextField searchField;
 	private JTable table;
 	private TableRowSorter<NozamaController> sorter;
-	private NozamaController nm = new NozamaController();
+	//private NozamaController nm = new NozamaController();
+	private static NozamaController nm = null;
 	private static Boolean managementState;
 
-	public static void createAndShowGUI(Boolean b) {
-		
+	public static void createAndShowGUI(Boolean b, Customer c) {
+		nm = new NozamaController(c);
 		managementState = b;
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NozamaView window = new NozamaView();
+					NozamaView window = new NozamaView(c);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,14 +74,14 @@ public class NozamaView {
 		});
 	}
 	
-	public NozamaView() {
-		initialize();
+	public NozamaView(Customer c) {
+		initialize(c);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Customer c) {
 		// TODO loadCart is for testing only
 		sorter = new TableRowSorter<NozamaController>(nm);
 		frame = new JFrame("Home Page");

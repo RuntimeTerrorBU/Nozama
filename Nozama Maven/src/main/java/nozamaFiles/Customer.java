@@ -184,7 +184,8 @@ public class Customer {
 		this.wishlist = new ShoppingCart();
 		this.customerCart = new ShoppingCart();
 		try {
-			File f = new File("resources/testCart.csv");
+			//File f = new File("resources/testCart.csv");
+			File f = new File("resources/carts/" + username + "Cart.csv");
 			this.customerCart.loadCart(f);
 			this.cartFile = f;
 		} catch (IOException e) {
@@ -192,7 +193,7 @@ public class Customer {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress
