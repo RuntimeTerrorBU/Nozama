@@ -253,7 +253,7 @@ public class NozamaView {
 			gbc_restockButton.gridy = 8;
 			panel.add(restockButton, gbc_restockButton);
 			
-			// add wishlist button
+			// add add product button
 			JButton addProductButton = new JButton("Add Product");
 			addProductButton.addMouseListener(new MouseAdapter() {
 				@Override
