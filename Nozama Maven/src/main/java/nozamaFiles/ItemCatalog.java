@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ItemCatalog {
 	private static List<ItemSpecification> items = new ArrayList<ItemSpecification>();
-	
+
 	public ItemCatalog(List<ItemSpecification> items) {
 		ItemCatalog.items = items;
 	}
-	
+
 	public static Integer getNumberOfItems() {
 		return items.size();
 	}
@@ -27,16 +27,17 @@ public class ItemCatalog {
 		Collections.sort(items, ItemSpecification.compareByID);
 		ItemCatalog.items = items;
 	}
-	
+
 	public static ItemSpecification getItemSpecification(String itemID) {
-		int ndx = Collections.binarySearch(ItemCatalog.items, new ItemSpecification(null, null, null, itemID, null), ItemSpecification.compareByID);
-		
+		int ndx = Collections.binarySearch(ItemCatalog.items, new ItemSpecification(null, null, null, itemID, null),
+				ItemSpecification.compareByID);
+
 		if (ndx != -1) {
 			return ItemCatalog.items.get(ndx);
 		}
 		return null;
 	}
-	
+
 	public static void loadData(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String line;
@@ -47,20 +48,20 @@ public class ItemCatalog {
 		Double price;
 		String itemID;
 		Integer quantity;
-		
-		while((line = in.readLine()) != null) {
+
+		while ((line = in.readLine()) != null) {
 			data = line.split(",");
 			name = data[0];
 			description = data[1];
 			price = Double.parseDouble(data[2]);
 			itemID = data[3];
 			quantity = Integer.parseInt(data[4]);
-			
+
 			myItems.add(new ItemSpecification(name, description, price, itemID, quantity));
 		}
-		
+
 		in.close();
-		
+
 		ItemCatalog.items = myItems;
 	}
 }
