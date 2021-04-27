@@ -13,9 +13,13 @@ public class Customer {
 	private static int incrementalID = 0;
 	private int customerID;
 	private ShoppingCart wishlist;
-	private Map<String, String> customerInformation = new HashMap<String, String> ();
+	private Map<String, String> customerInformation = new HashMap<String, String>();
 	private Boolean isCompany;
-	
+
+	private ShoppingCart customerCart;
+	private File cartFile;
+	private File wishListFile;
+
 	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist,
 			Map<String, String> customerInformation, Boolean isCompany, ShoppingCart customerCart, File cartFile) {
 		super();
@@ -26,103 +30,106 @@ public class Customer {
 		this.wishlist = wishlist;
 		this.customerInformation = customerInformation;
 		this.isCompany = isCompany;
-		//this.customerCart = customerCart;
+		// this.customerCart = customerCart;
 		this.cartFile = cartFile;
-		
+
 		this.customerCart = new ShoppingCart();
+		this.wishlist = new ShoppingCart();
 		try {
-			//File f = new File("resources/testCart.csv");
+			// File f = new File("resources/testCart.csv");
 			File f = new File("resources/carts/" + username + "Cart.csv");
 			this.customerCart.loadCart(f);
 			this.cartFile = f;
+
+			File w = new File("resources/wishlists/" + username + "Wishlist.csv");
+			
+			this.wishlist.loadCart(w);
+			this.wishListFile = w;
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	//added by Austin
-	private ShoppingCart customerCart;
-	private File cartFile;
-	
 	public Boolean getIsCompany() {
 		return isCompany;
 	}
-	
+
 	public void setIsCompany(Boolean b) {
 		this.isCompany = b;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getShippingAddress() {
 		return shippingAddress;
 	}
-	
+
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-	
+
 	public int getCustomerID() {
 		return customerID;
 	}
-	
+
 	public ShoppingCart getWishlist() {
 		return wishlist;
 	}
-	
+
 	public void setWishlist(ShoppingCart wishlist) {
 		this.wishlist = wishlist;
 	}
-	
+
 	public Map<String, String> getCustomerInformation() {
 		return this.customerInformation;
 	}
-	
+
 	public void setCustomerInformation(Map<String, String> customerInformation) {
 		this.customerInformation = customerInformation;
 	}
-	
+
 	public ShoppingCart getCustomerCart() {
 		return customerCart;
 	}
-	
+
 	public void setCustomerCart(ShoppingCart customerCart) {
 		this.customerCart = customerCart;
 	}
-	
+
 	public File getCartFile() {
 		return cartFile;
 	}
-	
+
 	public void setCartFile(File cartFile) {
 		this.cartFile = cartFile;
 	}
-	
+
 	public boolean login(String username, String password) {
 		boolean toReturn = false;
-		
-		if(password == this.getCustomerInformation().get(username)) {
+
+		if (password == this.getCustomerInformation().get(username)) {
 			toReturn = true;
 		}
-		
+
 		return toReturn;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,7 +143,7 @@ public class Customer {
 		result = prime * result + ((wishlist == null) ? 0 : wishlist.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -180,7 +187,7 @@ public class Customer {
 			return false;
 		return true;
 	}
-	
+
 	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist) {
 		super();
 		this.username = username;
@@ -190,12 +197,13 @@ public class Customer {
 		this.incrementalID++;
 		this.wishlist = wishlist;
 		this.customerInformation.put(username, password);
-		
-		//FIXME added for testing purposes, will need to update to work with different customers
+
+		// FIXME added for testing purposes, will need to update to work with different
+		// customers
 		this.wishlist = new ShoppingCart();
 		this.customerCart = new ShoppingCart();
 		try {
-			//File f = new File("resources/testCart.csv");
+			// File f = new File("resources/testCart.csv");
 			File f = new File("resources/carts/" + username + "Cart.csv");
 			this.customerCart.loadCart(f);
 			this.cartFile = f;
