@@ -96,7 +96,7 @@
           <configuration>
           	<archive>
           		<manifest>
-          			<mainClass>nozamaFiles.mainNozama</mainClass>
+          			<mainClass>views.HomeView</mainClass>
           		</manifest>
           	</archive>
           </configuration>
