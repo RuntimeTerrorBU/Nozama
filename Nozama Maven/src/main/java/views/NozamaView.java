@@ -208,6 +208,21 @@ public class NozamaView {
 		gbc_cartButton.gridy = 7;
 		panel.add(cartButton, gbc_cartButton);
 		
+		JButton reportButton = new JButton("Generate Report");
+			reportButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					displayCart();
+				}
+			});
+
+		GridBagConstraints gbc_reportButton = new GridBagConstraints();
+		gbc_reportButton.insets = new Insets(0, 0, 5, 0);
+		gbc_reportButton.gridx = 13;
+		gbc_reportButton.gridy = 3;
+		panel.add(reportButton, gbc_reportButton);
+		
+		
 		// add wishlist button
 		JButton wishlistButton = new JButton("Show Wishlist");
 		wishlistButton.addMouseListener(new MouseAdapter() {
