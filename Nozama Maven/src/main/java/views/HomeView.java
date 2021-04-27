@@ -119,9 +119,10 @@ public class HomeView {
 				loginFrame.revalidate();
 				loginForm.revalidate();
 				
-				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Login");
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
+				
 				
 				if(res == JOptionPane.OK_OPTION) {
 					String username = userField.getText();
@@ -211,9 +212,10 @@ public class HomeView {
 				loginFrame.revalidate();
 				loginForm.revalidate();
 				
-				int res = JOptionPane.showConfirmDialog(null, loginForm, "Company Login", JOptionPane.OK_CANCEL_OPTION);
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Login");
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Company Login", JOptionPane.OK_CANCEL_OPTION);
+				
 				
 				if(res == JOptionPane.OK_OPTION) {
 					String username = userField.getText();
