@@ -104,7 +104,8 @@ public class WishlistController extends AbstractTableModel {
 	/**
 	 * Set the customer for their cart
 	 *
-	 * @return customer to set is cart to
+	 * @param customer to set is cart to
+	 * @return void
 	 */
 	public void setCustomer(Customer c) {
 		this.c = c;
@@ -159,6 +160,7 @@ public class WishlistController extends AbstractTableModel {
 	 * Set the information of the Customer into a customer file
 	 * 
 	 * @param file filled with customer information
+	 * @return void
 	 */
 	public void setCustomerFile(File f) {
 		customerFile = f;
@@ -166,6 +168,8 @@ public class WishlistController extends AbstractTableModel {
 
 	/**
 	 * Move the data from the cart into the ShoppingCart data
+	 * 
+	 * @return void
 	 */
 	public void cartToData() {
 		List<Pair<Item, Integer>> contents = c.getWishlist().getCart();
@@ -190,6 +194,8 @@ public class WishlistController extends AbstractTableModel {
 
 	/**
 	 * Move the data from the data cart into the Customer's cart
+	 * 
+	 * @return void
 	 */
 	public void dataToCart() {
 		ShoppingCart newCart = new ShoppingCart();
@@ -206,6 +212,7 @@ public class WishlistController extends AbstractTableModel {
 	 * Remove a row from the data table
 	 * 
 	 * @param row number to remove
+	 * @return void
 	 */
 	public void removeRow(int modelRow) {
 		// TODO Auto-generated method stub
