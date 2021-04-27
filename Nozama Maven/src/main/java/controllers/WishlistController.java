@@ -13,78 +13,160 @@ import nozamaFiles.ItemSpecification;
 import nozamaFiles.Pair;
 import nozamaFiles.ShoppingCart;
 
+/**
+ * The WishlistController controls the WishList which is responsible for
+ * doing different actions
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class WishlistController extends AbstractTableModel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String[] columnNames = { "Name", "Cost", "Quantity", "", "" };
 	private List<Object[]> data;
 	private File customerFile;
 	private Customer c;
 
+	/**
+	 * Create the WishlistController which will create the Wishlist page
+	 */
 	public WishlistController() {
 		data = new ArrayList<Object[]>();
 	}
 
 	@Override
+	/**
+	 * Get the row count
+	 *
+	 * @return integer representing the row count
+	 */
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return data.size();
 	}
 
 	@Override
+	/**
+	 * Get the column count
+	 *
+	 * @return integer representing the column count
+	 */
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return columnNames.length;
 	}
 
+	@Override
+	/**
+	 * Get the name of the column
+	 *
+	 * @param integer representing the column index
+	 * @return string representing the name of the column
+	 */
 	public String getColumnName(int col) {
 		return columnNames[col];
 	}
 
+	@Override
+	/**
+	 * Get the value at a certain index of the table
+	 *
+	 * @param integer representing the row to look at
+	 * @param integer representing the column to look at
+	 * @return the object data found at that index
+	 */
 	public Object getValueAt(int row, int col) {
 		return data.get(row)[col];
 	}
 
+	/**
+	 * Get the Class found at the column passed
+	 *
+	 * @param integer representing the column to use to find the class
+	 * @return the Class found 
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
 	}
 
+	/**
+	 * Get the cart held by a customer
+	 *
+	 * @return the ShoppingCart of the customer
+	 */
 	public ShoppingCart getCart() {
 		dataToCart();
 		return c.getWishlist();
 	}
 
+	/**
+	 * Set the customer for their cart
+	 *
+	 * @return customer to set is cart to
+	 */
 	public void setCustomer(Customer c) {
 		this.c = c;
 		cartToData();
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Check if the cell of the table is editable
+	 *
+	 * @param integer representing the row of the table
+	 * @param integer representing the column of the table
+	 * @return true if the cell is editable, false otherwise
+	 */
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
 	}
 
+	/**
+	 * Set the value at the specific row and column asked for by the user
+	 *
+	 * @param value to put into the data table
+	 * @param row to set the value into
+	 * @param column to set the value
+	 * @return void
+	 */
 	public void setValueAt(Object value, int row, int col) {
 		data.get(row)[col] = value;
 		dataToCart();
 		fireTableCellUpdated(row, col);
 	}
 
+	/**
+	 * Get the subtotal of the items in the cart
+	 * 
+	 * @return double representing the subtotal of the cart
+	 */
 	public Double getSubtotal() {
 		return c.getCustomerCart().getSubtotal();
 	}
 
+	/**
+	 * Get the file of the Customer
+	 * 
+	 * @return File of the customer's information
+	 */
 	public File getCustomerFile() {
 		return customerFile;
 	}
 
+	/**
+	 * Set the information of the Customer into a customer file
+	 * 
+	 * @param file filled with customer information
+	 */
 	public void setCustomerFile(File f) {
 		customerFile = f;
 	}
 
+	/**
+	 * Move the data from the cart into the ShoppingCart data
+	 */
 	public void cartToData() {
 		List<Pair<Item, Integer>> contents = c.getWishlist().getCart();
 		List<Object[]> cartData = new ArrayList<Object[]>();
@@ -106,6 +188,9 @@ public class WishlistController extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Move the data from the data cart into the Customer's cart
+	 */
 	public void dataToCart() {
 		ShoppingCart newCart = new ShoppingCart();
 		for (Object[] o : data) {
@@ -117,6 +202,11 @@ public class WishlistController extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Remove a row from the data table
+	 * 
+	 * @param row number to remove
+	 */
 	public void removeRow(int modelRow) {
 		// TODO Auto-generated method stub
 		data.remove(modelRow);

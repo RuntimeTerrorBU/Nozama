@@ -62,7 +62,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	 * Get the name of the column
 	 *
 	 * @param integer representing the column index
-	 * @return 
+	 * @return string representing the name of the column
 	 */
 	public String getColumnName(int col) {
 		return columnNames[col];
