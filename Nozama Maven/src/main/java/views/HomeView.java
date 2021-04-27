@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
@@ -111,7 +112,8 @@ public class HomeView {
 
 				// Create label/field for entering password
 				JLabel passLabel = new JLabel("Enter Password: ");
-				JTextField passField = new JTextField();
+				// JTextField passField = new JTextField();
+				JPasswordField passField = new JPasswordField();
 				passField.setSize(new Dimension(75, 30));
 
 				// Add label for user name to layout
@@ -145,7 +147,8 @@ public class HomeView {
 
 					// Initialize the confirm option variables
 					String username = userField.getText();
-					String password = passField.getText();
+					// String password = passField.getText();
+					String password = new String(passField.getPassword());
 					Boolean loginComplete = false;
 
 					try {
@@ -249,7 +252,8 @@ public class HomeView {
 
 				// Create label/field for entering password
 				JLabel passLabel = new JLabel("Enter Password: ");
-				JTextField passField = new JTextField();
+				// JTextField passField = new JTextField();
+				JPasswordField passField = new JPasswordField();
 				passField.setSize(new Dimension(75, 30));
 
 				// Add label for user name to layout
@@ -282,7 +286,8 @@ public class HomeView {
 
 					// Initialize the confirm option variables
 					String username = userField.getText();
-					String password = passField.getText();
+					// String password = passField.getText();
+					String password = new String(passField.getPassword());
 					Boolean loginComplete = false;
 
 					try {
@@ -375,12 +380,14 @@ public class HomeView {
 
 				// Create Label/field for password
 				JLabel passLabel = new JLabel("Enter Password: ");
-				JTextField passField = new JTextField();
+				// JTextField passField = new JTextField();
+				JPasswordField passField = new JPasswordField();
 				passField.setSize(new Dimension(75, 30));
 
 				// Create Label/field for re-enter password
 				JLabel validateLabel = new JLabel("Re-Enter Password: ");
-				JTextField validateField = new JTextField();
+				// JTextField validateField = new JTextField();
+				JPasswordField validateField = new JPasswordField();
 				validateField.setSize(new Dimension(75, 30));
 
 				// Edit layout for user name input prompt
@@ -465,8 +472,11 @@ public class HomeView {
 						isCompany = true;
 					}
 
+					String pass = new String(passField.getPassword());
+					String validation = new String(validateField.getPassword());
+
 					// If both passwords matched correctly, set login to finished
-					if (passField.getText().equals(validateField.getText())) {
+					if (pass.equals(validation)) {
 
 						// Create string to be added to valid list of logins
 						String str = userField.getText() + "," + passField.getText() + ",";
@@ -487,13 +497,23 @@ public class HomeView {
 							FileOutputStream outputData = new FileOutputStream(file, true);
 							String line;
 							String userName = userField.getText();
+							String reason = "";
 							boolean isValid = true;
+
+							if (userField.getText().equals("")) {
+								isValid = false;
+								reason = "Username field is empty";
+							} else if (pass.equals("")) {
+								isValid = false;
+								reason = "Password field is empty";
+							}
 
 							// Make sure new login doesn't already exist
 							while (((line = inputData.readLine()) != null) && isValid) {
 								String[] split = line.split(",");
 								if (split[0].equals(userName)) {
 									isValid = false;
+									reason = "Username is taken";
 								}
 							}
 
@@ -514,6 +534,9 @@ public class HomeView {
 								File myWishList = new File(wishlistName);
 								myWishList.createNewFile();
 
+							} else {
+								UIManager.put("OptionPane.okButtonText", "Ok");
+								JOptionPane.showMessageDialog(loginFrame, reason);
 							}
 
 							// Close the same file with the saved login
@@ -521,8 +544,10 @@ public class HomeView {
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
+					} else {
+						UIManager.put("OptionPane.okButtonText", "Ok");
+						JOptionPane.showMessageDialog(loginFrame, "Passwords don't match");
 					}
-
 				}
 			}
 		});
