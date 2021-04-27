@@ -227,18 +227,24 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 				
 				// record purchase
 				File file = new File("resources/orders/" + scm.getCustomer().getUsername() + "Orders.csv");
+				File reportFile = new File("resources/orders/GeneratedReport.csv");
 				FileWriter fwriter;
+				FileWriter reportWriter;
 				try {
 					fwriter = new FileWriter(file, true);
+					reportWriter = new FileWriter(reportFile, true);
 					
 					BufferedWriter writer = new BufferedWriter(fwriter);
+					BufferedWriter rWriter = new BufferedWriter(reportWriter);
 					
 					writer.write("\n");
 					for (Pair<Item, Integer> p : scm.getCustomer().getCustomerCart().getCart()) {
 						writer.write(p.first.getItemID() + "," + p.second + "\n");
+						rWriter.write(p.first.getItemID()+ "," + p.second + "\n");
 					}
 					
 					writer.close();
+					rWriter.close();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

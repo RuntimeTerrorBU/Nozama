@@ -18,6 +18,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -27,11 +28,13 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -225,12 +228,38 @@ public class NozamaView {
 			gbc_cartButton.gridx = 13;
 			gbc_cartButton.gridy = 7;
 			panel.add(cartButton, gbc_cartButton);
-			
+			 
 			JButton reportButton = new JButton("Generate Report");
 				reportButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						displayCart();
+//						
+						File generateFile = new File("resources/orders/GeneratedReport.csv");
+						
+						try {
+							Scanner scanner = new Scanner(generateFile);
+							final JFileChooser fileChosen = new JFileChooser();
+							int optChosen = fileChosen.showSaveDialog(null);
+							
+							if (optChosen == JFileChooser.APPROVE_OPTION) {
+								try {
+									File expFile = fileChosen.getSelectedFile();
+									FileWriter toWrite = new FileWriter(expFile);
+									
+									while(scanner.hasNext()) {
+										toWrite.write(scanner.next());
+									}
+	
+									toWrite.close(); 
+								} catch (IOException x) {
+									x.printStackTrace();
+								}
+							}
+						} catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						System.out.println("GENERATE REPORT CLICKED");
 					}
 				});
 
@@ -267,10 +296,8 @@ public class NozamaView {
 					// show the frame
 					//frame.pack();
 					frame.setVisible(true);
-					
-					
-					System.out.println("DELETE PRODUCT CLICKED");
 
+					System.out.println("DELETE PRODUCT CLICKED");
 				}
 			});
 			
@@ -312,8 +339,6 @@ public class NozamaView {
 					if(res == JOptionPane.OK_OPTION) {
 						table.getSelectedRow();
 						
-						
-						
 						int inputQuan = Integer.parseInt(quanField.getText());
 						
 						List<ItemSpecification> tempItemList = ItemCatalog.getItems();
@@ -321,12 +346,9 @@ public class NozamaView {
 						tempItemList.get(table.getSelectedRow()).setQuantity(tempItemList.get(table.getSelectedRow()).getQuantity() + inputQuan);
 						ItemCatalog.setItems(tempItemList);
 						
-						
 						//nm.fireTableDataChanged();
 						//nm.data.get(table.getSelectedRow()).setQuantity(tempItemList.get(table.getSelectedRow()).getQuantity() + inputQuan);
 						nm.fireTableDataChanged();
-						
-						
 						
 						// show the frame
 						//frame.pack();
@@ -336,7 +358,6 @@ public class NozamaView {
 					System.out.println("RESTOCK PRODUCT CLICKED");
 				}
 			});
-
 
 			GridBagConstraints gbc_restockButton = new GridBagConstraints();
 			gbc_restockButton.insets = new Insets(0, 0, 5, 0);
@@ -444,7 +465,6 @@ public class NozamaView {
 			gbc_addProductButton.gridx = 1;
 			gbc_addProductButton.gridy = 8;
 			panel.add(addProductButton, gbc_addProductButton);
-		
 		}
 
 		Action addToCart = new AbstractAction() {
