@@ -26,8 +26,19 @@ public class Customer {
 		this.wishlist = wishlist;
 		this.customerInformation = customerInformation;
 		this.isCompany = isCompany;
-		this.customerCart = customerCart;
+		//this.customerCart = customerCart;
 		this.cartFile = cartFile;
+		
+		this.customerCart = new ShoppingCart();
+		try {
+			//File f = new File("resources/testCart.csv");
+			File f = new File("resources/carts/" + username + "Cart.csv");
+			this.customerCart.loadCart(f);
+			this.cartFile = f;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//added by Austin
