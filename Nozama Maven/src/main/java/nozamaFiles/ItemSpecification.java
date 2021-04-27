@@ -106,11 +106,11 @@ public class ItemSpecification {
 			return false;
 		return true;
 	}
-	
+
 	static final Comparator<ItemSpecification> compareByID = new Comparator<ItemSpecification>() {
 		@Override
 		public int compare(ItemSpecification o1, ItemSpecification o2) {
 			return o1.getItemID().compareTo(o2.getItemID());
 		}
 	};
- }
+}
