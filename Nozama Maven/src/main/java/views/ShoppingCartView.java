@@ -249,6 +249,31 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 					e1.printStackTrace();
 				}
 				
+				// show shipping confirmation
+				JFrame cFrame = new JFrame("Shipping confirmation");
+				JPanel cPanel = new JPanel(new GridLayout(0, 1));
+				
+				JLabel title = new JLabel("Shipping detals:");
+				JTextField itemsField = new JTextField();
+				String itemsString = "";
+				
+				cPanel.add(title);
+				cPanel.add(sentAddress);
+				
+				for (Pair<Item, Integer> p : scm.getCustomer().getCustomerCart().getCart()) {
+					itemsField = new JTextField();
+					itemsString = "Item: " + ItemCatalog.getItemSpecification(p.first.getItemID()).getName() +
+							" Quantity: " + p.second + "\n";
+					itemsField.setText(itemsString);
+					itemsField.setEditable(false);
+					cPanel.add(itemsField);
+				}
+				
+				// display it
+				cFrame.getContentPane().add(cPanel);
+				cFrame.pack();
+				cFrame.setVisible(true);
+				
 				UIManager.put("OptionPane.okButtonText", "Receipt");
 				UIManager.put("OptionPane.cancelButtonText", "No Receipt");
 				
