@@ -321,6 +321,23 @@ public class NozamaView {
 						ItemCatalog.setItems(tempItemList);
 						
 						nm.update();
+						
+						// write to the catalog file
+						File file = new File("resources/testCatalog.csv");
+						
+						FileWriter fwriter;
+						try {
+							fwriter = new FileWriter(file, true);
+							
+							BufferedWriter writer = new BufferedWriter(fwriter);
+							
+							writer.write("\n");
+							writer.write(name + "," + description + "," + price + "," + itemID + "," + quantity);
+							
+							writer.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 					
 					// show the frame
