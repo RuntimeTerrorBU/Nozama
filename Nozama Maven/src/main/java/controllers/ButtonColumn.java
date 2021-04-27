@@ -66,7 +66,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 *
 	 * @param arguments passed by the user
 	 * @return the foreground color
-	 * @throws none
 	 */
 	public Border getFocusBorder() {
 		return focusBorder;
@@ -77,7 +76,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 *
 	 * @param 	focusBorder the foreground color
 	 * @return 	void
-	 * @throws 	none
 	 */
 	public void setFocusBorder(Border focusBorder) {
 		this.focusBorder = focusBorder;
@@ -87,9 +85,7 @@ public class ButtonColumn extends AbstractCellEditor
 	/**
 	 * Get mnemonic of the function
 	 *
-	 * @param 	none
 	 * @return 	integer representing the mnemonic of the buttons
-	 * @throws 	none
 	 */
 	public int getMnemonic() {
 		return mnemonic;
@@ -100,7 +96,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 *
 	 * @param 	mnemonic to set
 	 * @return 	void
-	 * @throws 	none
 	 */
 	public void setMnemonic(int mnemonic) {
 		this.mnemonic = mnemonic;
@@ -116,7 +111,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 * @param	value representing the value of the table cell
 	 * @param	boolean representing if the button has been selected
 	 * @return 	Component representing the edit button
-	 * @throws 	none
 	 */
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		if (value == null) {
@@ -138,9 +132,7 @@ public class ButtonColumn extends AbstractCellEditor
 	/**
 	 * Get the cell editor value
 	 *
-	 * @param 	none
 	 * @return 	Object that represents the value of the editor
-	 * @throws 	none
 	 */
 	public Object getCellEditorValue() {
 		return editorValue;
@@ -156,7 +148,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 * @param 	integer representing the rows of the table
 	 * @param 	integer representing the columns of the table
 	 * @return 	void
-	 * @throws 	none
 	 */
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
@@ -197,7 +188,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 *
 	 * @param 	ActionEvent representing when a button has been clicked
 	 * @return 	void
-	 * @throws 	none
 	 */
 	public void actionPerformed(ActionEvent e) {
 		int row = table.convertRowIndexToModel(table.getEditingRow());
@@ -219,7 +209,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 *
 	 * @param 	MouseEvent representing when a button has been clicked
 	 * @return 	void
-	 * @throws 	none
 	 */
 	public void mousePressed(MouseEvent e) {
 		if (table.isEditing() && table.getCellEditor() == this)
@@ -231,7 +220,6 @@ public class ButtonColumn extends AbstractCellEditor
 	 *
 	 * @param 	MouseEvent representing when a button has been clicked
 	 * @return 	void
-	 * @throws 	none
 	 */
 	public void mouseReleased(MouseEvent e) {
 		if (isButtonColumnEditor && table.isEditing())

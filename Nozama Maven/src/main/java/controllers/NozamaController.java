@@ -9,11 +9,23 @@ import javax.swing.table.AbstractTableModel;
 
 import nozamaFiles.*;
 
+/**
+ * The NozamaController class controls the store page which is responsible
+ * for doing different actions
+ *
+ *	@author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ *	@version 1.0 (Apr 27, 2021)
+ */
 public class NozamaController extends AbstractTableModel {
 	private String[] columnNames = {"Name", "Cost", "", "", ""};
 	public List<Object[]> data;
 	private Customer c;
 	
+	/**
+	 * Create the NozamaController which will create the store page
+	 *
+	 * @param Customer who the page is created for
+	 */
 	public NozamaController(Customer c) {
 		data = new ArrayList<Object[]>();
 		//TODO for test purposes, refactor later to deal with different customers
@@ -23,23 +35,45 @@ public class NozamaController extends AbstractTableModel {
 	}
 
 	@Override
+	/**
+	 * Get the row count
+	 *
+	 * @return 	integer representing the row count
+	 */
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return data.size();
 	}
 
 	@Override
+	/**
+	 * Get the column count
+	 *
+	 * @return 	integer representing the column count
+	 */
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return columnNames.length;
 	}
 
 	@Override
+	/**
+	 * Get the value at a certain index of the table
+	 *
+	 * @param integer representing the row to look at
+	 * @param integer representing the column to look at
+	 * @return the object data found at that index
+	 */
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return data.get(rowIndex)[columnIndex];
 	}
 	
+	/**
+	 * Load the data of the store into the store page
+	 *
+	 * @return void
+	 */
 	public void loadData() {
 		
 		//FIXME change the file to be the customer's specific cart file
@@ -63,6 +97,11 @@ public class NozamaController extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 	
+	/**
+	 * Update the store page to add new items to cart and wishlist
+	 *
+	 * @return void
+	 */
 	public void update() {
 		data = new ArrayList<Object[]>();
 		for(ItemSpecification i : ItemCatalog.getItems()) {
@@ -77,6 +116,12 @@ public class NozamaController extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 	
+	/**
+	 * Load the cart held by a customer
+	 *
+	 * @param file used to load a customer cart
+	 * @return void
+	 */
 	public void loadCart(File f) {
 		try {
 			c.getCustomerCart().loadCart(f);
@@ -85,14 +130,31 @@ public class NozamaController extends AbstractTableModel {
 		}
 	}
 
+	/**
+	 * Get the cart held by a customer
+	 *
+	 * @return the ShoppingCart of the customer
+	 */
 	public ShoppingCart getCart() {
 		return c.getCustomerCart();
 	}
 	
+	/**
+	 * Check if the cell of the table is editable
+	 *
+	 * @param integer representing the row of the table
+	 * @param integer representing the column of the table
+	 * @return true if the cell is editable, false otherwise
+	 */
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
 	}
 	
+	/**
+	 * Get the customer using the Nozama store site
+	 * 
+	 * @return Customer using the store
+	 */
 	public Customer getCustomer() {
 		return c;
 	}
