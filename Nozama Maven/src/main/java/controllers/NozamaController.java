@@ -62,6 +62,7 @@ public class NozamaController extends AbstractTableModel {
 	}
 	
 	public void update() {
+		data = new ArrayList<Object[]>();
 		for(ItemSpecification i : ItemCatalog.getItems()) {
 			Object[] colData = new Object[columnNames.length];
 			colData[0] = i.getName();
