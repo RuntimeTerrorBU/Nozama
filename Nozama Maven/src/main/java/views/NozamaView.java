@@ -497,6 +497,16 @@ public class NozamaView {
 					}
 					else if(quantity <= available) {
 						nm.getCustomer().getCustomerCart().addItemToCart(toAdd, quantity);
+						BufferedWriter out;
+						try {
+							out = new BufferedWriter(new FileWriter("resources/carts/" + c.getUsername() + "Cart.csv"));
+							out.write(c.getWishlist().toString());
+							out.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 					}
 					else {
 						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
@@ -534,6 +544,17 @@ public class NozamaView {
 					}
 					else if(quantity <= available) {
 						nm.getCustomer().getWishlist().addItemToCart(toAdd, quantity);
+						BufferedWriter out;
+						try {
+							out = new BufferedWriter(new FileWriter("resources/wishlists/" + c.getUsername() + "Wishlist.csv"));
+							out.write(c.getWishlist().toString());
+							out.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						//System.out.println(wc.getCart().toString());
+						
 					}
 					else {
 						JOptionPane.showMessageDialog(form2, "ERROR: Maximum for sale is " + available);
@@ -550,6 +571,7 @@ public class NozamaView {
 
 	public void displayCart() {
 		ShoppingCartView.createAndShowGUI(nm.getCustomer());
+		
 	}
 	
 	public void displayWishlist() {

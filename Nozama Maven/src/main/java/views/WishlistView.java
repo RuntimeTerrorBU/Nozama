@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -30,10 +31,22 @@ public class WishlistView extends JPanel {
 	//Instance of the ShoppingCart Model to be used
 	private static WishlistController wc = new WishlistController();
 
-	public WishlistView(Customer c) {
-		// convert the cart to data
-		wc.setCustomer(c);
-		
+	public WishlistView(Customer c) {	
+		try {
+			File catalogFile = new File("resources/testCatalog.csv");
+			ItemCatalog.loadData(catalogFile);
+			wc.setCustomer(c);
+			File w = new File("resources/wishlists/" + c.getUsername() + "Wishlist.csv");
+			wc.setCustomerFile(w);
+			
+			BufferedWriter out = new BufferedWriter(new FileWriter(wc.getCustomerFile()));
+			//System.out.println(wc.getCart().toString());
+			out.write(wc.getCart().toString());
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//Creation of Table to add initial interface instance to
 		final JTable table = new JTable(wc);
 		table.removeColumn(table.getColumnModel().getColumn(4));
@@ -85,8 +98,10 @@ public class WishlistView extends JPanel {
 						
 						try {
 							BufferedWriter out = new BufferedWriter(new FileWriter(wc.getCustomerFile()));
+							//System.out.println(wc.getCart().toString());
 							out.write(wc.getCart().toString());
 							out.close();
+							
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

@@ -49,7 +49,7 @@ public class WishlistController extends AbstractTableModel {
 
 	public ShoppingCart getCart() {
 		dataToCart();
-		return c.getCustomerCart();
+		return c.getWishlist();
 	}
 	public void setCustomer(Customer c) {
 		this.c = c;
@@ -92,6 +92,7 @@ public class WishlistController extends AbstractTableModel {
 			itemData[1] = is.getPrice();
 			itemData[2] = p.second;
 			itemData[3] = "Edit";
+			itemData[4] = p.first.getItemID();
 			
 			cartData.add(itemData);
 		}

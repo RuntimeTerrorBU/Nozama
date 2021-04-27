@@ -155,6 +155,16 @@ public class HomeView {
 					
 					if(loginComplete) {
 						File f = new File("resources/carts/" + username + "Cart.csv");
+						
+						String wishlistName = "resources/wishlists/" + username + "Wishlist.csv";
+						File myWishList = new File(wishlistName);
+						try {
+							myWishList.createNewFile();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, false, new ShoppingCart(), f);
 						NozamaView.createAndShowGUI(false, c);
 						frame.setVisible(false);
@@ -388,6 +398,10 @@ public class HomeView {
 								String cartName = "resources/carts/" + userName + "Cart.csv";
 								File myCart = new File(cartName);
 								myCart.createNewFile();
+								
+								String wishlistName = "resources/wishlists/" + userName + "Wishlist.csv";
+								File myWishList = new File(wishlistName);
+								myWishList.createNewFile();
 								
 								
 							}
