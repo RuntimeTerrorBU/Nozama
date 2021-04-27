@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -200,12 +201,6 @@ public class NozamaView {
 				displayCart();
 			}
 		});
-
-		GridBagConstraints gbc_cartButton = new GridBagConstraints();
-		gbc_cartButton.insets = new Insets(0, 0, 5, 0);
-		gbc_cartButton.gridx = 13;
-		gbc_cartButton.gridy = 7;
-		panel.add(cartButton, gbc_cartButton);
 		
 		// add wishlist button
 		JButton wishlistButton = new JButton("Show Wishlist");
@@ -224,6 +219,26 @@ public class NozamaView {
 		panel.add(wishlistButton, gbc_wishlistButton);
 
 		if(managementState) {
+			
+			GridBagConstraints gbc_cartButton = new GridBagConstraints();
+			gbc_cartButton.insets = new Insets(0, 0, 5, 0);
+			gbc_cartButton.gridx = 13;
+			gbc_cartButton.gridy = 7;
+			panel.add(cartButton, gbc_cartButton);
+			
+			JButton reportButton = new JButton("Generate Report");
+				reportButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						displayCart();
+					}
+				});
+
+			GridBagConstraints gbc_reportButton = new GridBagConstraints();
+			gbc_reportButton.insets = new Insets(0, 0, 5, 0);
+			gbc_reportButton.gridx = 13;
+			gbc_reportButton.gridy = 3;
+			panel.add(reportButton, gbc_reportButton);
 			
 			JButton deleteProductDBButton = new JButton("Delete Product DB");
 			deleteProductDBButton.addMouseListener(new MouseAdapter() {
@@ -267,13 +282,61 @@ public class NozamaView {
 			
 			
 			JButton restockButton = new JButton("Restock Item");
-			cartButton.addMouseListener(new MouseAdapter() {
+			restockButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					//deleteProductFromDatabase();
-					System.out.println("RESTOCK FIRED");
+				
+					JFrame quanFrame = new JFrame("Add Quantity");
+					JPanel quanForm = new JPanel(new GridLayout(0, 1));
+					
+					JLabel quanLabel = new JLabel("Enter Quantity to Add: ");
+					JTextField quanField = new JTextField();
+					quanField.setSize(new Dimension(75, 30));
+					
+					//Edit layout for card input prompt
+					quanForm.add(quanLabel, BorderLayout.WEST);
+					quanLabel.setLabelFor(quanField);
+					quanForm.add(quanField);
+					//Add the entire form to the frame
+					quanFrame.add(quanForm);
+					
+					//Fire changes
+					quanFrame.revalidate();
+					quanForm.revalidate();
+					
+					UIManager.put("OptionPane.cancelButtonText", "Cancel");
+					UIManager.put("OptionPane.okButtonText", "Add");
+					int res = JOptionPane.showConfirmDialog(null, quanForm, "Company Login", JOptionPane.OK_CANCEL_OPTION);
+					
+					
+					if(res == JOptionPane.OK_OPTION) {
+						table.getSelectedRow();
+						
+						
+						
+						int inputQuan = Integer.parseInt(quanField.getText());
+						
+						List<ItemSpecification> tempItemList = ItemCatalog.getItems();
+
+						tempItemList.get(table.getSelectedRow()).setQuantity(tempItemList.get(table.getSelectedRow()).getQuantity() + inputQuan);
+						ItemCatalog.setItems(tempItemList);
+						
+						
+						//nm.fireTableDataChanged();
+						//nm.data.get(table.getSelectedRow()).setQuantity(tempItemList.get(table.getSelectedRow()).getQuantity() + inputQuan);
+						nm.fireTableDataChanged();
+						
+						
+						
+						// show the frame
+						//frame.pack();
+						frame.setVisible(true);
+					}
+					
+					System.out.println("RESTOCK PRODUCT CLICKED");
 				}
 			});
+
 
 			GridBagConstraints gbc_restockButton = new GridBagConstraints();
 			gbc_restockButton.insets = new Insets(0, 0, 5, 0);
@@ -445,6 +508,9 @@ public class NozamaView {
 				qTextField.setText("1");
 				form2.add(quantityLbl);
 				form2.add(qTextField);
+				
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Add Item");
 				
 				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Wishlist", JOptionPane.OK_CANCEL_OPTION);
 				if(res == JOptionPane.OK_OPTION) {

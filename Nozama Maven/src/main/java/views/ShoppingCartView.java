@@ -225,6 +225,24 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 				
 				frameCheckout.revalidate();
 				
+				// record purchase
+				File file = new File("resources/orders/" + scm.getCustomer().getUsername() + "Orders.csv");
+				FileWriter fwriter;
+				try {
+					fwriter = new FileWriter(file, true);
+					
+					BufferedWriter writer = new BufferedWriter(fwriter);
+					
+					writer.write("\n");
+					for (Pair<Item, Integer> p : scm.getCustomer().getCustomerCart().getCart()) {
+						writer.write(p.first.getItemID() + "," + p.second + "\n");
+					}
+					
+					writer.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
 				UIManager.put("OptionPane.okButtonText", "Receipt");
 				UIManager.put("OptionPane.cancelButtonText", "No Receipt");
 				

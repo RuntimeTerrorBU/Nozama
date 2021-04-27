@@ -58,6 +58,10 @@ public class ShoppingCartController extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 	
+	public Customer getCustomer() {
+		return this.c;
+	}
+	
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
 	}
