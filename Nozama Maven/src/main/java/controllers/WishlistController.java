@@ -14,7 +14,11 @@ import nozamaFiles.Pair;
 import nozamaFiles.ShoppingCart;
 
 public class WishlistController extends AbstractTableModel {
-	private String[] columnNames = { "Name", "Cost", "Quantity", "", ""};
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String[] columnNames = { "Name", "Cost", "Quantity", "", "" };
 	private List<Object[]> data;
 	private File customerFile;
 	private Customer c;
@@ -43,6 +47,7 @@ public class WishlistController extends AbstractTableModel {
 		return data.get(row)[col];
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
 	}
@@ -51,30 +56,31 @@ public class WishlistController extends AbstractTableModel {
 		dataToCart();
 		return c.getWishlist();
 	}
+
 	public void setCustomer(Customer c) {
 		this.c = c;
 		cartToData();
 		fireTableDataChanged();
 	}
-	
+
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
 	}
-	
+
 	public void setValueAt(Object value, int row, int col) {
 		data.get(row)[col] = value;
 		dataToCart();
 		fireTableCellUpdated(row, col);
 	}
-	
+
 	public Double getSubtotal() {
 		return c.getCustomerCart().getSubtotal();
 	}
-	
+
 	public File getCustomerFile() {
 		return customerFile;
 	}
-	
+
 	public void setCustomerFile(File f) {
 		customerFile = f;
 	}
@@ -84,7 +90,7 @@ public class WishlistController extends AbstractTableModel {
 		List<Object[]> cartData = new ArrayList<Object[]>();
 		ItemSpecification is = null;
 
-		//TODO fix later for adding image column, edit, and remove
+		// TODO fix later for adding image column, edit, and remove
 		for (Pair<Item, Integer> p : contents) {
 			is = ItemCatalog.getItemSpecification(p.first.getItemID());
 			Object[] itemData = new Object[5];
@@ -93,24 +99,24 @@ public class WishlistController extends AbstractTableModel {
 			itemData[2] = p.second;
 			itemData[3] = "Edit";
 			itemData[4] = p.first.getItemID();
-			
+
 			cartData.add(itemData);
 		}
 		this.data = cartData;
 		fireTableDataChanged();
 	}
-	
+
 	public void dataToCart() {
 		ShoppingCart newCart = new ShoppingCart();
-		for(Object[] o : data) {
+		for (Object[] o : data) {
 			Item i = new Item((String) o[4]);
 			newCart.addItemToCart(i, (Integer) o[2]);
 		}
-		
+
 		c.setWishlist(newCart);
 		fireTableDataChanged();
 	}
-	
+
 	public void removeRow(int modelRow) {
 		// TODO Auto-generated method stub
 		data.remove(modelRow);

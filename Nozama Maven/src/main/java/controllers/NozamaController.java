@@ -10,17 +10,21 @@ import javax.swing.table.AbstractTableModel;
 import nozamaFiles.*;
 
 /**
- * The NozamaController class controls the store page which is responsible
- * for doing different actions
+ * The NozamaController class controls the store page which is responsible for
+ * doing different actions
  *
- *	@author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
- *	@version 1.0 (Apr 27, 2021)
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
  */
 public class NozamaController extends AbstractTableModel {
-	private String[] columnNames = {"Name", "Cost", "", "", ""};
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String[] columnNames = { "Name", "Cost", "", "", "" };
 	public List<Object[]> data;
 	private Customer c;
-	
+
 	/**
 	 * Create the NozamaController which will create the store page
 	 *
@@ -28,8 +32,9 @@ public class NozamaController extends AbstractTableModel {
 	 */
 	public NozamaController(Customer c) {
 		data = new ArrayList<Object[]>();
-		//TODO for test purposes, refactor later to deal with different customers
-		//c = new Customer("testCustomer", null, null, 0, new ShoppingCart(), null, true, new ShoppingCart(), new File("textCart.csv"));
+		// TODO for test purposes, refactor later to deal with different customers
+		// c = new Customer("testCustomer", null, null, 0, new ShoppingCart(), null,
+		// true, new ShoppingCart(), new File("textCart.csv"));
 		this.c = c;
 		loadData();
 	}
@@ -38,7 +43,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Get the row count
 	 *
-	 * @return 	integer representing the row count
+	 * @return integer representing the row count
 	 */
 	public int getRowCount() {
 		// TODO Auto-generated method stub
@@ -49,7 +54,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Get the column count
 	 *
-	 * @return 	integer representing the column count
+	 * @return integer representing the column count
 	 */
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -68,15 +73,15 @@ public class NozamaController extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		return data.get(rowIndex)[columnIndex];
 	}
-	
+
 	/**
 	 * Load the data of the store into the store page
 	 *
 	 * @return void
 	 */
 	public void loadData() {
-		
-		//FIXME change the file to be the customer's specific cart file
+
+		// FIXME change the file to be the customer's specific cart file
 		File file = new File("resources/testCatalog.csv");
 		try {
 			ItemCatalog.loadData(file);
@@ -84,8 +89,8 @@ public class NozamaController extends AbstractTableModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		for(ItemSpecification i : ItemCatalog.getItems()) {
+
+		for (ItemSpecification i : ItemCatalog.getItems()) {
 			Object[] colData = new Object[columnNames.length];
 			colData[0] = i.getName();
 			colData[1] = i.getPrice();
@@ -96,7 +101,7 @@ public class NozamaController extends AbstractTableModel {
 		}
 		fireTableDataChanged();
 	}
-	
+
 	/**
 	 * Update the store page to add new items to cart and wishlist
 	 *
@@ -104,7 +109,7 @@ public class NozamaController extends AbstractTableModel {
 	 */
 	public void update() {
 		data = new ArrayList<Object[]>();
-		for(ItemSpecification i : ItemCatalog.getItems()) {
+		for (ItemSpecification i : ItemCatalog.getItems()) {
 			Object[] colData = new Object[columnNames.length];
 			colData[0] = i.getName();
 			colData[1] = i.getPrice();
@@ -115,7 +120,7 @@ public class NozamaController extends AbstractTableModel {
 		}
 		fireTableDataChanged();
 	}
-	
+
 	/**
 	 * Load the cart held by a customer
 	 *
@@ -125,7 +130,7 @@ public class NozamaController extends AbstractTableModel {
 	public void loadCart(File f) {
 		try {
 			c.getCustomerCart().loadCart(f);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -138,7 +143,7 @@ public class NozamaController extends AbstractTableModel {
 	public ShoppingCart getCart() {
 		return c.getCustomerCart();
 	}
-	
+
 	/**
 	 * Check if the cell of the table is editable
 	 *
@@ -149,7 +154,7 @@ public class NozamaController extends AbstractTableModel {
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
 	}
-	
+
 	/**
 	 * Get the customer using the Nozama store site
 	 * 
