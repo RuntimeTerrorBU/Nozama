@@ -1,4 +1,4 @@
-package views;
+ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -296,6 +296,7 @@ public class NozamaView {
 								// Write the already generated file to the output file
 								while (scanner.hasNext()) {
 									toWrite.write(scanner.next());
+									toWrite.append('\n');
 								}
 
 								// Close writer
