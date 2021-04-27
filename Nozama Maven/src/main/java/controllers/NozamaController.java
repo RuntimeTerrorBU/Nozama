@@ -17,9 +17,7 @@ import nozamaFiles.*;
  * @version 1.0 (Apr 27, 2021)
  */
 public class NozamaController extends AbstractTableModel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String[] columnNames = { "Name", "Cost", "", "", "" };
 	public List<Object[]> data;
