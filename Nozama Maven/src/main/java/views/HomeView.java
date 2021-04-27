@@ -1,7 +1,8 @@
 package views;
+
 import java.awt.EventQueue;
-import java.io.*;  
-import java.util.Scanner;  
+import java.io.*;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -44,9 +45,14 @@ public class HomeView {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
+		// Starts instance of the home view main page
 		EventQueue.invokeLater(new Runnable() {
+
+			// To run
 			public void run() {
 				try {
+					// General home view displayed by invoking instance of HomeView object
 					HomeView window = new HomeView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -67,364 +73,473 @@ public class HomeView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		// Initial frame set up
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
+		// Set home view name of Nozama application
 		JLabel lblNewLabel = new JLabel("Nozama");
 		lblNewLabel.setBounds(195, 6, 60, 16);
 		frame.getContentPane().add(lblNewLabel);
-		
+
+		// Customer button for customer input
 		JButton customerButton = new JButton("Customer");
 		customerButton.setBounds(163, 130, 125, 29);
 		customerButton.addMouseListener(new MouseAdapter() {
 			@Override
+
+			// If the customer login button is pressed
 			public void mouseClicked(MouseEvent e) {
-				//TODO ADD LOGIN SCREEN BEFORE THIS
-				
+
+				// The frame and panel set for a login prompt
 				JFrame loginFrame = new JFrame("Customer Login");
 				JPanel loginForm = new JPanel(new GridLayout(0, 1));
-				//loginFrame.setVisible(true);
-				//loginForm.setVisible(true);
-				
-				//Frame altered to be configured as a checkout screen
+
+				// Frame altered to be configured as a checkout screen
 				loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				loginFrame.setPreferredSize(new Dimension(240, 150));
 				loginFrame.pack();
 				loginFrame.setLocationRelativeTo(null);
-				
-				//Create Labels and Text fields for entering card info and cvc numbers
+
+				// Create label/field for entering user name
 				JLabel userLabel = new JLabel("Enter Username: ");
 				JTextField userField = new JTextField();
 				userField.setSize(new Dimension(75, 30));
+
+				// Create label/field for entering password
 				JLabel passLabel = new JLabel("Enter Password: ");
 				JTextField passField = new JTextField();
 				passField.setSize(new Dimension(75, 30));
-				
-				//Edit layout for card input prompt
+
+				// Add label for user name to layout
 				loginForm.add(userLabel, BorderLayout.WEST);
 				userLabel.setLabelFor(userField);
 				loginForm.add(userField);
-				
-				//Edit layout for cvc input prompt
+
+				// Add label for password
 				loginForm.add(passLabel, BorderLayout.WEST);
 				passLabel.setLabelFor(passField);
 				loginForm.add(passField);
-				
-				//Add the entire form to the frame
+
+				// Add the form containing the user name and password login
 				loginFrame.add(loginForm);
-				
-				//Fire changes
+
+				// Fire changes
 				loginFrame.revalidate();
 				loginForm.revalidate();
-				
+
+				// Set the buttons to be used for user name and password confirmation
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Login");
-				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login", JOptionPane.OK_CANCEL_OPTION);
-				
-				
-				if(res == JOptionPane.OK_OPTION) {
+
+				// Set the result of the user chosen option button to track if user tries to
+				// login
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Customer Login",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				// If the user input a user and password and pressed OK
+				if (res == JOptionPane.OK_OPTION) {
+
+					// Initialize the confirm option variables
 					String username = userField.getText();
 					String password = passField.getText();
 					Boolean loginComplete = false;
-					
+
 					try {
-						File file = new File("usersData.txt");   
+
+						// Initialize the files to parse current users from
+						File file = new File("usersData.txt");
 						FileInputStream fis = new FileInputStream(file);
 						Scanner scanner = new Scanner(file);
-
 						int r = 0;
 						String inputLine;
-						
-						while(scanner.hasNextLine() && !loginComplete) {
-							
+
+						// While there are more people in the database to check vs the login info
+						while (scanner.hasNextLine() && !loginComplete) {
+
+							// Get next person
 							inputLine = scanner.nextLine();
-							
+
+							// Divide the person data from the file to compare
 							String[] checkPerson;
 							checkPerson = inputLine.split(",");
-							
-							if(checkPerson[0].equals(username) && checkPerson[1].equals(password)) {
+
+							// If the login info is found and is valid, flag such true
+							if (checkPerson[0].equals(username) && checkPerson[1].equals(password)) {
 								loginComplete = true;
 							}
 						}
-					}
-					catch(Exception ex){  
+					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
-					
-					if(loginComplete) {
+
+					// If a valid login was found while parsing
+					if (loginComplete) {
+
+						// Set a persons cart & wish list
 						File f = new File("resources/carts/" + username + "Cart.csv");
-						
 						String wishlistName = "resources/wishlists/" + username + "Wishlist.csv";
 						File myWishList = new File(wishlistName);
+
 						try {
+							// Create the actual wish list
 							myWishList.createNewFile();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						
-						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, false, new ShoppingCart(), f);
+
+						// Initialize instance of customer to be added to have a Nozama View displayed
+						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, false,
+								new ShoppingCart(), f);
+
+						// Set the Nozama view and the frame to be displayed (CUSTOMER)
 						NozamaView.createAndShowGUI(false, c);
 						frame.setVisible(false);
 					}
+					// If the login was invalid, display such
 					else {
-						System.out.println("DISPLAY ERROR FOR INVALID LOGIN");
+						// Initialize the frame and invalid login message
+						JFrame invalidLogin = new JFrame("Login Failed");
+						JLabel invalidUserOrPassword = new JLabel("   Invalid Username or Password: Try again!");
+
+						// Frame altered to be configured as a checkout screen
+						invalidLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						invalidLogin.setPreferredSize(new Dimension(280, 70));
+						invalidLogin.pack();
+						invalidLogin.setLocationRelativeTo(null);
+
+						// Add the invalid login and set it to show
+						invalidLogin.add(invalidUserOrPassword);
+						invalidLogin.setVisible(true);
 					}
 				}
-				
-				//Validation check in command line
-				System.out.println("Login CLICKED");
 			}
 		});
+
+		// Add the actual instance of the customer button to the home view frame
 		frame.getContentPane().add(customerButton);
-		
+
+		// Company button for company input
 		JButton companyButton = new JButton("Company");
 		companyButton.setBounds(163, 165, 125, 29);
-		
 		companyButton.addMouseListener(new MouseAdapter() {
 			@Override
+
+			// If the company login button is pressed
 			public void mouseClicked(MouseEvent e) {
-				JFrame loginFrame = new JFrame("Customer Login");
+
+				// The frame and panel set for a login prompt
+				JFrame loginFrame = new JFrame("Company Login");
 				JPanel loginForm = new JPanel(new GridLayout(0, 1));
-				//loginFrame.setVisible(true);
-				//loginForm.setVisible(true);
-				
-				//Frame altered to be configured as a checkout screen
+
+				// Frame altered to be configured as a checkout screen
 				loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				loginFrame.setPreferredSize(new Dimension(240, 150));
 				loginFrame.pack();
 				loginFrame.setLocationRelativeTo(null);
-				
-				//Create Labels and Text fields for entering card info and cvc numbers
+
+				// Create label/field for entering user name
 				JLabel userLabel = new JLabel("Enter Username: ");
 				JTextField userField = new JTextField();
 				userField.setSize(new Dimension(75, 30));
+
+				// Create label/field for entering password
 				JLabel passLabel = new JLabel("Enter Password: ");
 				JTextField passField = new JTextField();
 				passField.setSize(new Dimension(75, 30));
-				
-				//Edit layout for card input prompt
+
+				// Add label for user name to layout
 				loginForm.add(userLabel, BorderLayout.WEST);
 				userLabel.setLabelFor(userField);
 				loginForm.add(userField);
-				
-				//Edit layout for cvc input prompt
+
+				// Add label for password
 				loginForm.add(passLabel, BorderLayout.WEST);
 				passLabel.setLabelFor(passField);
 				loginForm.add(passField);
-				
-				//Add the entire form to the frame
+
+				// Add the form containing the user name and password login
 				loginFrame.add(loginForm);
-				
-				//Fire changes
+
+				// Fire changes
 				loginFrame.revalidate();
 				loginForm.revalidate();
-				
+
+				// Set the buttons to be used for user name and password confirmation
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Login");
+
+				// Set the result of the user chosen option button to track if user tries to
+				// login
 				int res = JOptionPane.showConfirmDialog(null, loginForm, "Company Login", JOptionPane.OK_CANCEL_OPTION);
-				
-				
-				if(res == JOptionPane.OK_OPTION) {
+
+				// If the user input a user and password and pressed OK
+				if (res == JOptionPane.OK_OPTION) {
+
+					// Initialize the confirm option variables
 					String username = userField.getText();
 					String password = passField.getText();
 					Boolean loginComplete = false;
-					
+
 					try {
-						File file = new File("usersData.txt");   
+						// Initialize the files to parse current users from
+						File file = new File("usersData.txt");
 						FileInputStream fis = new FileInputStream(file);
 						Scanner scanner = new Scanner(file);
-
 						int r = 0;
 						String inputLine;
-						
-						while(scanner.hasNextLine() && !loginComplete) {
-							
+
+						// While there are more companies in the database to check vs the login info
+						while (scanner.hasNextLine() && !loginComplete) {
+
+							// Get next person
 							inputLine = scanner.nextLine();
-							
+
+							// Divide the person data from the file to compare
 							String[] checkPerson;
 							checkPerson = inputLine.split(",");
-							
-							if(checkPerson[0].equals(username) && checkPerson[1].equals(password) && checkPerson[2].equals("true")) {
+
+							// If the COMPANY login info is found and is valid, flag such true
+							if (checkPerson[0].equals(username) && checkPerson[1].equals(password)
+									&& checkPerson[2].equals("true")) {
 								loginComplete = true;
 							}
 						}
-					}
-					catch(Exception ex){  
+					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
-					
-					if(loginComplete) {
+
+					// If a valid COMPANY login was found while parsing
+					if (loginComplete) {
+
+						// Set a cart & wish list
 						File f = new File("resources/carts/" + username + "Cart.csv");
-						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, true, new ShoppingCart(), f);
-						
+						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, true,
+								new ShoppingCart(), f);
+
+						// Set the Nozama view and the frame to be displayed (COMPANY)
 						NozamaView.createAndShowGUI(true, c);
 						frame.setVisible(false);
 					}
+					// If the login was invalid, display such
 					else {
-						System.out.println("DISPLAY ERROR FOR INVALID LOGIN");
+						// Initialize the frame and invalid login message
+						JFrame invalidLogin = new JFrame("Login Failed");
+						JLabel invalidUserOrPassword = new JLabel("   Invalid Username or Password: Try again!");
+
+						// Frame altered to be configured as a checkout screen
+						invalidLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						invalidLogin.setPreferredSize(new Dimension(280, 70));
+						invalidLogin.pack();
+						invalidLogin.setLocationRelativeTo(null);
+
+						// Add the invalid login and set it to show
+						invalidLogin.add(invalidUserOrPassword);
+						invalidLogin.setVisible(true);
 					}
 				}
-			
-				//Validation check in command line
-				System.out.println("Login CLICKED");
 			}
 		});
-		
+
+		// Add the actual instance of the company button to the home view frame
 		frame.getContentPane().add(companyButton);
-		
+
+		// Create button to create a user if not already existed in system
 		JButton newUserButton = new JButton("Create Login");
 		newUserButton.setBounds(163, 200, 125, 29);
 		newUserButton.addMouseListener(new MouseAdapter() {
 			@Override
+
+			// If the create login button is pressed
 			public void mouseClicked(MouseEvent e) {
-				//TODO ADD LOGIN SCREEN BEFORE THIS
+
+				// Create frame and panel to add create login components
 				JFrame loginFrame = new JFrame("Create Login");
 				JPanel loginForm = new JPanel(new GridLayout(0, 1));
 				Boolean isCompany = null;
-				//loginFrame.setVisible(true);
-				//loginForm.setVisible(true);
-				
-				//Frame altered to be configured as a checkout screen
+
+				// Frame altered to be configured as a checkout screen
 				loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				loginFrame.setPreferredSize(new Dimension(240, 150));
 				loginFrame.pack();
 				loginFrame.setLocationRelativeTo(null);
-				
-				//Create Labels and Text fields for entering card info and cvc numbers
+
+				// Create Label/field for user name
 				JLabel userLabel = new JLabel("Enter Username: ");
 				JTextField userField = new JTextField();
 				userField.setSize(new Dimension(75, 30));
+
+				// Create Label/field for password
 				JLabel passLabel = new JLabel("Enter Password: ");
 				JTextField passField = new JTextField();
 				passField.setSize(new Dimension(75, 30));
+
+				// Create Label/field for re-enter password
 				JLabel validateLabel = new JLabel("Re-Enter Password: ");
 				JTextField validateField = new JTextField();
 				validateField.setSize(new Dimension(75, 30));
-				
-				//Edit layout for card input prompt
+
+				// Edit layout for user name input prompt
 				loginForm.add(userLabel, BorderLayout.WEST);
 				userLabel.setLabelFor(userField);
 				loginForm.add(userField);
-				
-				//Edit layout for cvc input prompt
+
+				// Edit layout for password input prompt
 				loginForm.add(passLabel, BorderLayout.WEST);
 				passLabel.setLabelFor(passField);
 				loginForm.add(passField);
-				
+
+				// Edit layout for password validate input prompt
 				loginForm.add(validateLabel, BorderLayout.WEST);
 				validateLabel.setLabelFor(validateField);
 				loginForm.add(validateField);
-				
+
+				// Create check box option for customer
 				JCheckBox customerCB = new JCheckBox("Customer");
 				customerCB.setSelected(true);
-				
+
+				// Create check box option for company
 				JCheckBox companyCB = new JCheckBox("Company");
+
+				// Listener for Customer
 				customerCB.addItemListener(new ItemListener() {
 					@Override
 					public void itemStateChanged(ItemEvent e) {
-						if(e.getStateChange() == 1) {
+
+						// Based on the chosen state, set the account to that type of account
+						if (e.getStateChange() == 1) {
 							companyCB.setSelected(false);
-						}
-						else if(e.getStateChange() == 2) {
+						} else if (e.getStateChange() == 2) {
 							companyCB.setSelected(true);
 						}
 					}
-					
+
 				});
+
+				// Listener for Company
 				companyCB.addItemListener(new ItemListener() {
 					@Override
 					public void itemStateChanged(ItemEvent e) {
-						if(e.getStateChange() == 1) {
+
+						// Based on the chosen state, set the account to that type of account
+						if (e.getStateChange() == 1) {
 							customerCB.setSelected(false);
-						}
-						else if(e.getStateChange() == 2) {
+						} else if (e.getStateChange() == 2) {
 							customerCB.setSelected(true);
 						}
 					}
-					
+
 				});
+
+				// Add the customer and company checkboxs
 				loginForm.add(customerCB);
 				loginForm.add(companyCB);
-				
-				//Add the entire form to the frame
+
+				// Add the entire form to the frame
 				loginFrame.add(loginForm);
-				
-				//Fire changes
+
+				// Fire changes
 				loginFrame.revalidate();
 				loginForm.revalidate();
-				
+
+				// Set the buttons to be used for user name and password confirmation
 				UIManager.put("OptionPane.cancelButtonText", "Cancel");
 				UIManager.put("OptionPane.okButtonText", "Create Login");
-				int res = JOptionPane.showConfirmDialog(null, loginForm, "Create New Login", JOptionPane.OK_CANCEL_OPTION);
-				if(res == JOptionPane.OK_OPTION) {
-					if(customerCB.isSelected()) {
+
+				// Set the result of the user chosen option button to track if user tries to
+				// login
+				int res = JOptionPane.showConfirmDialog(null, loginForm, "Create New Login",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				// If the OK Option is pressed
+				if (res == JOptionPane.OK_OPTION) {
+
+					// Set company state to open valid Nozama view
+					if (customerCB.isSelected()) {
 						isCompany = false;
-					}
-					else {
+					} else {
 						isCompany = true;
 					}
-					
-					if(passField.getText().equals(validateField.getText())) {
+
+					// If both passwords matched correctly, set login to finished
+					if (passField.getText().equals(validateField.getText())) {
+
+						// Create string to be added to valid list of logins
 						String str = userField.getText() + "," + passField.getText() + ",";
-						if(isCompany) {
+
+						// Set comapny state string to add
+						if (isCompany) {
 							str += "true";
-						}
-						else {
+						} else {
 							str += "false";
 						}
 						str += '\n';
+
 						try {
-							File file = new File("usersData.txt");   
+
+							// Initialize file variables & parse variables
+							File file = new File("usersData.txt");
 							BufferedReader inputData = new BufferedReader(new FileReader(file));
 							FileOutputStream outputData = new FileOutputStream(file, true);
 							String line;
 							String userName = userField.getText();
 							boolean isValid = true;
-							
-							while(((line = inputData.readLine()) != null) && isValid) {
+
+							// Make sure new login doesn't already exist
+							while (((line = inputData.readLine()) != null) && isValid) {
 								String[] split = line.split(",");
-								if(split[0].equals(userName)) {
+								if (split[0].equals(userName)) {
 									isValid = false;
 								}
 							}
+
+							// Close file after parse
 							inputData.close();
-							
-							if(isValid) {
+
+							if (isValid) {
+								// Write the login info to the file
 								outputData.write(str.getBytes());
-								
+
+								// Set cart
 								String cartName = "resources/carts/" + userName + "Cart.csv";
 								File myCart = new File(cartName);
 								myCart.createNewFile();
-								
+
+								// Set wish list
 								String wishlistName = "resources/wishlists/" + userName + "Wishlist.csv";
 								File myWishList = new File(wishlistName);
 								myWishList.createNewFile();
-								
-								
+
 							}
+
+							// Close the same file with the saved login
 							outputData.close();
-						}
-						catch(Exception ex){  
+						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
 					}
-					
+
 				}
 			}
 		});
+
+		// Add the actual instance of the create login button to the frame
 		frame.getContentPane().add(newUserButton);
-		
+
+		// Add Text Login to the frame for readability
 		JLabel lblNewLabel_1 = new JLabel("LOGIN");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(163, 66, 125, 29);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
+		// Add Text Form to the frame for readability
 		JLabel lblNewLabel_2 = new JLabel("Form");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(195, 90, 61, 16);
-		frame.getContentPane().add(lblNewLabel_2);	
+		frame.getContentPane().add(lblNewLabel_2);
 	}
 }

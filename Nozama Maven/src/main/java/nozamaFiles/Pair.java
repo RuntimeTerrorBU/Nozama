@@ -3,7 +3,7 @@ package nozamaFiles;
 public class Pair<T1, T2> {
 	public T1 first;
 	public T2 second;
-	
+
 	public Pair(T1 first, T2 second) {
 		this.first = first;
 		this.second = second;
@@ -26,7 +26,7 @@ public class Pair<T1, T2> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pair other = (Pair) obj;
+		Pair<?, ?> other = (Pair<?, ?>) obj;
 		if (first == null) {
 			if (other.first != null)
 				return false;
