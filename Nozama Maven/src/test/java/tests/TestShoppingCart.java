@@ -1,4 +1,6 @@
+package tests;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -84,6 +86,7 @@ public class TestShoppingCart {
 		sc.addItemToCart(new Item("6"), 60);
 		
 		// see if they are equal
-		assertEquals(sc2, sc);
+		System.out.println(sc.equals(sc2));
+		assertTrue(sc.equals(sc2));
 	}
 }
