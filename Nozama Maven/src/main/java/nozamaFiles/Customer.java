@@ -23,7 +23,6 @@ public class Customer {
 		this.password = password;
 		this.shippingAddress = shippingAddress;
 		this.customerID = customerID;
-		this.wishlist = wishlist;
 		this.customerInformation = customerInformation;
 		this.isCompany = isCompany;
 		//this.customerCart = customerCart;
@@ -37,6 +36,14 @@ public class Customer {
 			this.cartFile = f;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.wishlist = new ShoppingCart();
+		try {
+			File f = new File("resources/carts/" + username + "Wishlist.csv");
+			this.wishlist.loadCart(f);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -201,6 +208,12 @@ public class Customer {
 			this.cartFile = f;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			File f = new File("resources/carts/" + username + "Wishlist.csv");
+			this.wishlist.loadCart(f);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

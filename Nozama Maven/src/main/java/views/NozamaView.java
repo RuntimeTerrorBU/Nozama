@@ -436,6 +436,9 @@ public class NozamaView {
 				form2.add(quantityLbl);
 				form2.add(qTextField);
 				
+				UIManager.put("OptionPane.cancelButtonText", "Cancel");
+				UIManager.put("OptionPane.okButtonText", "Add Item");
+				
 				int res = JOptionPane.showConfirmDialog(null, form2, "Add Item To Wishlist", JOptionPane.OK_CANCEL_OPTION);
 				if(res == JOptionPane.OK_OPTION) {
 					Item toAdd = new Item((String)nm.getValueAt(modelRow, 3));
