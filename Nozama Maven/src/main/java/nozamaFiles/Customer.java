@@ -52,7 +52,7 @@ public class Customer {
 		
 		this.wishlist = new ShoppingCart();
 		try {
-			File f = new File("resources/carts/" + username + "Wishlist.csv");
+			File f = new File("resources/wishlists/" + username + "Wishlist.csv");
 			this.wishlist.loadCart(f);
 		} catch (IOException e) {
 			e.printStackTrace();
