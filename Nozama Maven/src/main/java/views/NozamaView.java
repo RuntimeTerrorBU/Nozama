@@ -205,6 +205,12 @@ public class NozamaView {
 			}
 		});
 		
+		GridBagConstraints gbc_cartButton = new GridBagConstraints();
+		gbc_cartButton.insets = new Insets(0, 0, 5, 0);
+		gbc_cartButton.gridx = 13;
+		gbc_cartButton.gridy = 7;
+		panel.add(cartButton, gbc_cartButton);
+		
 		// add wishlist button
 		JButton wishlistButton = new JButton("Show Wishlist");
 		wishlistButton.addMouseListener(new MouseAdapter() {
@@ -222,12 +228,6 @@ public class NozamaView {
 		panel.add(wishlistButton, gbc_wishlistButton);
 
 		if(managementState) {
-			
-			GridBagConstraints gbc_cartButton = new GridBagConstraints();
-			gbc_cartButton.insets = new Insets(0, 0, 5, 0);
-			gbc_cartButton.gridx = 13;
-			gbc_cartButton.gridy = 7;
-			panel.add(cartButton, gbc_cartButton);
 			 
 			JButton reportButton = new JButton("Generate Report");
 				reportButton.addMouseListener(new MouseAdapter() {
