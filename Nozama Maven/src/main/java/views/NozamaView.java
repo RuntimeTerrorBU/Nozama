@@ -221,7 +221,7 @@ public class NozamaView {
 		gbc_wishlistButton.gridy = 8;
 		panel.add(wishlistButton, gbc_wishlistButton);
 		
-		JButton deleteProductDBButton = new JButton("Delete Product from Database");
+		JButton deleteProductDBButton = new JButton("Delete Product DB");
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -233,7 +233,7 @@ public class NozamaView {
 		if(managementState) {
 			GridBagConstraints gbc_deleteProductDBButton = new GridBagConstraints();
 			gbc_deleteProductDBButton.insets = new Insets(0, 0, 5, 0);
-			gbc_deleteProductDBButton.gridx = 1;
+			gbc_deleteProductDBButton.gridx = 2;
 			gbc_deleteProductDBButton.gridy = 8;
 			panel.add(deleteProductDBButton, gbc_deleteProductDBButton);
 			
@@ -249,12 +249,12 @@ public class NozamaView {
 
 			GridBagConstraints gbc_restockButton = new GridBagConstraints();
 			gbc_restockButton.insets = new Insets(0, 0, 5, 0);
-			gbc_restockButton.gridx = 2;
+			gbc_restockButton.gridx = 3;
 			gbc_restockButton.gridy = 8;
 			panel.add(restockButton, gbc_restockButton);
 			
 			// add add product button
-			JButton addProductButton = new JButton("Add Product");
+			JButton addProductButton = new JButton("Add Product DB");
 			addProductButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -333,8 +333,8 @@ public class NozamaView {
 			
 			GridBagConstraints gbc_addProductButton = new GridBagConstraints();
 			gbc_addProductButton.insets = new Insets(0, 0, 5, 0);
-			gbc_addProductButton.gridx = 13;
-			gbc_addProductButton.gridy = 9;
+			gbc_addProductButton.gridx = 1;
+			gbc_addProductButton.gridy = 8;
 			panel.add(addProductButton, gbc_addProductButton);
 		
 		}
