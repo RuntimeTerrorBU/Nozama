@@ -1,23 +1,4 @@
- package views;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JPanel;
-import java.awt.GridBagConstraints;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -46,6 +27,25 @@ import nozamaFiles.ItemSpecification;
 import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
 
 /**
  * The NozamaView class creates the main store page of Nozama
@@ -505,19 +505,27 @@ public class NozamaView {
 					itemIDField.setSize(new Dimension(75, 30));
 					quantityField.setSize(new Dimension(75, 30));
 
-					// Set the labels and add them
+					// Set name label
 					panel.add(nameLabel);
 					nameLabel.setLabelFor(nameField);
 					panel.add(nameField);
+
+					// Set description label
 					panel.add(descriptionLabel);
 					descriptionLabel.setLabelFor(descriptionField);
 					panel.add(descriptionField);
+
+					// Set price label
 					panel.add(priceLabel);
 					priceLabel.setLabelFor(priceField);
 					panel.add(priceField);
+
+					// Set itemID label
 					panel.add(itemIDLabel);
 					itemIDLabel.setLabelFor(itemIDField);
 					panel.add(itemIDField);
+
+					// Set quantity label
 					panel.add(quantityLabel);
 					quantityLabel.setLabelFor(quantityField);
 					panel.add(quantityField);
