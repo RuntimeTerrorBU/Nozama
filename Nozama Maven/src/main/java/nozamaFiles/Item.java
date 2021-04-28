@@ -14,7 +14,7 @@ public class Item {
 	/**
 	 * Item constructor
 	 * 
-	 * @param string representing the id of the item
+	 * @param itemID, String representing the id of the item
 	 */
 	public Item(String itemID) {
 		super();
@@ -24,7 +24,7 @@ public class Item {
 	/**
 	 * Get the item's id number
 	 *
-	 * @return string representing the item's id
+	 * @return String representing the item's id
 	 */
 	public String getItemID() {
 		return itemID;
@@ -33,8 +33,7 @@ public class Item {
 	/**
 	 * Set the item's id number
 	 *
-	 * @param string representing the item's id
-	 * @return void
+	 * @param itemID, String representing the item's id
 	 */
 	public void setItemID(String itemID) {
 		this.itemID = itemID;
@@ -44,7 +43,7 @@ public class Item {
 	/**
 	 * Creates a specific mapping to a value
 	 *
-	 * @return integer hashed value of the input value
+	 * @return int hashed value of the input value
 	 */
 	public int hashCode() {
 		final int prime = 31;
@@ -57,8 +56,8 @@ public class Item {
 	/**
 	 * Tells if two objects are equal
 	 *
-	 * @param object to compare to the object being used
-	 * @return true if the two objects are equal, false otherwise
+	 * @param obj, Object to compare to the object being used
+	 * @return boolean, true if the two objects are equal, false otherwise
 	 */
 	public boolean equals(Object obj) {
 		if (this == obj)

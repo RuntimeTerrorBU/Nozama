@@ -13,8 +13,8 @@ public class Store {
 	/**
 	 * Store constructor
 	 * 
-	 * @param string representing the name of the store
-	 * @param string representing the url of the store
+	 * @param n, string representing the name of the store
+	 * @param u, string representing the url of the store
 	 */
 	public Store(String n, String u) {
 		super();
@@ -34,8 +34,7 @@ public class Store {
 	/**
 	 * Set the url of the store
 	 *
-	 * @param String representing the url of the store
-	 * @return void
+	 * @param u, String representing the url of the store
 	 */
 	public void setUrl(String u) {
 		this.url = u;
@@ -53,8 +52,7 @@ public class Store {
 	/**
 	 * Set the name of the store
 	 *
-	 * @param String representing the name of the store
-	 * @return void
+	 * @param n, String representing the name of the store
 	 */
 	public void setName(String n) {
 		this.name = n;

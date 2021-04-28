@@ -28,15 +28,16 @@ public class Customer {
 	/**
 	 * Create the Customer using the information of the user
 	 * 
-	 * @param String representing username passed by the new Customer
-	 * @param String representing password passed by the new Customer
-	 * @param String representing shipping address of the new Customer
-	 * @param int representing the customer ID set to a custom ID for each customer
-	 * @param ShoppingCart representing the wishlist for each user
-	 * @param map filled with the customer information
-	 * @param boolean to check if the Customer is also a Company member
-	 * @param shoppingCart filled with items the Customer has in their cart
-	 * @param file filled with the items stored in the Customer's cart
+	 * @param username, String representing username passed by the new Customer
+	 * @param password, String representing password passed by the new Customer
+	 * @param shippingAddress, String representing shipping address of the new Customer
+	 * @param customerID, int representing the customer ID set to a custom ID for each customer
+	 * @param wishlist, ShoppingCart representing the wishlist for each user
+	 * @param customerInformation, Map filled with the customer information
+	 * @param isCompany, Boolean to check if the Customer is also a Company member
+	 * @param customerCartShoppingCart filled with items the Customer has in their cart
+	 * @param cartFile, File filled with the items stored in the Customer's cart
+	 * @throws IOException if the customer information files cannot be opened
 	 */
 	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist,
 			Map<String, String> customerInformation, Boolean isCompany, ShoppingCart customerCart, File cartFile) {
@@ -79,7 +80,7 @@ public class Customer {
 	/**
 	 * Check if the Customer is also a Company member
 	 *
-	 * @return true if the Customer is also a Company member, false otherwise
+	 * @return Boolean, true if the Customer is also a Company member, false otherwise
 	 */
 	public Boolean getIsCompany() {
 		return isCompany;
@@ -88,8 +89,7 @@ public class Customer {
 	/**
 	 * Set the Company status of a Customer
 	 *
-	 * @param true if the Customer is a company member, false otherwise
-	 * @return void
+	 * @param Boolean, true if the Customer is a company member, false otherwise
 	 */
 	public void setIsCompany(Boolean b) {
 		this.isCompany = b;
@@ -98,7 +98,7 @@ public class Customer {
 	/**
 	 * Get the customer's username
 	 *
-	 * @return string representing the customer's username
+	 * @return String representing the customer's username
 	 */
 	public String getUsername() {
 		return username;
@@ -107,8 +107,7 @@ public class Customer {
 	/**
 	 * Set the username of a customer
 	 *
-	 * @param string representing the username to be used for the customer
-	 * @return void
+	 * @param username, String representing the username to be used for the customer
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -117,7 +116,7 @@ public class Customer {
 	/**
 	 * Get the customer's password
 	 *
-	 * @return string representing the customer's password
+	 * @return String representing the customer's password
 	 */
 	public String getPassword() {
 		return password;
@@ -126,8 +125,7 @@ public class Customer {
 	/**
 	 * Set the password of a customer
 	 *
-	 * @param string representing the password to be used for the customer
-	 * @return void
+	 * @param password, String representing the password to be used for the customer
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -136,7 +134,7 @@ public class Customer {
 	/**
 	 * Get the customer's shipping address
 	 *
-	 * @return string representing the customer's shipping address
+	 * @return String representing the customer's shipping address
 	 */
 	public String getShippingAddress() {
 		return shippingAddress;
@@ -145,8 +143,7 @@ public class Customer {
 	/**
 	 * Set the shipping address of a customer
 	 *
-	 * @param string representing the shipping address to be used for the customer
-	 * @return void
+	 * @param shippingAddress, String representing the shipping address to be used for the customer
 	 */
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
@@ -155,7 +152,7 @@ public class Customer {
 	/**
 	 * Get the customer's id number
 	 *
-	 * @return integer representing the customer's id number
+	 * @return int representing the customer's id number
 	 */
 	public int getCustomerID() {
 		return customerID;
@@ -173,8 +170,7 @@ public class Customer {
 	/**
 	 * Set the wishlist of a customer
 	 *
-	 * @param ShoppingCart representing the wishlist to be used by the customer
-	 * @return void
+	 * @param wishlist, ShoppingCart representing the wishlist to be used by the customer
 	 */
 	public void setWishlist(ShoppingCart wishlist) {
 		this.wishlist = wishlist;
@@ -183,7 +179,7 @@ public class Customer {
 	/**
 	 * Get the information of the customer
 	 *
-	 * @return map filled with usernames and passwords
+	 * @return Map filled with usernames and passwords
 	 */
 	public Map<String, String> getCustomerInformation() {
 		return this.customerInformation;
@@ -192,8 +188,7 @@ public class Customer {
 	/**
 	 * Set the customer information of a customer
 	 *
-	 * @param Map filled with username and passwords representing the customers
-	 * @return void
+	 * @param customerInformation, Map filled with username and passwords representing the customers
 	 */
 	public void setCustomerInformation(Map<String, String> customerInformation) {
 		this.customerInformation = customerInformation;
@@ -211,8 +206,7 @@ public class Customer {
 	/**
 	 * Set the shopping cart of a customer
 	 *
-	 * @param ShoppingCart representing the shopping cart to be used by the customer
-	 * @return void
+	 * @param customerCart, ShoppingCart representing the shopping cart to be used by the customer
 	 */
 	public void setCustomerCart(ShoppingCart customerCart) {
 		this.customerCart = customerCart;
@@ -221,7 +215,7 @@ public class Customer {
 	/**
 	 * Get the file of the shopping cart
 	 *
-	 * @return file filled with the information of the customer's shopping cart
+	 * @return File filled with the information of the customer's shopping cart
 	 */
 	public File getCartFile() {
 		return cartFile;
@@ -230,8 +224,7 @@ public class Customer {
 	/**
 	 * Set the shopping cart file of a customer
 	 *
-	 * @param file representing the shopping cart file to be used by the customer
-	 * @return void
+	 * @param cartFile, File representing the shopping cart file to be used by the customer
 	 */
 	public void setCartFile(File cartFile) {
 		this.cartFile = cartFile;
@@ -240,9 +233,9 @@ public class Customer {
 	/**
 	 * Allows the user to login to Nozama using the username and password they created
 	 *
-	 * @param string representing the username of the customer trying to login
-	 * @param string representing the password of the customer trying to login
-	 * @return true if the customer can login, false otherwise
+	 * @param username, String representing the username of the customer trying to login
+	 * @param password, String representing the password of the customer trying to login
+	 * @return boolean, true if the customer can login, false otherwise
 	 */
 	public boolean login(String username, String password) {
 		boolean toReturn = false;
@@ -258,7 +251,7 @@ public class Customer {
 	/**
 	 * Creates a specific mapping to a value
 	 *
-	 * @return integer hashed value of the input value
+	 * @return int hashed value of the input value
 	 */
 	public int hashCode() {
 		final int prime = 31;
@@ -277,8 +270,8 @@ public class Customer {
 	/**
 	 * Tells if two objects are equal
 	 *
-	 * @param object to compare to the object being used
-	 * @return true if the two objects are equal, false otherwise
+	 * @param obj, Object to compare to the object being used
+	 * @return boolean, true if the two objects are equal, false otherwise
 	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -326,11 +319,11 @@ public class Customer {
 	/**
 	 * Create the Customer using the information of the user
 	 * 
-	 * @param username passed by the new Customer
-	 * @param password passed by the new Customer
-	 * @param shipping address of the new Customer
-	 * @param customer ID set to a custom ID for each customer
-	 * @param wishlist for each user
+	 * @param username, String passed by the new Customer
+	 * @param password, String passed by the new Customer
+	 * @param shippingAddress, String passed by the new Customer
+	 * @param customerID, int set to a custom ID for each customer
+	 * @param wishlist, ShoppingCart wishlist for each user
 	 * @throws IOException if the file cannot be created
 	 */
 	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist) {
@@ -368,7 +361,7 @@ public class Customer {
 	/**
 	 * Displays all information of a Customer object
 	 *
-	 * @return string filled with the Customer information
+	 * @return String filled with the Customer information
 	 */
 	public String toString() {
 		return "Customer [username=" + username + ", password=" + password + ", shippingAddress=" + shippingAddress

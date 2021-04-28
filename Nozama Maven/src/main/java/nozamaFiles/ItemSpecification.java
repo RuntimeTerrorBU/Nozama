@@ -18,11 +18,11 @@ public class ItemSpecification {
 	/**
 	 * Create the ItemSpecification using the information entered the user
 	 * 
-	 * @param string representing the name of the item
-	 * @param string representing the description of the item
-	 * @param double representing the price of the item
-	 * @param string representing the id of the item
-	 * @param integer representing the quantity of the item
+	 * @param name, String representing the name of the item
+	 * @param description, String representing the description of the item
+	 * @param price, Double representing the price of the item
+	 * @param itemID, String representing the id of the item
+	 * @param quantity, Integer representing the quantity of the item
 	 */
 	public ItemSpecification(String name, String description, Double price, String itemID, Integer quantity) {
 		super();
@@ -36,7 +36,7 @@ public class ItemSpecification {
 	/**
 	 * Get the item's name
 	 *
-	 * @return string representing the itme's name
+	 * @return String representing the itme's name
 	 */
 	public String getName() {
 		return name;
@@ -45,8 +45,7 @@ public class ItemSpecification {
 	/**
 	 * Set the item's name
 	 *
-	 * @param string representing the itme's name to be set
-	 * @return void
+	 * @param name, String representing the itme's name to be set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -55,7 +54,7 @@ public class ItemSpecification {
 	/**
 	 * Get the item's description
 	 *
-	 * @return string representing the itme's description
+	 * @return String representing the itme's description
 	 */
 	public String getDescription() {
 		return description;
@@ -64,8 +63,7 @@ public class ItemSpecification {
 	/**
 	 * Set the item's description
 	 *
-	 * @param string representing the itme's description to be set
-	 * @return void
+	 * @param description, String representing the itme's description to be set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -74,7 +72,7 @@ public class ItemSpecification {
 	/**
 	 * Get the item's price
 	 *
-	 * @return double representing the itme's price
+	 * @return Double representing the itme's price
 	 */
 	public Double getPrice() {
 		return price;
@@ -83,8 +81,7 @@ public class ItemSpecification {
 	/**
 	 * Set the item's price
 	 *
-	 * @param double representing the itme's price to be set
-	 * @return void
+	 * @param price, Double representing the itme's price to be set
 	 */
 	public void setPrice(Double price) {
 		this.price = price;
@@ -93,7 +90,7 @@ public class ItemSpecification {
 	/**
 	 * Get the itmems's id
 	 *
-	 * @return string representing the items's id
+	 * @return String representing the items's id
 	 */
 	public String getItemID() {
 		return itemID;
@@ -102,8 +99,7 @@ public class ItemSpecification {
 	/**
 	 * Set the item's id
 	 *
-	 * @param string representing the itme's id to be set
-	 * @return void
+	 * @param itemID, String representing the itme's id to be set
 	 */
 	public void setItemID(String itemID) {
 		this.itemID = itemID;
@@ -112,7 +108,7 @@ public class ItemSpecification {
 	/**
 	 * Get the itmems's quantity
 	 *
-	 * @return integer representing the items's quantity
+	 * @return Integer representing the items's quantity
 	 */
 	public Integer getQuantity() {
 		return quantity;
@@ -121,8 +117,7 @@ public class ItemSpecification {
 	/**
 	 * Set the item's quantity
 	 *
-	 * @param integer representing the itme's quantity to be set
-	 * @return void
+	 * @param quantity, Integer representing the itme's quantity to be set
 	 */
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
@@ -132,7 +127,7 @@ public class ItemSpecification {
 	/**
 	 * Creates a specific mapping to a value
 	 *
-	 * @return integer hashed value of the input value
+	 * @return int hashed value of the input value
 	 */
 	public int hashCode() {
 		final int prime = 31;
@@ -149,8 +144,8 @@ public class ItemSpecification {
 	/**
 	 * Tells if two objects are equal
 	 *
-	 * @param object to compare to the object being used
-	 * @return true if the two objects are equal, false otherwise
+	 * @param obj, Object to compare to the object being used
+	 * @return boolean. true if the two objects are equal, false otherwise
 	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -193,9 +188,9 @@ public class ItemSpecification {
 		/**
 		 * Compare two ItemSpecifications
 		 *
-		 * @param ItemSpecification to compare to the other parameter
-		 * @param ItemSpecification to compare to the other parameter
-		 * @return integer representing the comparison between the two ItemSpecifications
+		 * @param o1, ItemSpecification to compare to the other parameter
+		 * @param 02, ItemSpecification to compare to the other parameter
+		 * @return int representing the comparison between the two ItemSpecifications
 		 */
 		public int compare(ItemSpecification o1, ItemSpecification o2) {
 			return o1.getItemID().compareTo(o2.getItemID());

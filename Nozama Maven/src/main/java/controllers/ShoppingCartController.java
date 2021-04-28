@@ -39,7 +39,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the row count
 	 *
-	 * @return integer representing the row count
+	 * @return int representing the row count
 	 */
 	public int getRowCount() {
 		// TODO Auto-generated method stub
@@ -50,7 +50,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the column count
 	 *
-	 * @return integer representing the column count
+	 * @return int representing the column count
 	 */
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -61,8 +61,8 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the name of the column
 	 *
-	 * @param integer representing the column index
-	 * @return string representing the name of the column
+	 * @param col, int representing the column index
+	 * @return String representing the name of the column
 	 */
 	public String getColumnName(int col) {
 		return columnNames[col];
@@ -72,9 +72,9 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the value at a certain index of the table
 	 *
-	 * @param integer representing the row to look at
-	 * @param integer representing the column to look at
-	 * @return the object data found at that index
+	 * @param row, int representing the row to look at
+	 * @param col, int representing the column to look at
+	 * @return Object found at that index
 	 */
 	public Object getValueAt(int row, int col) {
 		return data.get(row)[col];
@@ -83,8 +83,8 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the Class found at the column passed
 	 *
-	 * @param integer representing the column to use to find the class
-	 * @return the Class found 
+	 * @param c, int representing the column to use to find the class
+	 * @return Class found at the column
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Class getColumnClass(int c) {
@@ -94,7 +94,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the cart held by a customer
 	 *
-	 * @return the ShoppingCart of the customer
+	 * @return ShoppingCart of the customer
 	 */
 	public ShoppingCart getCart() {
 		dataToCart();
@@ -104,7 +104,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Set the customer for their cart
 	 *
-	 * @return customer to set is cart to
+	 * @return c, Customer to set cart to
 	 */
 	public void setCustomer(Customer c) {
 		this.c = c;
@@ -124,9 +124,9 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Check if the cell of the table is editable
 	 *
-	 * @param integer representing the row of the table
-	 * @param integer representing the column of the table
-	 * @return true if the cell is editable, false otherwise
+	 * @param row, int representing the row of the table
+	 * @param col, int representing the column of the table
+	 * @return boolean, true if the cell is editable, false otherwise
 	 */
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;
@@ -135,10 +135,9 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Set the value at the specific row and column asked for by the user
 	 *
-	 * @param value to put into the data table
-	 * @param row to set the value into
-	 * @param column to set the value
-	 * @return void
+	 * @param value, Object to put into the data table
+	 * @param row, int to set the value into
+	 * @param col, int to set the value
 	 */
 	public void setValueAt(Object value, int row, int col) {
 		data.get(row)[col] = value;
@@ -149,7 +148,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Get the subtotal of the items in the cart
 	 * 
-	 * @return double representing the subtotal of the cart
+	 * @return Double representing the subtotal of the cart
 	 */
 	public Double getSubtotal() {
 		return c.getCustomerCart().getSubtotal();
@@ -167,7 +166,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Set the information of the Customer into a customer file
 	 * 
-	 * @param file filled with customer information
+	 * @param f, File filled with customer information
 	 */
 	public void setCustomerFile(File f) {
 		customerFile = f;
@@ -214,7 +213,7 @@ public class ShoppingCartController extends AbstractTableModel {
 	/**
 	 * Remove a row from the data table
 	 * 
-	 * @param row number to remove
+	 * @param modelRow, int number of row to remove
 	 */
 	public void removeRow(int modelRow) {
 		// TODO Auto-generated method stub

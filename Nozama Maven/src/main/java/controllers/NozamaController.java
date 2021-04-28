@@ -26,7 +26,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Create the NozamaController which will create the store page
 	 *
-	 * @param Customer who the page is created for
+	 * @param c, Customer who the page is created for
 	 */
 	public NozamaController(Customer c) {
 		data = new ArrayList<Object[]>();
@@ -41,7 +41,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Get the row count
 	 *
-	 * @return integer representing the row count
+	 * @return int representing the row count
 	 */
 	public int getRowCount() {
 		// TODO Auto-generated method stub
@@ -52,7 +52,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Get the column count
 	 *
-	 * @return integer representing the column count
+	 * @return int representing the column count
 	 */
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -63,9 +63,9 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Get the value at a certain index of the table
 	 *
-	 * @param integer representing the row to look at
-	 * @param integer representing the column to look at
-	 * @return the object data found at that index
+	 * @param rowIndex, int representing the row to look at
+	 * @param columnIndex, int representing the column to look at
+	 * @return Object data found at that index
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
@@ -74,8 +74,8 @@ public class NozamaController extends AbstractTableModel {
 
 	/**
 	 * Load the data of the store into the store page
-	 *
-	 * @return void
+	 * 
+	 * @throws IOException if the testCatalog file cannot be loaded
 	 */
 	public void loadData() {
 
@@ -102,8 +102,6 @@ public class NozamaController extends AbstractTableModel {
 
 	/**
 	 * Update the store page to add new items to cart and wishlist
-	 *
-	 * @return void
 	 */
 	public void update() {
 		data = new ArrayList<Object[]>();
@@ -122,8 +120,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Load the cart held by a customer
 	 *
-	 * @param file used to load a customer cart
-	 * @return void
+	 * @param f, File used to load a customer cart
 	 */
 	public void loadCart(File f) {
 		try {
@@ -136,7 +133,7 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Get the cart held by a customer
 	 *
-	 * @return the ShoppingCart of the customer
+	 * @return ShoppingCart of the customer
 	 */
 	public ShoppingCart getCart() {
 		return c.getCustomerCart();
@@ -145,9 +142,9 @@ public class NozamaController extends AbstractTableModel {
 	/**
 	 * Check if the cell of the table is editable
 	 *
-	 * @param integer representing the row of the table
-	 * @param integer representing the column of the table
-	 * @return true if the cell is editable, false otherwise
+	 * @param row, int representing the row of the table
+	 * @param col, int representing the column of the table
+	 * @return boolean, true if the cell is editable, false otherwise
 	 */
 	public boolean isCellEditable(int row, int col) {
 		return col > 1;

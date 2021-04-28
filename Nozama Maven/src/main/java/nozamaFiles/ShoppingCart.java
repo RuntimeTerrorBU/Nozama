@@ -29,8 +29,8 @@ public class ShoppingCart {
 	/**
 	 * Create the ShoppingCart item for a Customer
 	 * 
-	 * @param List of items and the amount of the item to store as a cart
-	 * @param double representing the total amount (in dollars) of the items in the cart
+	 * @param cart, List of items and the amount of the item to store as a cart
+	 * @param subtotal, Double representing the total amount (in dollars) of the items in the cart
 	 */
 	public ShoppingCart(List<Pair<Item, Integer>> cart, Double subtotal) {
 		super();
@@ -50,8 +50,7 @@ public class ShoppingCart {
 	/**
 	 * Set the shopping cart
 	 *
-	 * @param List of pairs of items and amounts representing the shopping cart
-	 * @return void
+	 * @param cart, List of pairs of items and amounts representing the shopping cart
 	 */
 	public void setCart(List<Pair<Item, Integer>> cart) {
 		this.cart = cart;
@@ -60,7 +59,7 @@ public class ShoppingCart {
 	/**
 	 * Get the shopping cart subtotal
 	 *
-	 * @return double representing the subtotal of the items in the cart
+	 * @return Double representing the subtotal of the items in the cart
 	 */
 	public Double getSubtotal() {
 		return subtotal;
@@ -69,8 +68,7 @@ public class ShoppingCart {
 	/**
 	 * Set the subtotal of the shopping cart
 	 *
-	 * @param double representing the subtotal of the items in the cart
-	 * @return void
+	 * @param subtotal, Double representing the subtotal of the items in the cart
 	 */
 	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
@@ -79,9 +77,8 @@ public class ShoppingCart {
 	/**
 	 * Add an item to the shopping cart
 	 *
-	 * @param Item representing the item to be added to the cart
-	 * @param Integer representing the quantity of the item to be added
-	 * @return void
+	 * @param item, Item representing the item to be added to the cart
+	 * @param quantity, Integer representing the quantity of the item to be added
 	 */
 	public void addItemToCart(Item item, Integer quantity) {
 		boolean alreadyInCart = false;
@@ -105,9 +102,9 @@ public class ShoppingCart {
 	/**
 	 * Remove an item to the shopping cart
 	 *
-	 * @param Item representing the item to be removed from the cart
-	 * @param Integer representing the quantity of the item to be removed
-	 * @return void
+	 * @param item, Item representing the item to be removed from the cart
+	 * @param quantitiy, Integer representing the quantity of the item to be removed
+	 * 
 	 */
 	public void removeItemFromCart(Item item, Integer quantity) {
 		Double itemPrice = 0.0;
@@ -133,9 +130,8 @@ public class ShoppingCart {
 	/**
 	 * Load the data into Shopping Cart
 	 * 
-	 * @param File to load the data into a shopping cart
+	 * @param file, File to load the data into a shopping cart
 	 * @throws IOException if the file is not able to be used
-	 * @return void
 	 */
 	public void loadCart(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));

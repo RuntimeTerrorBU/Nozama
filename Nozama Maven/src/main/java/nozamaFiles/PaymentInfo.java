@@ -34,9 +34,9 @@ public class PaymentInfo {
 	/**
 	 * PaymentInfo constructor to be made with user inputted information
 	 * 
-	 * @param string representing the card number
-	 * @param string representing the cvc number
-	 * @param string representing the billing address
+	 * @param cn, String representing the card number
+	 * @param c, String representing the cvc number
+	 * @param ba, String representing the billing address
 	 */
 	public PaymentInfo(String cn, String c, String ba) {
 		if(validateCardInfo(cn, c)) {
@@ -61,9 +61,9 @@ public class PaymentInfo {
 	/**
 	 * Check if the payment information is valid
 	 * 
-	 * @param string representing the card number
-	 * @param string representing the cvc number
-	 * @return true if the card info is valid, false otherwise
+	 * @param cn, String representing the card number
+	 * @param c, String representing the cvc number
+	 * @return Boolean, true if the card info is valid, false otherwise
 	 */
 	public Boolean validateCardInfo(String cn, String c) {
 		Boolean toReturn = false;
@@ -127,8 +127,7 @@ public class PaymentInfo {
 	/**
 	 * Set the card number
 	 * 
-	 * @param String representing the card number
-	 * @return void
+	 * @param cn, String representing the card number
 	 */
 	public void setCardNumber(String cn) {
 		if(cn.length() == VALID_CARD_NUMBER) {
@@ -147,7 +146,7 @@ public class PaymentInfo {
 	/**
 	 * Get the card cvc number
 	 * 
-	 * @return String representing the cardcvc  number
+	 * @return String representing the cardcvc number
 	 */
 	public String getCvc() {
 		return cvc;
@@ -156,8 +155,7 @@ public class PaymentInfo {
 	/**
 	 * Set the card cvc number
 	 * 
-	 * @param String representing the card cvc number
-	 * @return void
+	 * @param c, String representing the card cvc number
 	 */
 	public void setCvc(String c) {
 		if(c.length() == VALID_CVC_NUMBER) {
@@ -177,8 +175,7 @@ public class PaymentInfo {
 	/**
 	 * Set the billing address
 	 * 
-	 * @param String representing the billing address
-	 * @return void
+	 * @param ba, String representing the billing address
 	 */
 	public void setBillingAddress(String ba) {
 		this.billingAddress = ba;
@@ -233,6 +230,11 @@ public class PaymentInfo {
 	}
 
 	@Override
+	/**
+	 * Displays all information of a PaymentInfo object
+	 *
+	 * @return String filled with the PaymentInfo information
+	 */
 	public String toString() {
 		return "PaymentInfo - CardNumber: " + cardNumber + ", CVC = " + cvc + ", Billing Address: " + billingAddress;
 	}

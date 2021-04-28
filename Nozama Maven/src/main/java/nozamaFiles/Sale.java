@@ -22,8 +22,7 @@ public class Sale {
 	/**
 	 * Set the sale date
 	 * 
-	 * @param String representing the sale date
-	 * @return void
+	 * @param date, String representing the sale date
 	 */
 	public void setDate(String date) {
 		this.date = date;
@@ -41,8 +40,7 @@ public class Sale {
 	/**
 	 * Set the sale time
 	 * 
-	 * @param String representing the sale time
-	 * @return void
+	 * @param time, String representing the sale time
 	 */
 	public void setTime(String time) {
 		this.time = time;
@@ -66,8 +64,8 @@ public class Sale {
 	/**
 	 * Tells if two objects are equal
 	 *
-	 * @param object to compare to the object being used
-	 * @return true if the two objects are equal, false otherwise
+	 * @param obj, Object to compare to the object being used
+	 * @return boolean, true if the two objects are equal, false otherwise
 	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,8 +91,8 @@ public class Sale {
 	/**
 	 * Sale constructor to be made with user inputted information
 	 * 
-	 * @param string representing the sale date
-	 * @param string representing the sale time
+	 * @param date, String representing the sale date
+	 * @param time, String representing the sale time
 	 */
 	public Sale(String date, String time) {
 		super();
@@ -106,7 +104,7 @@ public class Sale {
 	/**
 	 * Displays all information of a Sale object
 	 *
-	 * @return string filled with the Sale information
+	 * @return String filled with the Sale information
 	 */
 	public String toString() {
 		return "Sale [date=" + date + ", time=" + time + "]";

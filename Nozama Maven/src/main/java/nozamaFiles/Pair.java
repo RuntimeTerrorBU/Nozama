@@ -13,8 +13,8 @@ public class Pair<T1, T2> {
 	/**
 	 * Pair constructor
 	 *
-	 * @param first item in the pair
-	 * @param second item in the pair
+	 * @param first, T1 item in the pair
+	 * @param second, T2 item in the pair
 	 */
 	public Pair(T1 first, T2 second) {
 		this.first = first;

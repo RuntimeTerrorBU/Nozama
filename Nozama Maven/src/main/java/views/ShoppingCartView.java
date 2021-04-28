@@ -30,7 +30,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 	/**
 	 * Launch the shopping cart page for the customer
 	 * 
-	 * @param Customer to open the shopping cart page for
+	 * @param c Customer to open the shopping cart page for
 	 * @throw IOException if the item catalog and/or cart information files cannot be opened successfully
 	 */
 	public ShoppingCartView(Customer c) {
@@ -61,6 +61,13 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 
 		// Action to perform edit on quantity of item
 		Action edit = new AbstractAction() {
+			
+			/**
+			 * Action Perfomed once the user tries to edit the quantity of of the item
+			 * 
+			 * @param Customer to open the wishlist page for
+			 * @throw IOException the customer file cannot be written to
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				// Creation of edit prompt panel
@@ -145,9 +152,8 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 	/**
 	 * Create the checkout actions once the Checkout button is clicked
 	 * 
-	 * @param ActionEvent of the button being pressed
+	 * @param e ActionEvent of the button being pressed
 	 * @throws IOException if the Customer's order file and / or the general report file cannot be written to
-	 * @return void
 	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) (e.getSource());
@@ -334,7 +340,6 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 							x.printStackTrace();
 						}
 					}
-
 				}
 			}
 		}
@@ -343,8 +348,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 	/**
 	 * Create and display the ShoppingCart page
 	 * 
-	 * @param Customer to open the shopping cart page for
-	 * @return void
+	 * @param c Customer to open the shopping cart page for
 	 */
 	public static void createAndShowGUI(Customer c) {
 

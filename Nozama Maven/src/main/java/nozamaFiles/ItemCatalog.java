@@ -20,7 +20,7 @@ public class ItemCatalog {
 	/**
 	 * ItemCatalog constructor
 	 * 
-	 * @param List of ItemSpecification representing the catalog of items
+	 * @param items, List of ItemSpecification representing the catalog of items
 	 */
 	public ItemCatalog(List<ItemSpecification> items) {
 		ItemCatalog.items = items;
@@ -29,7 +29,7 @@ public class ItemCatalog {
 	/**
 	 * Get the number of items in the Nozama store
 	 * 
-	 * @return static integer representing the number of items
+	 * @return Integer representing the number of items
 	 */
 	public static Integer getNumberOfItems() {
 		return items.size();
@@ -47,8 +47,7 @@ public class ItemCatalog {
 	/**
 	 * Set the data of items in the Nozama store
 	 * 
-	 * @param List representing the items to be set in the Nozama Store
-	 * @return void
+	 * @param items, List representing the items to be set in the Nozama Store
 	 */
 	public static void setItems(List<ItemSpecification> items) {
 		Collections.sort(items, ItemSpecification.compareByID);
@@ -58,7 +57,7 @@ public class ItemCatalog {
 	/**
 	 * Set the item specification of item wanted in the Nozama store
 	 * 
-	 * @param String representing the id of the item to be set
+	 * @param itemID, String representing the id of the item to be set
 	 * @return ItemSpecification of the item set
 	 */
 	public static ItemSpecification getItemSpecification(String itemID) {
@@ -74,9 +73,8 @@ public class ItemCatalog {
 	/**
 	 * Load the data into the Item Catalog
 	 * 
-	 * @param File to load the data into an item catalog
+	 * @param file, File to load the data into an item catalog
 	 * @throws IOException if the file is not able to be used
-	 * @return void
 	 */
 	public static void loadData(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));

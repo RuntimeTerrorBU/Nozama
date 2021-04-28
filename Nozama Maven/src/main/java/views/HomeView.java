@@ -15,23 +15,15 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 
-import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
@@ -51,9 +43,8 @@ public class HomeView {
 	/**
 	 * Launch the application.
 	 * 
-	 * @param String represeting the arguments passed
+	 * @param args String[] represeting the arguments passed
 	 * @throws Exception if the HomeView cannot be opened
-	 * @return void
 	 */
 	public static void main(String[] args) {
 
@@ -104,7 +95,13 @@ public class HomeView {
 		customerButton.setBounds(163, 130, 125, 29);
 		customerButton.addMouseListener(new MouseAdapter() {
 			@Override
-			// If the customer login button is pressed
+			/**
+			 * If the customer login button is pressed
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 * @throws Exception if the user's data file cannot be accessed
+			 * @throws IOException if the wishlist fine cannot be created
+			 */
 			public void mouseClicked(MouseEvent e) {
 
 				// The frame and panel set for a login prompt
@@ -164,7 +161,6 @@ public class HomeView {
 					Boolean loginComplete = false;
 
 					try {
-
 						// Initialize the files to parse current users from
 						File file = new File("usersData.txt");
 						FileInputStream fis = new FileInputStream(file);
@@ -243,8 +239,12 @@ public class HomeView {
 		companyButton.setBounds(163, 165, 125, 29);
 		companyButton.addMouseListener(new MouseAdapter() {
 			@Override
-
-			// If the company login button is pressed
+			/**
+			 * If the company login button is pressed
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 * @throws Exception if the user's data file cannot be accessed
+			 */
 			public void mouseClicked(MouseEvent e) {
 
 				// The frame and panel set for a login prompt
@@ -370,8 +370,12 @@ public class HomeView {
 		newUserButton.setBounds(163, 200, 125, 29);
 		newUserButton.addMouseListener(new MouseAdapter() {
 			@Override
-
-			// If the create login button is pressed
+			/**
+			 * If the create login button is pressed
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 * @throws Exception if the user's data file cannot be accessed
+			 */
 			public void mouseClicked(MouseEvent e) {
 
 				// Create frame and panel to add create login components
@@ -424,9 +428,13 @@ public class HomeView {
 				// Create check box option for company
 				JCheckBox companyCB = new JCheckBox("Company");
 
-				// Listener for Customer
 				customerCB.addItemListener(new ItemListener() {
 					@Override
+					/**
+					 * Listener for Customer
+					 * 
+					 * @param e ItemEvent of the button being pressed
+					 */
 					public void itemStateChanged(ItemEvent e) {
 
 						// Based on the chosen state, set the account to that type of account
@@ -439,11 +447,14 @@ public class HomeView {
 
 				});
 
-				// Listener for Company
 				companyCB.addItemListener(new ItemListener() {
 					@Override
+					/**
+					 * Listener for Company
+					 * 
+					 * @param e ItemEvent of the button being pressed
+					 */
 					public void itemStateChanged(ItemEvent e) {
-
 						// Based on the chosen state, set the account to that type of account
 						if (e.getStateChange() == 1) {
 							customerCB.setSelected(false);
@@ -451,7 +462,6 @@ public class HomeView {
 							customerCB.setSelected(true);
 						}
 					}
-
 				});
 
 				// Add the customer and company checkboxs

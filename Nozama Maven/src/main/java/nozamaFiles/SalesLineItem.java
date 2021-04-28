@@ -23,8 +23,7 @@ public class SalesLineItem {
 	/**
 	 * Set the SalesLineItem quantity
 	 * 
-	 * @param int representing the SaleLineItem quantity
-	 * @return void
+	 * @param q, int representing the SaleLineItem quantity
 	 */
 	public void setQuantity(int q) {
 		this.quantity = q;
@@ -47,8 +46,8 @@ public class SalesLineItem {
 	/**
 	 * Tells if two objects are equal
 	 *
-	 * @param object to compare to the object being used
-	 * @return true if the two objects are equal, false otherwise
+	 * @param obj, Object to compare to the object being used
+	 * @return boolean, true if the two objects are equal, false otherwise
 	 */
 	public boolean equals(Object obj) {
 		if (this == obj)

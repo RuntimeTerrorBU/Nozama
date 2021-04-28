@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,8 +7,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -41,7 +38,7 @@ public class WishlistView extends JPanel {
 	/**
 	 * Launch the wishlist page for the customer
 	 * 
-	 * @param Customer to open the wishlist page for
+	 * @param c Customer to open the wishlist page for
 	 * @throw IOException if the item catalog and/or wishlist files cannot be opened successfully
 	 */
 	public WishlistView(Customer c) {
@@ -69,6 +66,13 @@ public class WishlistView extends JPanel {
 
 		// Action to perform edit on quantity of item
 		Action edit = new AbstractAction() {
+			
+			/**
+			 * Action Perfomed once the user tries to edit the quantity of of the item
+			 * 
+			 * @param e ActionEvent of the button being pressed
+			 * @throw IOException the customer file cannot be written to
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				// Creation of edit prompt panel
@@ -142,8 +146,7 @@ public class WishlistView extends JPanel {
 	/**
 	 * Create and display the Wishlist page
 	 * 
-	 * @param Customer to open the wishlist page for
-	 * @return void
+	 * @param c Customer to open the wishlist page for
 	 */
 	public static void createAndShowGUI(Customer c) {
 

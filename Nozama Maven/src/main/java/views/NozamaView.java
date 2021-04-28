@@ -3,7 +3,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,14 +24,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.Scanner;
 
@@ -46,7 +42,6 @@ import nozamaFiles.Customer;
 import nozamaFiles.Item;
 import nozamaFiles.ItemCatalog;
 import nozamaFiles.ItemSpecification;
-import views.*;
 
 import java.awt.Insets;
 import javax.swing.JScrollPane;
@@ -71,10 +66,9 @@ public class NozamaView {
 	/**
 	 * Create and display the Nozama page
 	 * 
-	 * @param true if management state is available, false otherwise
-	 * @param Customer to open the Nozama store page for
+	 * @param b, boolean true if management state is available, false otherwise
+	 * @param c, Customer to open the Nozama store page for
 	 * @throws Exception if the NozamaView cannot be opened
-	 * @return void
 	 */
 	public static void createAndShowGUI(Boolean b, Customer c) {
 
@@ -101,7 +95,7 @@ public class NozamaView {
 	/**
 	 * Launch the main page for the customer
 	 * 
-	 * @param Customer to open the Nozama store page for
+	 * @param c customer to open the Nozama store page for
 	 */
 	public NozamaView(Customer c) {
 		// Constructor for initializing and showing the Nozama View interface
@@ -111,6 +105,7 @@ public class NozamaView {
 	/**
 	 * Initialize the contents of the frame.
 	 * 
+	 * @param c customer to open the Nozama store page for
 	 * @throws IOException if the window cannot be closed correctly
 	 */
 	private void initialize(Customer c) {
@@ -124,6 +119,12 @@ public class NozamaView {
 		// Window closing event to guarantee safe data
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
+			/**
+			 * Close the window of the view
+			 * 
+			 * @param e WindownEvent of the closing window
+			 * @throws IOException if the customer's cart file cannot be accessed
+			 */
 			public void windowClosing(WindowEvent e) {
 				try {
 					BufferedWriter out = new BufferedWriter(new FileWriter(nm.getCustomer().getCartFile()));
@@ -162,6 +163,12 @@ public class NozamaView {
 		// Add listener for search to filter table based on text search
 		searchButton.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Create the search actions once the Search button is clicked
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 * @throws PatternSyntaxException if the search can't filter correctly
+			 */
 			public void mouseClicked(MouseEvent e) {
 
 				// Initialize the text to input and the row filter for condensing
@@ -192,6 +199,12 @@ public class NozamaView {
 		// Add listener for the Clean
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Create the clear search actions once the Search button is clicked
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 * @throws PatternSyntaxException if the clear search can't filter correctly
+			 */
 			public void mouseClicked(MouseEvent e) {
 
 				// Initialize the text to empty and the row filter for condensing
@@ -253,6 +266,11 @@ public class NozamaView {
 		// Listener for cart display
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Create the Show Cart actions once the Show Cart button is clicked
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 */
 			public void mouseClicked(MouseEvent e) {
 				// Fire display cart
 				displayCart();
@@ -272,6 +290,11 @@ public class NozamaView {
 		// Listener for wish list button
 		wishlistButton.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Create the Wishlist actions once the Wishlist
+			 * 
+			 * @param e MouseEvent of the button being pressed
+			 */
 			public void mouseClicked(MouseEvent e) {
 
 				// Fire display wish list
@@ -295,6 +318,12 @@ public class NozamaView {
 			// Listener for report button
 			reportButton.addMouseListener(new MouseAdapter() {
 				@Override
+				/**
+				 * Create the Generate report actions once the Generate Report button is clicked
+				 * 
+				 * @param e MouseEvent of the button being pressed
+				 * @throws IOException if the generated report file cannot be accessed
+				 */
 				public void mouseClicked(MouseEvent e) {
 
 					// Initialize file for generated report
@@ -345,6 +374,11 @@ public class NozamaView {
 			// Listener for delete product button
 			deleteProductDBButton.addMouseListener(new MouseAdapter() {
 				@Override
+				/**
+				 * Create the Delete Product actions once the Delete Product button is clicked
+				 * 
+				 * @param e MouseEvent of the button being pressed
+				 */
 				public void mouseClicked(MouseEvent e) {
 
 					// Initialize and remove from instance
@@ -374,6 +408,11 @@ public class NozamaView {
 			// Listener for stock
 			restockButton.addMouseListener(new MouseAdapter() {
 				@Override
+				/**
+				 * Create the Restock Item actions once the Restock Item button is clicked
+				 * 
+				 * @param e MouseEvent of the button being pressed
+				 */
 				public void mouseClicked(MouseEvent e) {
 
 					// Initialize frame and labels for stocking
@@ -433,6 +472,12 @@ public class NozamaView {
 			// Listener for add product button
 			addProductButton.addMouseListener(new MouseAdapter() {
 				@Override
+				/**
+				 * Create the Add Product actions once the Add Product button is clicked
+				 * 
+				 * @param e MouseEvent of the button being pressed
+				 * @throws IOException if the test catalog file cannot be accessed
+				 */
 				public void mouseClicked(MouseEvent e) {
 
 					// Initialize add product frame
@@ -542,6 +587,12 @@ public class NozamaView {
 		}
 
 		Action addToCart = new AbstractAction() {
+			/**
+			 * Create the Add Product actions once the Add Product button is clicked
+			 * 
+			 * @param e ActionEvent of the button being pressed
+			 * @throws IOException if the customers cart file cannot be accessed
+			 */
 			public void actionPerformed(ActionEvent e) {
 				JPanel form2 = new JPanel(new GridLayout(0, 1));
 				JTable table = (JTable) e.getSource();
@@ -592,6 +643,12 @@ public class NozamaView {
 
 		// Added listener for add to cart button press
 		Action addToWishlist = new AbstractAction() {
+			/**
+			 * Create the AddToWishlist actions once the Add to Wishlist button is clicked
+			 * 
+			 * @param e ActionEvent of the button being pressed
+			 * @throws IOException if the customers cart file cannot be accessed
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				// Initialize J-Style objects for displaying add to cart interface
@@ -667,8 +724,6 @@ public class NozamaView {
 
 	/**
 	 * Display the information of the customer's shopping cart in a new window
-	 * 
-	 * @return void
 	 */
 	public void displayCart() {
 		// Called to display the cart
@@ -678,8 +733,6 @@ public class NozamaView {
 
 	/**
 	 * Display the information of the customer's wishlist in a new window
-	 * 
-	 * @return void
 	 */
 	public void displayWishlist() {
 		// Called to display the wish list
