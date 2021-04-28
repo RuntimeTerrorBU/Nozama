@@ -8,36 +8,81 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ShoppingCart class creates a ShoppingCart item for each customer
+ * in the Nozama Store
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class ShoppingCart {
 	List<Pair<Item, Integer>> cart;
 	Double subtotal = 0.0;
 	
+	/**
+	 * Create the blank, default ShoppingCart item for a Customer
+	 */
 	public ShoppingCart() {
 		this.cart = new ArrayList<Pair<Item, Integer>>();
 	}
 	
+	/**
+	 * Create the ShoppingCart item for a Customer
+	 * 
+	 * @param List of items and the amount of the item to store as a cart
+	 * @param double representing the total amount (in dollars) of the items in the cart
+	 */
 	public ShoppingCart(List<Pair<Item, Integer>> cart, Double subtotal) {
 		super();
 		this.cart = cart;
 		this.subtotal = subtotal;
 	}
 	
+	/**
+	 * Get the shopping cart
+	 *
+	 * @return List of pairs of items and amounts representing the shopping cart
+	 */
 	public List<Pair<Item, Integer>> getCart() {
 		return cart;
 	}
 	
+	/**
+	 * Set the shopping cart
+	 *
+	 * @param List of pairs of items and amounts representing the shopping cart
+	 * @return void
+	 */
 	public void setCart(List<Pair<Item, Integer>> cart) {
 		this.cart = cart;
 	}
 	
+	/**
+	 * Get the shopping cart subtotal
+	 *
+	 * @return double representing the subtotal of the items in the cart
+	 */
 	public Double getSubtotal() {
 		return subtotal;
 	}
 	
+	/**
+	 * Set the subtotal of the shopping cart
+	 *
+	 * @param double representing the subtotal of the items in the cart
+	 * @return void
+	 */
 	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
 	
+	/**
+	 * Add an item to the shopping cart
+	 *
+	 * @param Item representing the item to be added to the cart
+	 * @param Integer representing the quantity of the item to be added
+	 * @return void
+	 */
 	public void addItemToCart(Item item, Integer quantity) {
 		boolean alreadyInCart = false;
 		Double itemPrice = 0.0;
@@ -57,6 +102,13 @@ public class ShoppingCart {
 		subtotal += itemPrice * quantity;
 	}	
 	
+	/**
+	 * Remove an item to the shopping cart
+	 *
+	 * @param Item representing the item to be removed from the cart
+	 * @param Integer representing the quantity of the item to be removed
+	 * @return void
+	 */
 	public void removeItemFromCart(Item item, Integer quantity) {
 		Double itemPrice = 0.0;
 		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
@@ -78,6 +130,13 @@ public class ShoppingCart {
 		}
 	}
 	
+	/**
+	 * Load the data into Shopping Cart
+	 * 
+	 * @param File to load the data into a shopping cart
+	 * @throws IOException if the file is not able to be used
+	 * @return void
+	 */
 	public void loadCart(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String line;
@@ -96,6 +155,11 @@ public class ShoppingCart {
 		subtotal = calculateSub();
 	}
 	
+	/**
+	 * Calculate the subtotal of the items inside the shopping cart
+	 * 
+	 * @return double representing the subtotal of the items in the shopping cart
+	 */
 	public double calculateSub() {
 		double itemPrice;
 		double res = 0.0;
@@ -109,6 +173,11 @@ public class ShoppingCart {
 	}
 	
 	@Override
+	/**
+	 * Displays all information of a ShoppingCart object
+	 *
+	 * @return string filled with the ShoppingCart information
+	 */
 	public String toString() {
 		String str = "";
 		
@@ -120,6 +189,11 @@ public class ShoppingCart {
 	}
 	
 	@Override
+	/**
+	 * Creates a specific mapping to a value
+	 *
+	 * @return integer hashed value of the input value
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -129,6 +203,12 @@ public class ShoppingCart {
 	}
 	
 	@Override
+	/**
+	 * Tells if two objects are equal
+	 *
+	 * @param object to compare to the object being used
+	 * @return true if the two objects are equal, false otherwise
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

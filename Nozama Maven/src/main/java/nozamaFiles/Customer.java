@@ -331,6 +331,7 @@ public class Customer {
 	 * @param shipping address of the new Customer
 	 * @param customer ID set to a custom ID for each customer
 	 * @param wishlist for each user
+	 * @throws IOException if the file cannot be created
 	 */
 	public Customer(String username, String password, String shippingAddress, int customerID, ShoppingCart wishlist) {
 		super();

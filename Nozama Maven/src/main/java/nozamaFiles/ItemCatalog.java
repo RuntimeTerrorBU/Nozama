@@ -75,7 +75,8 @@ public class ItemCatalog {
 	 * Load the data into the Item Catalog
 	 * 
 	 * @param File to load the data into an item catalog
-	 * @throws IOException if he file is not able to be used
+	 * @throws IOException if the file is not able to be used
+	 * @return void
 	 */
 	public static void loadData(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
