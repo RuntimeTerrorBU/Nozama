@@ -28,11 +28,11 @@ public class Customer {
 	/**
 	 * Create the Customer using the information of the user
 	 * 
-	 * @param username passed by the new Customer
-	 * @param password passed by the new Customer
-	 * @param shipping address of the new Customer
-	 * @param customer ID set to a custom ID for each customer
-	 * @param wishlist for each user
+	 * @param String representing username passed by the new Customer
+	 * @param String representing password passed by the new Customer
+	 * @param String representing shipping address of the new Customer
+	 * @param int representing the customer ID set to a custom ID for each customer
+	 * @param ShoppingCart representing the wishlist for each user
 	 * @param map filled with the customer information
 	 * @param boolean to check if the Customer is also a Company member
 	 * @param shoppingCart filled with items the Customer has in their cart

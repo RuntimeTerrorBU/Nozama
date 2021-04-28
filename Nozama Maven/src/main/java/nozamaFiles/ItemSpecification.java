@@ -2,6 +2,12 @@ package nozamaFiles;
 
 import java.util.Comparator;
 
+/**
+ * The ItemSpecification class specifies the parts of an item
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class ItemSpecification {
 	private String name;
 	private String description;
@@ -9,6 +15,15 @@ public class ItemSpecification {
 	private String itemID;
 	private Integer quantity;
 
+	/**
+	 * Create the ItemSpecification using the information entered the user
+	 * 
+	 * @param string representing the name of the item
+	 * @param string representing the description of the item
+	 * @param double representing the price of the item
+	 * @param string representing the id of the item
+	 * @param integer representing the quantity of the item
+	 */
 	public ItemSpecification(String name, String description, Double price, String itemID, Integer quantity) {
 		super();
 		this.name = name;
@@ -18,47 +33,107 @@ public class ItemSpecification {
 		this.quantity = quantity;
 	}
 
+	/**
+	 * Get the item's name
+	 *
+	 * @return string representing the itme's name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Set the item's name
+	 *
+	 * @param string representing the itme's name to be set
+	 * @return void
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Get the item's description
+	 *
+	 * @return string representing the itme's description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Set the item's description
+	 *
+	 * @param string representing the itme's description to be set
+	 * @return void
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Get the item's price
+	 *
+	 * @return double representing the itme's price
+	 */
 	public Double getPrice() {
 		return price;
 	}
 
+	/**
+	 * Set the item's price
+	 *
+	 * @param double representing the itme's price to be set
+	 * @return void
+	 */
 	public void setPrice(Double price) {
 		this.price = price;
 	}
 
+	/**
+	 * Get the itmems's id
+	 *
+	 * @return string representing the items's id
+	 */
 	public String getItemID() {
 		return itemID;
 	}
 
+	/**
+	 * Set the item's id
+	 *
+	 * @param string representing the itme's id to be set
+	 * @return void
+	 */
 	public void setItemID(String itemID) {
 		this.itemID = itemID;
 	}
 
+	/**
+	 * Get the itmems's quantity
+	 *
+	 * @return integer representing the items's quantity
+	 */
 	public Integer getQuantity() {
 		return quantity;
 	}
 
+	/**
+	 * Set the item's quantity
+	 *
+	 * @param integer representing the itme's quantity to be set
+	 * @return void
+	 */
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
 	@Override
+	/**
+	 * Creates a specific mapping to a value
+	 *
+	 * @return integer hashed value of the input value
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -71,6 +146,12 @@ public class ItemSpecification {
 	}
 
 	@Override
+	/**
+	 * Tells if two objects are equal
+	 *
+	 * @param object to compare to the object being used
+	 * @return true if the two objects are equal, false otherwise
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -109,6 +190,13 @@ public class ItemSpecification {
 
 	static final Comparator<ItemSpecification> compareByID = new Comparator<ItemSpecification>() {
 		@Override
+		/**
+		 * Compare two ItemSpecifications
+		 *
+		 * @param ItemSpecification to compare to the other parameter
+		 * @param ItemSpecification to compare to the other parameter
+		 * @return integer representing the comparison between the two ItemSpecifications
+		 */
 		public int compare(ItemSpecification o1, ItemSpecification o2) {
 			return o1.getItemID().compareTo(o2.getItemID());
 		}
