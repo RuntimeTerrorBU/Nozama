@@ -2,18 +2,40 @@ package nozamaFiles;
 
 import java.util.List;
 
+/**
+ * The SaleLineItem class specifies the amount of item sold on Nozama store
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class SalesLineItem {
 	private int quantity;
 	
+	/**
+	 * Get the SalesLineItem quantity
+	 * 
+	 * @return int representing the SaleLineItem quantity
+	 */
 	public int getQuantity() {
 		return quantity;
 	}
 	
+	/**
+	 * Set the SalesLineItem quantity
+	 * 
+	 * @param int representing the SaleLineItem quantity
+	 * @return void
+	 */
 	public void setQuantity(int q) {
 		this.quantity = q;
 	}
 	
 	@Override
+	/**
+	 * Creates a specific mapping to a value
+	 *
+	 * @return integer hashed value of the input value
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -22,6 +44,12 @@ public class SalesLineItem {
 	}
 	
 	@Override
+	/**
+	 * Tells if two objects are equal
+	 *
+	 * @param object to compare to the object being used
+	 * @return true if the two objects are equal, false otherwise
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
