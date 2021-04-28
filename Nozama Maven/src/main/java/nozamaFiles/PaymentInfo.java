@@ -29,7 +29,6 @@ public class PaymentInfo {
 		this.cardNumber = "9999-9999-9999-9999";
 		this.cvc = "999";
 		this.billingAddress = "";
-		
 	}
 	
 	/**
