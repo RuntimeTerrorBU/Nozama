@@ -38,12 +38,22 @@ import javax.swing.UIManager;
 import nozamaFiles.Customer;
 import nozamaFiles.ShoppingCart;
 
+/**
+ * The HomeView class creates the login screen that is displayed to the user once launching Nozama
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class HomeView {
 
 	private JFrame frame;
 
 	/**
 	 * Launch the application.
+	 * 
+	 * @param String represeting the arguments passed
+	 * @throws Exception if the HomeView cannot be opened
+	 * @return void
 	 */
 	public static void main(String[] args) {
 
@@ -72,6 +82,9 @@ public class HomeView {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
+	 * @throws Exception if the user data file cannot be parsed
+	 * @throws IOException if the wishlist file cannot be created
 	 */
 	private void initialize() {
 
@@ -91,7 +104,6 @@ public class HomeView {
 		customerButton.setBounds(163, 130, 125, 29);
 		customerButton.addMouseListener(new MouseAdapter() {
 			@Override
-
 			// If the customer login button is pressed
 			public void mouseClicked(MouseEvent e) {
 

@@ -16,11 +16,23 @@ import javax.swing.*;
 
 import controllers.*;
 
+/**
+ * The ShoppingCartView class creates the main store page of Nozama
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class ShoppingCartView extends JPanel implements ActionListener {
 
 	// Instance of the ShoppingCart Model to be used
 	private static ShoppingCartController scm = new ShoppingCartController();
 
+	/**
+	 * Launch the shopping cart page for the customer
+	 * 
+	 * @param Customer to open the shopping cart page for
+	 * @throw IOException if the item catalog and/or cart information files cannot be opened successfully
+	 */
 	public ShoppingCartView(Customer c) {
 
 		// FIXME This try/catch is specifically for testing only
@@ -130,6 +142,13 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		revalidate();
 	}
 
+	/**
+	 * Create the checkout actions once the Checkout button is clicked
+	 * 
+	 * @param ActionEvent of the button being pressed
+	 * @throws IOException if the Customer's order file and / or the general report file cannot be written to
+	 * @return void
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) (e.getSource());
 
@@ -321,6 +340,12 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Create and display the ShoppingCart page
+	 * 
+	 * @param Customer to open the shopping cart page for
+	 * @return void
+	 */
 	public static void createAndShowGUI(Customer c) {
 
 		// Implementation of the Shopping cart interface after checkout

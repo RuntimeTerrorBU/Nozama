@@ -27,11 +27,23 @@ import nozamaFiles.Customer;
 import nozamaFiles.ItemCatalog;
 import controllers.WishlistController;
 
+/**
+ * The WishlistView class creates the Wishlist page of Nozama
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class WishlistView extends JPanel {
 
 	// Instance of the Wish list Controller to be used
 	private static WishlistController wc = new WishlistController();
 
+	/**
+	 * Launch the wishlist page for the customer
+	 * 
+	 * @param Customer to open the wishlist page for
+	 * @throw IOException if the item catalog and/or wishlist files cannot be opened successfully
+	 */
 	public WishlistView(Customer c) {
 		try {
 			// Set up files based on the set catalog
@@ -127,6 +139,12 @@ public class WishlistView extends JPanel {
 		revalidate();
 	}
 
+	/**
+	 * Create and display the Wishlist page
+	 * 
+	 * @param Customer to open the wishlist page for
+	 * @return void
+	 */
 	public static void createAndShowGUI(Customer c) {
 
 		// Implementation of the Shopping cart interface after checkout

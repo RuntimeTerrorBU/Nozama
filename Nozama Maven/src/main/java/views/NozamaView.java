@@ -52,6 +52,12 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+/**
+ * The NozamaView class creates the main store page of Nozama
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class NozamaView {
 
 	// Global J-Objects for Nomzama View
@@ -62,6 +68,14 @@ public class NozamaView {
 	private static NozamaController nm = null;
 	private static Boolean managementState;
 
+	/**
+	 * Create and display the Nozama page
+	 * 
+	 * @param true if management state is available, false otherwise
+	 * @param Customer to open the Nozama store page for
+	 * @throws Exception if the NozamaView cannot be opened
+	 * @return void
+	 */
 	public static void createAndShowGUI(Boolean b, Customer c) {
 
 		// Passed management state and customer to determine interface showing
@@ -84,6 +98,11 @@ public class NozamaView {
 		});
 	}
 
+	/**
+	 * Launch the main page for the customer
+	 * 
+	 * @param Customer to open the Nozama store page for
+	 */
 	public NozamaView(Customer c) {
 		// Constructor for initializing and showing the Nozama View interface
 		initialize(c);
@@ -91,6 +110,8 @@ public class NozamaView {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
+	 * @throws IOException if the window cannot be closed correctly
 	 */
 	private void initialize(Customer c) {
 
@@ -644,12 +665,22 @@ public class NozamaView {
 		ButtonColumn addToWishlistButton = new ButtonColumn(table, addToWishlist, 3);
 	}
 
+	/**
+	 * Display the information of the customer's shopping cart in a new window
+	 * 
+	 * @return void
+	 */
 	public void displayCart() {
 		// Called to display the cart
 		ShoppingCartView.createAndShowGUI(nm.getCustomer());
 
 	}
 
+	/**
+	 * Display the information of the customer's wishlist in a new window
+	 * 
+	 * @return void
+	 */
 	public void displayWishlist() {
 		// Called to display the wish list
 		WishlistView.createAndShowGUI(nm.getCustomer());
