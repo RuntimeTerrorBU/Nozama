@@ -1,15 +1,32 @@
 package nozamaFiles;
 
+/**
+ * The Pair class creates a pair of items
+ *
+ * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
+ * @version 1.0 (Apr 27, 2021)
+ */
 public class Pair<T1, T2> {
 	public T1 first;
 	public T2 second;
 
+	/**
+	 * Pair constructor
+	 *
+	 * @param first item in the pair
+	 * @param second item in the pair
+	 */
 	public Pair(T1 first, T2 second) {
 		this.first = first;
 		this.second = second;
 	}
 
 	@Override
+	/**
+	 * Creates a specific mapping to a value
+	 *
+	 * @return integer hashed value of the input value
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -19,6 +36,12 @@ public class Pair<T1, T2> {
 	}
 
 	@Override
+	/**
+	 * Tells if two objects are equal
+	 *
+	 * @param object to compare to the object being used
+	 * @return true if the two objects are equal, false otherwise
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
