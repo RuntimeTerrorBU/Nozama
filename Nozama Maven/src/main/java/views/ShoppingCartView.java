@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URISyntaxException;
+
 import javax.swing.*;
 
 import controllers.*;
@@ -38,12 +40,15 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		// FIXME This try/catch is specifically for testing only
 		try {
 			// Initialize the files
-			File catalogFile = new File("resources/testCatalog.csv");
+			File catalogFile = new File(this.getClass().getResource("/testCatalog.csv").toURI());
 			ItemCatalog.loadData(catalogFile);
 			scm.setCustomer(c);
-			scm.setCustomerFile(new File("resources/carts/" + c.getUsername() + "Cart.csv"));
+			scm.setCustomerFile(new File(this.getClass().getResource("/" + c.getUsername() + "Cart.csv").toURI()));
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		// Creation of Table to add initial interface instance to
@@ -247,13 +252,17 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 				// Fire changes
 				frameCheckout.revalidate();
 
-				// record purchase & initialize files
-				File file = new File("resources/orders/" + scm.getCustomer().getUsername() + "Orders.csv");
-				File reportFile = new File("resources/orders/GeneratedReport.csv");
-				FileWriter fwriter;
-				FileWriter reportWriter;
+				
 
 				try {
+					// record purchase & initialize files
+					File file = new File(this.getClass().getResource("/" + scm.getCustomer().getUsername() + "Orders.csv").toURI());
+					File reportFile = new File(this.getClass().getResource("/GeneratedReport.csv").toURI());
+					FileWriter fwriter;
+					FileWriter reportWriter;
+					
+					file.createNewFile();
+					reportFile.createNewFile();
 					// Set readers if valid
 					fwriter = new FileWriter(file, true);
 					reportWriter = new FileWriter(reportFile, true);
@@ -274,6 +283,9 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 					rWriter.close();
 
 				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 

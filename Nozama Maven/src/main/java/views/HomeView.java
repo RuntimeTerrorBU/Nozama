@@ -2,6 +2,8 @@ package views;
 
 import java.awt.EventQueue;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -31,7 +33,8 @@ import nozamaFiles.Customer;
 import nozamaFiles.ShoppingCart;
 
 /**
- * The HomeView class creates the login screen that is displayed to the user once launching Nozama
+ * The HomeView class creates the login screen that is displayed to the user
+ * once launching Nozama
  *
  * @author - Ashley Bickham, Joshua Hunter, Austin Lehman, Tyler Ross
  * @version 1.0 (Apr 27, 2021)
@@ -74,7 +77,7 @@ public class HomeView {
 	/**
 	 * Initialize the contents of the frame.
 	 * 
-	 * @throws Exception if the user data file cannot be parsed
+	 * @throws Exception   if the user data file cannot be parsed
 	 * @throws IOException if the wishlist file cannot be created
 	 */
 	private void initialize() {
@@ -99,7 +102,7 @@ public class HomeView {
 			 * If the customer login button is pressed
 			 * 
 			 * @param e MouseEvent of the button being pressed
-			 * @throws Exception if the user's data file cannot be accessed
+			 * @throws Exception   if the user's data file cannot be accessed
 			 * @throws IOException if the wishlist fine cannot be created
 			 */
 			public void mouseClicked(MouseEvent e) {
@@ -192,15 +195,19 @@ public class HomeView {
 					if (loginComplete) {
 
 						// Set a persons cart & wish list
-						File f = new File( "./" + username + "Cart.csv");
-						String wishlistName = username + "Wishlist.csv";
-						File myWishList = new File(wishlistName);
+						File f = new File("/" + username + "Cart.csv");
+						String wishlistName = "/" + username + "Wishlist.csv";
 
 						try {
+
+							File myWishList = new File(this.getClass().getResource(wishlistName).toURI());
 							// Create the actual wish list
 							f.createNewFile();
 							myWishList.createNewFile();
 						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (URISyntaxException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -337,7 +344,14 @@ public class HomeView {
 					if (loginComplete) {
 
 						// Set a cart & wish list
-						File f = new File(username + "Cart.csv");
+						File f = null;
+						try {
+							f = new File(this.getClass().getResource("/" + username + "Cart.csv").toURI());
+						} catch (URISyntaxException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
 						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, true,
 								new ShoppingCart(), f);
 
@@ -517,7 +531,7 @@ public class HomeView {
 						try {
 
 							// Initialize file variables & parse variables
-							File file = new File("./usersData.txt");
+							File file = new File(this.getClass().getResource("usersData.txt").toURI());
 							file.createNewFile();
 							BufferedReader inputData = new BufferedReader(new FileReader(file));
 							FileOutputStream outputData = new FileOutputStream(file, true);
@@ -551,13 +565,13 @@ public class HomeView {
 								outputData.write(str.getBytes());
 
 								// Set cart
-								String cartName = "./" + userName + "Cart.csv";
-								File myCart = new File(cartName);
+								String cartName = "/" + userName + "Cart.csv";
+								File myCart = new File(this.getClass().getResource(cartName).toURI());
 								myCart.createNewFile();
 
 								// Set wish list
-								String wishlistName = "./" + userName + "Wishlist.csv";
-								File myWishList = new File(wishlistName);
+								String wishlistName = "/" + userName + "Wishlist.csv";
+								File myWishList = new File(this.getClass().getResource(wishlistName).toURI());
 								myWishList.createNewFile();
 
 							} else {
