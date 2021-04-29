@@ -328,6 +328,12 @@ public class NozamaView {
 
 					// Initialize file for generated report
 					File generateFile = new File("GeneratedReport.csv");
+					try {
+						generateFile.createNewFile();
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					
 					try {
 						generateFile.createNewFile();
@@ -563,6 +569,12 @@ public class NozamaView {
 
 						// Open files for catalog
 						File file = new File("testCatalog.csv");
+						try {
+							file.createNewFile();
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
 						FileWriter fwriter;
 
 						try {

@@ -165,13 +165,13 @@ public class HomeView {
 
 					try {
 						// Initialize the files to parse current users from
-						File file = new File("./usersData.txt");
+						File file = new File("usersData.txt");
 						file.createNewFile();
 						FileInputStream fis = new FileInputStream(file);
 						Scanner scanner = new Scanner(file);
 						int r = 0;
 						String inputLine;
-
+					
 						// While there are more people in the database to check vs the login info
 						while (scanner.hasNextLine() && !loginComplete) {
 
@@ -195,19 +195,28 @@ public class HomeView {
 					if (loginComplete) {
 
 						// Set a persons cart & wish list
-						File f = new File("/" + username + "Cart.csv");
-						String wishlistName = "/" + username + "Wishlist.csv";
+						File f = new File(username + "Cart.csv");
+						try {
+							f.createNewFile();
+						} catch (IOException e3) {
+							// TODO Auto-generated catch block
+							e3.printStackTrace();
+						}
+						try {
+							f.createNewFile();
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						String wishlistName = username + "Wishlist.csv";
 
 						try {
 
-							File myWishList = new File(this.getClass().getResource(wishlistName).toURI());
+							File myWishList = new File(wishlistName);
 							// Create the actual wish list
 							f.createNewFile();
 							myWishList.createNewFile();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (URISyntaxException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -313,7 +322,7 @@ public class HomeView {
 
 					try {
 						// Initialize the files to parse current users from
-						File file = new File("./usersData.txt");
+						File file = new File("usersData.txt");
 						file.createNewFile();
 						FileInputStream fis = new FileInputStream(file);
 						Scanner scanner = new Scanner(file);
@@ -345,13 +354,14 @@ public class HomeView {
 
 						// Set a cart & wish list
 						File f = null;
+	
+						f = new File(username + "Cart.csv");
 						try {
-							f = new File(this.getClass().getResource("/" + username + "Cart.csv").toURI());
-						} catch (URISyntaxException e1) {
+							f.createNewFile();
+						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-
 						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, true,
 								new ShoppingCart(), f);
 
@@ -531,7 +541,7 @@ public class HomeView {
 						try {
 
 							// Initialize file variables & parse variables
-							File file = new File(this.getClass().getResource("usersData.txt").toURI());
+							File file = new File("usersData.txt");
 							file.createNewFile();
 							BufferedReader inputData = new BufferedReader(new FileReader(file));
 							FileOutputStream outputData = new FileOutputStream(file, true);
@@ -565,13 +575,13 @@ public class HomeView {
 								outputData.write(str.getBytes());
 
 								// Set cart
-								String cartName = "/" + userName + "Cart.csv";
-								File myCart = new File(this.getClass().getResource(cartName).toURI());
+								String cartName =  userName + "Cart.csv";
+								File myCart = new File(cartName);
 								myCart.createNewFile();
 
 								// Set wish list
-								String wishlistName = "/" + userName + "Wishlist.csv";
-								File myWishList = new File(this.getClass().getResource(wishlistName).toURI());
+								String wishlistName =  userName + "Wishlist.csv";
+								File myWishList = new File(wishlistName);
 								myWishList.createNewFile();
 
 							} else {

@@ -54,11 +54,13 @@ public class Customer {
 		
 		try {
 			// File f = new File("resources/testCart.csv");
-			File f = new File("resources/carts/" + username + "Cart.csv");
+			File f = new File(username + "Cart.csv");
+			f.createNewFile();
 			this.customerCart.loadCart(f);
 			this.cartFile = f;
 
-			File w = new File("resources/wishlists/" + username + "Wishlist.csv");
+			File w = new File(username + "Wishlist.csv");
+			w.createNewFile();
 			
 			this.wishlist.loadCart(w);
 			this.wishListFile = w;
@@ -70,7 +72,8 @@ public class Customer {
 		
 		this.wishlist = new ShoppingCart();
 		try {
-			File f = new File("resources/wishlists/" + username + "Wishlist.csv");
+			File f = new File(username + "Wishlist.csv");
+			f.createNewFile();
 			this.wishlist.loadCart(f);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -342,7 +345,8 @@ public class Customer {
 		this.customerCart = new ShoppingCart();
 		try {
 			// File f = new File("resources/testCart.csv");
-			File f = new File("resources/carts/" + username + "Cart.csv");
+			File f = new File(username + "Cart.csv");
+			f.createNewFile();
 			this.customerCart.loadCart(f);
 			this.cartFile = f;
 		} catch (IOException e) {
@@ -350,7 +354,8 @@ public class Customer {
 			e.printStackTrace();
 		}
 		try {
-			File f = new File("resources/carts/" + username + "Wishlist.csv");
+			File f = new File(username + "Wishlist.csv");
+			f.createNewFile();
 			this.wishlist.loadCart(f);
 		} catch (IOException e) {
 			e.printStackTrace();

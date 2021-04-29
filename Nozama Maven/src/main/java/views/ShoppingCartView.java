@@ -40,15 +40,13 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 		// FIXME This try/catch is specifically for testing only
 		try {
 			// Initialize the files
-			File catalogFile = new File(this.getClass().getResource("/testCatalog.csv").toURI());
+			File catalogFile = new File(("testCatalog.csv"));
+			catalogFile.createNewFile();
 			ItemCatalog.loadData(catalogFile);
 			scm.setCustomer(c);
-			scm.setCustomerFile(new File(this.getClass().getResource("/" + c.getUsername() + "Cart.csv").toURI()));
+			scm.setCustomerFile(new File((c.getUsername() + "Cart.csv")));
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 
 		// Creation of Table to add initial interface instance to
@@ -256,8 +254,8 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 
 				try {
 					// record purchase & initialize files
-					File file = new File(this.getClass().getResource("/" + scm.getCustomer().getUsername() + "Orders.csv").toURI());
-					File reportFile = new File(this.getClass().getResource("/GeneratedReport.csv").toURI());
+					File file = new File((scm.getCustomer().getUsername() + "Orders.csv"));
+					File reportFile = new File(("GeneratedReport.csv"));
 					FileWriter fwriter;
 					FileWriter reportWriter;
 					
@@ -283,9 +281,6 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 					rWriter.close();
 
 				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (URISyntaxException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 

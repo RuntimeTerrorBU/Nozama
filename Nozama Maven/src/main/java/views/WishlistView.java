@@ -45,10 +45,11 @@ public class WishlistView extends JPanel {
 	public WishlistView(Customer c) {
 		try {
 			// Set up files based on the set catalog
-			File catalogFile = new File(this.getClass().getResource("/testCatalog.csv").toURI());
+			File catalogFile = new File(("testCatalog.csv"));
+			catalogFile.createNewFile();
 			ItemCatalog.loadData(catalogFile);
 			wc.setCustomer(c);
-			File w = new File(this.getClass().getResource("/" + c.getUsername() + "Wishlist.csv").toURI());
+			File w = new File((c.getUsername() + "Wishlist.csv"));
 			w.createNewFile();
 			wc.setCustomerFile(w);
 			BufferedWriter out = new BufferedWriter(new FileWriter(wc.getCustomerFile()));
@@ -58,9 +59,6 @@ public class WishlistView extends JPanel {
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 
 		// Creation of Table to add interface instance to

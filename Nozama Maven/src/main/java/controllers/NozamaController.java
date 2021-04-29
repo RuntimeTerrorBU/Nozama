@@ -78,8 +78,9 @@ public class NozamaController extends AbstractTableModel {
 	public void loadData() {
 
 		// FIXME change the file to be the customer's specific cart file
-		File file = new File("resources/testCatalog.csv");
+		File file = new File("testCatalog.csv");
 		try {
+			file.createNewFile();
 			ItemCatalog.loadData(file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
