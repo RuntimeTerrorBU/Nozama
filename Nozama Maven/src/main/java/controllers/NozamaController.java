@@ -74,8 +74,6 @@ public class NozamaController extends AbstractTableModel {
 
 	/**
 	 * Load the data of the store into the store page
-	 * 
-	 * @throws IOException if the testCatalog file cannot be loaded
 	 */
 	public void loadData() {
 
