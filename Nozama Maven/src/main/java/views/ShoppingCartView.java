@@ -300,6 +300,7 @@ public class ShoppingCartView extends JPanel implements ActionListener {
 
 				// Set frame settings and display
 				cFrame.getContentPane().add(cPanel);
+				cFrame.setLocationRelativeTo(null);
 				cFrame.pack();
 				cFrame.setVisible(true);
 
