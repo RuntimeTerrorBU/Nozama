@@ -32,90 +32,6 @@ public class PaymentInfo {
 	}
 	
 	/**
-	 * PaymentInfo constructor to be made with user inputted information
-	 * 
-	 * @param cn, String representing the card number
-	 * @param c, String representing the cvc number
-	 * @param ba, String representing the billing address
-	 */
-	public PaymentInfo(String cn, String c, String ba) {
-		if(validateCardInfo(cn, c)) {
-			if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
-				this.cardNumber = cn;
-				this.cvc = c;
-				this.billingAddress = ba;
-			}	
-			else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
-				
-				String formatString = "";
-				
-				formatString = cn.substring(0, 4) + "-" + cn.substring(4, 8) + "-" + cn.substring(8, 12) + "-" + cn.substring(12, 16);
-				
-				this.cardNumber = formatString;
-				this.cvc = c;
-				this.billingAddress = ba;
-			}	
-		}
-	}
-	
-	/**
-	 * Check if the payment information is valid
-	 * 
-	 * @param cn, String representing the card number
-	 * @param c, String representing the cvc number
-	 * @return Boolean, true if the card info is valid, false otherwise
-	 */
-	public Boolean validateCardInfo(String cn, String c) {
-		Boolean toReturn = false;
-		
-		//Return true if input card information is valid (Dashed format)
-		if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
-			
-			toReturn = true;
-			
-			for(int i = 0; i < VALID_CARD_NUMBER; i++) {
-				
-				if(i == 4 || i == 9 || i == 14) {
-					if(!(cn.charAt(i) == '-')) {
-						toReturn = false;
-					}
-					i++;
-				}
-				
-				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
-					toReturn = false;
-				}
-			}
-			
-			for(int i = 0; i < VALID_CVC_NUMBER; i++) {
-				if(!(c.charAt(i) >= '0' && c.charAt(i) <= '9')) {
-					toReturn = false;
-				}
-			}
-		}
-		
-		//Return true if input card information is valid (Pure number format)
-		else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
-			
-			toReturn = true;
-			
-			for(int i = 0; i < VALID_CARD_NUMBER2; i++) {
-				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
-					toReturn = false;
-				}
-			}
-			
-			for(int i = 0; i < VALID_CVC_NUMBER; i++) {
-				if(!(c.charAt(i) >= '0' && c.charAt(i) <= '9')) {
-					toReturn = false;
-				}
-			}
-		}
-		
-		return toReturn;
-	}
-	
-	/**
 	 * Get the card number
 	 * 
 	 * @return String representing the card number
@@ -179,6 +95,90 @@ public class PaymentInfo {
 	 */
 	public void setBillingAddress(String ba) {
 		this.billingAddress = ba;
+	}
+	
+	/**
+	 * Check if the payment information is valid
+	 * 
+	 * @param cn, String representing the card number
+	 * @param c, String representing the cvc number
+	 * @return Boolean, true if the card info is valid, false otherwise
+	 */
+	public Boolean validateCardInfo(String cn, String c) {
+		Boolean toReturn = false;
+		
+		//Return true if input card information is valid (Dashed format)
+		if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
+			
+			toReturn = true;
+			
+			for(int i = 0; i < VALID_CARD_NUMBER; i++) {
+				
+				if(i == 4 || i == 9 || i == 14) {
+					if(!(cn.charAt(i) == '-')) {
+						toReturn = false;
+					}
+					i++;
+				}
+				
+				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+			
+			for(int i = 0; i < VALID_CVC_NUMBER; i++) {
+				if(!(c.charAt(i) >= '0' && c.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+		}
+		
+		//Return true if input card information is valid (Pure number format)
+		else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
+			
+			toReturn = true;
+			
+			for(int i = 0; i < VALID_CARD_NUMBER2; i++) {
+				if(!(cn.charAt(i) >= '0' && cn.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+			
+			for(int i = 0; i < VALID_CVC_NUMBER; i++) {
+				if(!(c.charAt(i) >= '0' && c.charAt(i) <= '9')) {
+					toReturn = false;
+				}
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	/**
+	 * PaymentInfo constructor to be made with user inputted information
+	 * 
+	 * @param cn, String representing the card number
+	 * @param c, String representing the cvc number
+	 * @param ba, String representing the billing address
+	 */
+	public PaymentInfo(String cn, String c, String ba) {
+		if(validateCardInfo(cn, c)) {
+			if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER) {
+				this.cardNumber = cn;
+				this.cvc = c;
+				this.billingAddress = ba;
+			}	
+			else if(c.length() == VALID_CVC_NUMBER && cn.length() == VALID_CARD_NUMBER2) {
+				
+				String formatString = "";
+				
+				formatString = cn.substring(0, 4) + "-" + cn.substring(4, 8) + "-" + cn.substring(8, 12) + "-" + cn.substring(12, 16);
+				
+				this.cardNumber = formatString;
+				this.cvc = c;
+				this.billingAddress = ba;
+			}	
+		}
 	}
 
 	@Override

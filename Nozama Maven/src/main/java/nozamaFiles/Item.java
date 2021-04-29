@@ -38,20 +38,7 @@ public class Item {
 	public void setItemID(String itemID) {
 		this.itemID = itemID;
 	}
-
-	@Override
-	/**
-	 * Creates a specific mapping to a value
-	 *
-	 * @return int hashed value of the input value
-	 */
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((itemID == null) ? 0 : itemID.hashCode());
-		return result;
-	}
-
+	
 	@Override
 	/**
 	 * Tells if two objects are equal
@@ -73,5 +60,18 @@ public class Item {
 		} else if (!itemID.equals(other.itemID))
 			return false;
 		return true;
+	}
+
+	@Override
+	/**
+	 * Creates a specific mapping to a value
+	 *
+	 * @return int hashed value of the input value
+	 */
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((itemID == null) ? 0 : itemID.hashCode());
+		return result;
 	}
 }

@@ -74,58 +74,6 @@ public class ShoppingCart {
 		this.subtotal = subtotal;
 	}
 	
-	/**
-	 * Add an item to the shopping cart
-	 *
-	 * @param item, Item representing the item to be added to the cart
-	 * @param quantity, Integer representing the quantity of the item to be added
-	 */
-	public void addItemToCart(Item item, Integer quantity) {
-		boolean alreadyInCart = false;
-		Double itemPrice = 0.0;
-		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
-			itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
-		}
-		for(Pair<Item, Integer> p : cart) {
-			if(p.first.equals(item)) {
-				p.second += quantity;
-				alreadyInCart = true;
-			}
-		}
-		if(!alreadyInCart) {
-			cart.add(new Pair<Item, Integer>(item, quantity));
-		}
-		
-		subtotal += itemPrice * quantity;
-	}	
-	
-	/**
-	 * Remove an item to the shopping cart
-	 *
-	 * @param item, Item representing the item to be removed from the cart
-	 * @param quantitiy, Integer representing the quantity of the item to be removed
-	 * 
-	 */
-	public void removeItemFromCart(Item item, Integer quantity) {
-		Double itemPrice = 0.0;
-		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
-			itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
-		}
-		for(int i = 0; i < cart.size(); i++) {
-			Pair<Item, Integer> p = cart.get(i);
-			//if item is in cart
-			if(p.first.getItemID().equals(item.getItemID())) {
-				if(p.second.equals(quantity)) {
-					cart.remove(i);
-					subtotal -= itemPrice * quantity;
-				}
-				else if(p.second > quantity) {
-					p.second -= quantity;
-					subtotal -= itemPrice * quantity;
-				}
-			}
-		}
-	}
 	
 	/**
 	 * Load the data into Shopping Cart
@@ -224,5 +172,58 @@ public class ShoppingCart {
 		} else if (!subtotal.equals(other.subtotal))
 			return false;
 		return true;
+	}
+	
+	/**
+	 * Add an item to the shopping cart
+	 *
+	 * @param item, Item representing the item to be added to the cart
+	 * @param quantity, Integer representing the quantity of the item to be added
+	 */
+	public void addItemToCart(Item item, Integer quantity) {
+		boolean alreadyInCart = false;
+		Double itemPrice = 0.0;
+		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
+			itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
+		}
+		for(Pair<Item, Integer> p : cart) {
+			if(p.first.equals(item)) {
+				p.second += quantity;
+				alreadyInCart = true;
+			}
+		}
+		if(!alreadyInCart) {
+			cart.add(new Pair<Item, Integer>(item, quantity));
+		}
+		
+		subtotal += itemPrice * quantity;
+	}	
+	
+	/**
+	 * Remove an item to the shopping cart
+	 *
+	 * @param item, Item representing the item to be removed from the cart
+	 * @param quantitiy, Integer representing the quantity of the item to be removed
+	 * 
+	 */
+	public void removeItemFromCart(Item item, Integer quantity) {
+		Double itemPrice = 0.0;
+		if (ItemCatalog.getItemSpecification(item.getItemID()) != null) {
+			itemPrice = ItemCatalog.getItemSpecification(item.getItemID()).getPrice();
+		}
+		for(int i = 0; i < cart.size(); i++) {
+			Pair<Item, Integer> p = cart.get(i);
+			//if item is in cart
+			if(p.first.getItemID().equals(item.getItemID())) {
+				if(p.second.equals(quantity)) {
+					cart.remove(i);
+					subtotal -= itemPrice * quantity;
+				}
+				else if(p.second > quantity) {
+					p.second -= quantity;
+					subtotal -= itemPrice * quantity;
+				}
+			}
+		}
 	}
 }

@@ -46,6 +46,28 @@ public class Sale {
 		this.time = time;
 	}
 	
+	/**
+	 * Sale constructor to be made with user inputted information
+	 * 
+	 * @param date, String representing the sale date
+	 * @param time, String representing the sale time
+	 */
+	public Sale(String date, String time) {
+		super();
+		this.date = date;
+		this.time = time;
+	}
+	
+	@Override
+	/**
+	 * Displays all information of a Sale object
+	 *
+	 * @return String filled with the Sale information
+	 */
+	public String toString() {
+		return "Sale [date=" + date + ", time=" + time + "]";
+	}
+	
 	@Override
 	/**
 	 * Creates a specific mapping to a value
@@ -86,27 +108,5 @@ public class Sale {
 		} else if (!time.equals(other.time))
 			return false;
 		return true;
-	}
-	
-	/**
-	 * Sale constructor to be made with user inputted information
-	 * 
-	 * @param date, String representing the sale date
-	 * @param time, String representing the sale time
-	 */
-	public Sale(String date, String time) {
-		super();
-		this.date = date;
-		this.time = time;
-	}
-	
-	@Override
-	/**
-	 * Displays all information of a Sale object
-	 *
-	 * @return String filled with the Sale information
-	 */
-	public String toString() {
-		return "Sale [date=" + date + ", time=" + time + "]";
 	}
 }
