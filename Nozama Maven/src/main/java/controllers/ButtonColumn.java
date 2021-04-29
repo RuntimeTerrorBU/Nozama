@@ -145,7 +145,7 @@ public class ButtonColumn extends AbstractCellEditor
 	 * @param isSelected, boolean true if the button has been selected, false otherwise
 	 * @param hasFocus, boolean true if there is a focus within the table, false otherwise
 	 * @param row, int representing the rows of the table
-	 * @param col, int representing the columns of the table
+	 * @param column, int representing the columns of the table
 	 * @return Component of the table cell renderer
 	 */
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
