@@ -162,7 +162,8 @@ public class HomeView {
 
 					try {
 						// Initialize the files to parse current users from
-						File file = new File("usersData.txt");
+						File file = new File("./usersData.txt");
+						file.createNewFile();
 						FileInputStream fis = new FileInputStream(file);
 						Scanner scanner = new Scanner(file);
 						int r = 0;
@@ -191,12 +192,13 @@ public class HomeView {
 					if (loginComplete) {
 
 						// Set a persons cart & wish list
-						File f = new File("resources/carts/" + username + "Cart.csv");
-						String wishlistName = "resources/wishlists/" + username + "Wishlist.csv";
+						File f = new File( "./" + username + "Cart.csv");
+						String wishlistName = username + "Wishlist.csv";
 						File myWishList = new File(wishlistName);
 
 						try {
 							// Create the actual wish list
+							f.createNewFile();
 							myWishList.createNewFile();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -304,7 +306,8 @@ public class HomeView {
 
 					try {
 						// Initialize the files to parse current users from
-						File file = new File("usersData.txt");
+						File file = new File("./usersData.txt");
+						file.createNewFile();
 						FileInputStream fis = new FileInputStream(file);
 						Scanner scanner = new Scanner(file);
 						int r = 0;
@@ -334,7 +337,7 @@ public class HomeView {
 					if (loginComplete) {
 
 						// Set a cart & wish list
-						File f = new File("resources/carts/" + username + "Cart.csv");
+						File f = new File(username + "Cart.csv");
 						Customer c = new Customer(username, null, null, 0, new ShoppingCart(), null, true,
 								new ShoppingCart(), f);
 
@@ -514,7 +517,8 @@ public class HomeView {
 						try {
 
 							// Initialize file variables & parse variables
-							File file = new File("usersData.txt");
+							File file = new File("./usersData.txt");
+							file.createNewFile();
 							BufferedReader inputData = new BufferedReader(new FileReader(file));
 							FileOutputStream outputData = new FileOutputStream(file, true);
 							String line;
@@ -547,12 +551,12 @@ public class HomeView {
 								outputData.write(str.getBytes());
 
 								// Set cart
-								String cartName = "resources/carts/" + userName + "Cart.csv";
+								String cartName = "./" + userName + "Cart.csv";
 								File myCart = new File(cartName);
 								myCart.createNewFile();
 
 								// Set wish list
-								String wishlistName = "resources/wishlists/" + userName + "Wishlist.csv";
+								String wishlistName = "./" + userName + "Wishlist.csv";
 								File myWishList = new File(wishlistName);
 								myWishList.createNewFile();
 

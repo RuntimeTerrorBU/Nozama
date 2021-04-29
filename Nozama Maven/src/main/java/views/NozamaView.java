@@ -327,9 +327,10 @@ public class NozamaView {
 				public void mouseClicked(MouseEvent e) {
 
 					// Initialize file for generated report
-					File generateFile = new File("resources/orders/GeneratedReport.csv");
-
+					File generateFile = new File("GeneratedReport.csv");
+					
 					try {
+						generateFile.createNewFile();
 						// Initialize scanner and file to be written to
 						Scanner scanner = new Scanner(generateFile);
 						final JFileChooser fileChosen = new JFileChooser();
@@ -355,7 +356,7 @@ public class NozamaView {
 								x.printStackTrace();
 							}
 						}
-					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}
@@ -561,10 +562,11 @@ public class NozamaView {
 						nm.update();
 
 						// Open files for catalog
-						File file = new File("resources/testCatalog.csv");
+						File file = new File("testCatalog.csv");
 						FileWriter fwriter;
 
 						try {
+							file.createNewFile();
 							// Initialize writers
 							fwriter = new FileWriter(file, true);
 							BufferedWriter writer = new BufferedWriter(fwriter);
@@ -631,7 +633,7 @@ public class NozamaView {
 						nm.getCustomer().getCustomerCart().addItemToCart(toAdd, quantity);
 						BufferedWriter out;
 						try {
-							out = new BufferedWriter(new FileWriter("resources/carts/" + c.getUsername() + "Cart.csv"));
+							out = new BufferedWriter(new FileWriter(c.getUsername() + "Cart.csv"));
 							out.write(c.getWishlist().toString());
 							out.close();
 						} catch (IOException e1) {
@@ -706,7 +708,7 @@ public class NozamaView {
 						try {
 							// Initialize the buffered reader
 							out = new BufferedWriter(
-									new FileWriter("resources/wishlists/" + c.getUsername() + "Wishlist.csv"));
+									new FileWriter(c.getUsername() + "Wishlist.csv"));
 
 							// Set the buffer out to the wish list
 							out.write(c.getWishlist().toString());

@@ -44,10 +44,10 @@ public class WishlistView extends JPanel {
 	public WishlistView(Customer c) {
 		try {
 			// Set up files based on the set catalog
-			File catalogFile = new File("resources/testCatalog.csv");
+			File catalogFile = new File("testCatalog.csv");
 			ItemCatalog.loadData(catalogFile);
 			wc.setCustomer(c);
-			File w = new File("resources/wishlists/" + c.getUsername() + "Wishlist.csv");
+			File w = new File(c.getUsername() + "Wishlist.csv");
 			wc.setCustomerFile(w);
 			BufferedWriter out = new BufferedWriter(new FileWriter(wc.getCustomerFile()));
 
